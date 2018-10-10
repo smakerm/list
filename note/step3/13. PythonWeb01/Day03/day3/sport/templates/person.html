@@ -1,0 +1,45 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/sport.css'%}">
+</head>
+<body>
+    <h2 class="redBack">使用static标签访问</h2>
+    <img src="{%static 'images/huiyuan.jpg'%}">
+    <h2>使用/static/访问</h2>
+    <img src="/static/images/huiyuan.jpg">
+    <h1>姓名:{{uname|upper}}</h1>
+    <h1>性别:
+        {%if ugender == 1%}
+            男
+        {%else%}
+            女
+        {%endif%}
+
+        {%ifequal ugender 1%}
+            帅哥
+        {%else%}
+            美女
+        {%endifequal%}
+    </h1>
+    <h1>年龄:
+        {%if uage >= 50%}
+            老年人
+        {%else%}
+            小鲜肉
+        {%endif%}
+    </h1>
+    <h1>爱好:
+        <ul>
+            {%for h in uhobby%}
+                <li {%if forloop.first%}style='color:red;'{%endif%} >
+                    {{forloop.counter}}:{{h}}
+                </li>
+            {%endfor%}
+        </ul>
+    </h1>
+</body>
+</html>

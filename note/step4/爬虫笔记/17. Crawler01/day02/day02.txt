@@ -1,0 +1,79 @@
+数据结构：
+    数组，链表；
+数组：根据下标来索引元素；插入删除元素慢，
+会有元素的挪动；
+    有10个元素的数组L[10]: 0-9，
+		访问第五个元素：L[4]
+链表：不能根据下标来访问元素，访问只能遍历，
+访问元素慢；插入删除快，只改变相关的元素；
+
+怎么判断list到底是用数组还是用链表来实现的？
+    index比append要慢；说明list使用数组实现的；
+
+关于Python数据结构的时间复杂度：
+https://wiki.python.org/moin/TimeComplexity
+
+1,2,6,7,-1,-5,9,8,13,21
+
+User-Agent: 
+Mozilla/5.0 (Windows NT 6.1; Win64; x64) 
+AppleWebKit/537.36 (KHTML, like Gecko)
+Chrome/66.0.3359.181 Safari/537.36
+
+anaconda中安装包：
+打开：Anaconda Prompt
+			conda install builtwith
+			pip install builtwith
+
+使用builtwith来查看这个网站后台所使用的技术架构：
+ import builtwith
+ print(builtwith.parse("http://www.sina.com.cn"))
+
+{'web-servers': ['Nginx'], 
+'javascript-frameworks': ['Prototype', 'jQuery']}
+
+pip install python-whois
+import whois
+print(whois.whois("https://www.baidu.com"))
+
+
+http://www.chery.cn/
+AI
+
+HTTP Status Code:
+   200 Ok；
+	 3XX 跳转；
+   4XX 客户端浏览器问题，404页面找不到，403权限不够；
+	 5XX 服务器错误；
+思考：当返回的状态码是4XX时，程序怎么办？
+      当返回的状态码是5XX时，程序怎么办？  
+
+www.sina.com.cn --DNS解析--> 0-255.0-255.0-255.0-255
+
+User-Agent池（以空间换时间）：
+    通过user-agent大全，把大量的UA放在一个list中；
+每次随机从中取一个来用；
+
+作业1：构造使用一个UA池,访问百度首页10次，
+每次打印出你当前所使用的UA（UA
+是随机从池里取出），并且每次访问间隔时间
+需要随机在1-3秒内；
+作业2：如何用正则表达式来匹配
+       1）电子邮件；
+			 2）URL；
+			 3）手机号码；
+			 4）QQ号；
+
+栈：FILO   先进后出；
+队列：FIFO 先进先出；
+
+
+广度优先遍历和深度优先遍历：
+    广度优先遍历可以在数据不相互干扰的情况下，
+使用多个进程或者线程，协程等来把任务分解，
+从而加速爬虫的爬取数据；
+    
+HASH：
+  对一段数据进行打指纹；
+hello    --> XXXX
+hello1   --> YYYY

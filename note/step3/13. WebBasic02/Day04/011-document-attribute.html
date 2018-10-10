@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <input type="password" id="upwd" name="upwd">
+	<button onclick="attrOperate()">属性操作</button>
+	<script>
+		function attrOperate(){
+			//1、获取id为upwd的元素
+			var upwd = document.getElementById("upwd");
+			//2、将 upwd 的type属性值打印在控制台上
+			/*var typeVal=upwd.getAttribute("value");
+			console.log("value:"+typeVal);*/
+			//3、将 upwd 的type属性值更改为text
+			upwd.setAttribute("type","text");
+		}
+	</script>
+ </body>
+</html>

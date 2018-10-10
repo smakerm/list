@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#show{
+			border:2px solid #000;
+			height:100px;
+		}
+	</style>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			$("#btn").click(function(){
+				//1、创建一个按钮
+				var $btn = $("<button>创建的按钮</button>");
+				console.log($btn);
+				//2、将创建好的按钮增加到#show的里面
+				//$("#show").append($btn);
+				//3、将$btn作为#show的下一个兄弟插入进来
+				$("#show").after($btn);
+			});
+		}
+	</script>
+ </head>
+ <body>
+  <button id="btn">创建元素</button>
+	<p id="show"></p>	
+ </body>
+</html>

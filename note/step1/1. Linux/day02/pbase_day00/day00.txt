@@ -1,0 +1,104 @@
+
+<<python 语言开发基础>>
+
+魏明择
+EMail: weimz@tedu.cn
+
+
+python 的简介:
+  创始人: Guido van Rossum(荷兰人)
+  时间: 1989 圣诞节期间
+  Python的命名: 源于一个喜剧团 Monty Python
+
+python 的应用领域
+  系统运维
+  网络编程
+  科学计算
+  人工智能，机器人
+  web 开发
+  大数据及数据库编程
+  云计算
+  教育
+  游戏，图像
+  其它
+
+python 的优缺点
+  优点：
+  　　面向对象(Java, C++, Python)
+    免费
+    可移植
+    可混合编程(C/C++/Java/.net)
+    简单易学易用
+    应用领域广泛
+    开发效率高
+    开源
+  缺点:
+    与C/C++相比执行速度不够快
+    不能封闭源代码
+
+python 的官网:
+  www.python.org
+
+
+python 的版本
+  python v2.7(2020年结束维护)
+  python v3.5 (当前教学版本)
+  python v3.8 (最新版本)
+
+python 的安装:
+  windows / Mac OS X / Unix ...
+
+
+python 的运行
+  python 的解释执行器　
+  　　CPython (python3)
+    Jython
+    IronPython
+    PyPy
+
+第一个python程序
+　　　见: hello.py
+python的运行:
+　　　# 方法1
+   $ python3 hello.py
+   # 方法　２
+   # 在hellp.py 的第一行写入:
+       #! /usr/bin/python3
+   $ chmod u+x hello.py
+   $ ./hello.pyh
+
+
+
+python 的交互提示模式
+　　$ python3
+  >>>   # <-- 可以在>>>提示符下输入语句
+
+  退出:
+    ctrl + d
+    >>> quit()
+    >>> exit()
+
+
+python 的注释:
+  # 井号开头，直到行尾
+  作用:
+    让注释内容不参加解释执行
+
+Python 的核心数据类型:
+  数字(整数, 浮点数，复数，布尔型)
+  字符串
+  列表等
+
+预习:
+  十进制，二进制，八进制，十六进制
+  数据类型：
+  　　整数,浮点数,复数,布尔型
+  运算符:
+    + - * / // % **
+  变量 和 赋值语句
+  is 和　is not　运算符
+  del　语句
+  比较运算符:
+    < <= > >= == != 
+
+

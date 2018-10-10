@@ -1,0 +1,144 @@
+1、DOM
+	1、元素的样式
+		1、使用setAttribute()设置class属性的值
+			elem.setAttribute("class","类选择器");
+		2、使用元素的 className 属性修改class值
+			elem.className="类选择器";
+		3、自定义元素样式
+			elem.style.css属性=值;
+			注意：
+				如果css属性名中包含 - 的话，连字符(-)要取消，并且 - 后面的第一个字符要变大写
+			ex:
+				$("d1").style.color = "red";
+				$("d1").style.fontSize="18px";
+				$("d1").style.borderRightColor="yellow";
+	2、查询节点
+		1、通过id查询
+			var elem=document.getElementById("id");
+		2、通过标签名查询
+			语法:document|elem.getElementsByTagName(标签名)
+				document.getElementsByTagName(标签名)
+				elem.getElementsByTagName(标签名)
+				ex:
+					1、document.getElementsByTagName("p")
+					2、
+						var div = document.getElementById("d1");
+						div.getElementsByTagName("p")
+				返回值：由指定标签元素所组成的数组
+		3、通过元素的name属性值来查询节点
+			优先使用在 单选按钮 和 复选框中的
+			语法：document.getElementsByName(name)
+			返回值：返回由指定name值的元素所组成的数组
+		4、根据元素的class值查询节点
+			语法：document|elem.getElementsByClassName(className)
+			返回值：由指定className值的元素所组成的数组
+		5、根据节点的层级关系查找节点
+			1、parentNode
+				返回当前元素的父节点
+			2、childNodes
+				返回当前元素的所有子节点
+				注意：该属性会获取到元素节点，文本节点(包含空格和回车)以及注释节点
+			3、children
+				返回当前元素的所有子节点(元素节点)
+			4、nextSibling
+				返回当前元素的下一个兄弟节点
+			5、nextElementSibling
+				返回当前元素的下一个元素兄弟节点
+			6、previousSibling
+				返回当前元素的上一个兄弟节点
+			7、previousElementSibling
+				返回当前元素的上一个元素兄弟节点
+	3、增加节点
+		1、创建元素节点
+			var elem=document.createElement("元素名");
+			elem:表示创建好的DOM元素
+		2、增加节点
+			1、document.body.appendChild(elem)
+				向body中追加新元素elem
+			2、parentNode.appendChild(elem)
+				parentNode:表示的是已存在的一个元素
+				将elem追加到parentNode的内部
+			3、parentNode.insertBefore(newElem,oldElem)
+				将newElem元素插入到parentNode中oldElem之前
+	4、删除节点
+		删除节点只能由父元素来发起
+		1、document.body.removeChild(elem);
+			删除body中的elem元素
+		2、parentNode.removeChild(elem);
+			在 parentNode 中删除 elem 元素
+2、事件
+	1、什么是事件
+		允许通过特殊的行为来激发的操作
+	2、常用的事件
+		1、鼠标事件
+			click ：鼠标单击事件
+			mouseover ：鼠标进入到元素时激发的事件
+			mousemove ：鼠标在元素内移动时激发的事件
+			mouseout ：鼠标从元素内移出时激发的事件
+		2、键盘事件
+			keydown ：键位按下时的事件
+			keypress：键位按下时的事件
+			keyup ：键位抬起时的事件
+		3、状态改变事件
+			load ：当元素加载完毕时触发的事件
+			change ：当元素发生改变时触发的事件
+			focus ：当元素获取焦点时触发的事件
+			blur ：当元素失去焦点时触发的事件
+			submit ：当表单被提交时触发的事件
+		
+		注意：当为html元素绑定事件时，必须要在事件名称前加 on
+			1、为某元素绑定load事件 -> onload
+			2、为某元素绑定focus事件 -> onfocus
+	3、绑定事件的方式
+		1、在元素中绑定事件
+			<button onclick=""></button>
+			<input onblur="" onfocus="" onclick="">
+		2、在js中动态的为元素绑定事件
+			<script>
+				var div = $("d1");
+				div.on事件名=function(){
+					
+				}
+				div.onclick=function(){
+					
+				}
+			</script>
+	4、事件行为详解
+		1、load 事件
+			常用场合：当网页加载完毕时，要执行的操作
+			方式1：在元素中绑定事件
+				<body onload="函数()"></body>
+			方式2：JS中动态绑定
+				<script>
+					window.onload = function(){
+						
+					}
+				</script>
+
+
+
+
+
+
+
+
+.red{color:red;}
+.green{color:green;}
+<span class="green"></span>
+<div style="color:red;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

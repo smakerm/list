@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+	<script src="common.js"></script>
+	<script>
+		//window加载完毕时要执行的操作
+		window.onload = function(){
+			var btn = $("btn");
+			btn.onclick = function(){
+				alert("动态绑定的事件!!!");
+				//this:表示的就是触发事件的元素
+				console.log(this);
+				this.innerHTML = "在事件中动态改变了按钮的文本";
+			}
+		}
+	</script>
+  <button id="btn">测试事件的按钮</button>
+	
+ </body>
+</html>

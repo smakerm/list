@@ -1,0 +1,203 @@
+select 
+poll
+
+epoll 
+epoll也是一种IO多路复用的方式，效率比select和poll要高一点
+epoll不仅支持水平触发也支持边缘触发
+
+循环服务器模型
+并发服务器模型
+IO多路复用模型
+协程服务器模型
+
+*************************************************************
+
+协程 （微线程，纤程）  本质单线程
+
+定义 ： 是一种用户态的轻量级线程
+
+1. 轻量级，创建消耗资源非常少
+2. 不涉及内核
+
+优点 ： 无需上下文切换的开销
+        无需同步互斥操作
+				有较高的并发型 （IO并发）
+				创建消耗资源少
+缺点 ： 无法利用计算机的多核资源
+        遇到死循环等阻塞状态会影响整个程序的运行
+
+
+greenlet
+sudo pip3 install greenlet
+
+
+gevent
+sudo pip3 install gevent
+sudo python3 setup.py install
+
+进程 + 协程 方案完成高并发
+
+1. 什么是协程 （单线程 优点  缺点  高并发量的IO操作）
+2. 协程是如何工作的 （在线程栈中进行跳转，是应用层的技术，遇到IO 阻塞进行协程选择）
+3. 写过什么协程代码
+
+
+非阻塞IO和超时检测
+
+非阻塞IO ： 在遇到原本阻塞的IO情形时，不进行阻塞等待，如果满足执行条件即执行，不满足条件就不执行
+
+sockfd.setblocking(False)
+功能 ： 设置一个套接字的阻塞状态
+参数 ： 默认为True 表示套接字为阻塞套接字
+        如果设置为False则表示非阻塞，此时套接字使用阻塞函数时，如果无法正常执行则抛出 blocking异常
+
+监听套接字设置为非阻塞则 accept不再阻塞
+连接套接字设置为非阻塞则 recv 不再阻塞
+
+超时检测 
+
+在状态下，设置程序超时时间。当到达事件后进程不再阻塞等待
+e.g.
+multiprocessing/threading   ---> join
+Queue  --->  get   put  
+select ----> select
+Event ----> wait
+
+sockfd.settimeout(5)
+功能：设置套接字的超时检测事件
+参数： 超时时间
+
+
+网络广播 (是一端发送，多端接收的模式)
+
+udp 数据报套接字
+
+广播地址 : 172.60.50.255 
+
+设置套接字为可以发送接收广播的套接字
+s.setsockopt(SOL_SOCKET,SO_BROADCAST,1)
+
+*在网络中如果存在大量的广播会产生广播风暴，占用大量带宽
+
+
+本地套接字
+
+作用 ： 用作本地两个进程间的通信
+传输方式 ： 字节流的方式进行数据传输 
+创建本地套接字
+socket(AF_UNIX,SOCK_STREAM)
+
+通信介质 ： 通过套接字文件实现通信
+
+
+http  超文本传输协议 
+
+应用层协议 ----》 传输层使用 TCP协议
+
+用途 ： 网站中网页的传输数据的传输
+        也可以用作通过编程传输数据
+
+http协议特点 
+1. 支持典型的客户端服务器模式 
+2. 灵活简单
+3. 几乎支持所有的数据格式
+4. 是无状态的 
+5. http1.0 无连接   http1.1 持续连接
+
+请求
+1.请求格式：
+
+请求行 ： 发送什么类型的请求
+请求头 ： 对发送请求信息的描述
+空行
+请求体 ： 具体的请求参数或请求内容
+
+GET         /index.html   HTTP/1.1
+请求方法    请求格式      协议版本
+
+GET    获取URL标识的网路资源 （url 统一资源定位符，指的是网络资源在网络中的位置，网址即为一类的url）
+
+POST 提交一定的附加数据，用以获取相应的返回
+
+HEAD 获取URL所标识的响应消息报头
+
+PUT  获取服务器的资源
+
+DELETE  删除一个服务器资源
+TRACE   用于测试和诊断
+CONNECT 保留的请求方法
+OPTIONS 请求获取服务器性能，查询相关资源信息
+
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: BAIDUID=087384E8032769651B65AEC1E9FC1683:FG=1; BIDUPSID=087384E8032769651B65AEC1E9FC1683; PSTM=1517361569; BD_UPN=133352; BD_HOME=0; H_PS_PSSID=1460_21118_17001_22160
+Host: www.baidu.com
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0
+
+请求体
+a:3
+b:4
+get请求 ：请求体即为get请求的参数
+post请求 ： 请求体即为post请求提交的内容
+
+
+响应
+
+格式 
+
+响应行   ：反馈响应情况
+响应头   ： 对响应内容的描述
+空行
+响应内容 ： 根据请求返回给客户端的内容
+
+HTTP/1.1    200            OK
+协议版本   响应码        响应码对应信息
+
+1xx 提示信息，表示请求已经接受，正在处理
+2xx 访问成功
+3xx 重定向，完成任务需要其他操作
+4xx 客户端错误 
+5xx 服务器端错误
+
+200  访问成功  400 客户但请求有语法错误 
+401 访问没有授权  403 服务器已收到请求，但是拒绝执行
+404 请求的服务器资源不存在   500 服务器发生未知错误 
+503 服务器暂时不能执行，请稍后访问再试
+
+Bdpagetype: 1
+Bdqid: 0xbccf8ff30001ca5b
+Bduserid: 0
+Cache-Control: private
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Cxy_all: baidu+7f98f395ebbdb0df7ebccec435f56c3f
+Date: Mon, 26 Mar 2018 08:30:45 
+
+
+响应体就是给客户端返回的内容
+
+总结：
+什么是HTTP协议
+http协议请求和响应的格式
+请求方法都有哪些
+常见的响应码代表什么
+get请求post请求区别
+http协议的特点
+
+python http server
+
+python3   http.server
+python2   BaseHTTPServer
+
+HTTPSERVER服务器 用来接受客户端的HTTP请求
+
+
+
+
+

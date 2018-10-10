@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <button onclick="btnCreate()">创建</button>
+	<button onclick="btnDelete()">删除</button>
+	<script src="common.js"></script>
+	<script>
+		function btnCreate(){
+			//1、创建一个div元素
+			var d1 = document.createElement("div");
+			//2、设置文本：这是动态创建的div
+			d1.innerHTML = "这是动态创建的div";
+			//3、设置id 为 div1
+			d1.setAttribute("id","div1");
+			//4、设置文本颜色为 ：红色
+			d1.style.color="red";
+			//5、将 d1 增加到 body 中
+			document.body.appendChild(d1);
+		}
+
+		function btnDelete(){
+			//1、获取 id 为 div1 的元素
+			var d1 = $("div1");
+			//2、由document.body删除 div1
+			document.body.removeChild(d1);
+		}
+	</script>
+ </body>
+</html>

@@ -1,0 +1,77 @@
+#斐波那契数列：
+#递归：有一个函数，它自己调用自己；
+#Fab(n) = Fab(n-1)+Fab(n-2)   n >= 2
+#         1                   0<= n < 2
+#				                    n是自然数；
+
+尾递归 -优化-》循环 
+
+使用yield来返回值；
+用非递归来实现一个Fab(n)，使用yield来返回值；
+测试时n取0-9；
+
+
+SQL
+No SQL(Not only SQL)
+GFS,HDFS,Hive
+
+XHR: XML HTTP Request
+Ajax，JS；
+{"translateResult":[[{"tgt":"你好","src":"hello"}]],
+"errorCode":0,"type":"en2zh-CHS","smartResult":
+{"entries":["","n. 表示问候， 
+惊奇或唤起注意时的用语\r\n","int. 喂；哈罗\r\n",
+"n. (Hello)人名；(法)埃洛\r\n"],"type":1}}
+关于JSON：
+   1.和JS同时存在；
+	 2.本质上来说，JSON就是一个字符串；
+
+
+使用lxml时，需要记住xpath方法；
+    可以在浏览器中找到需要的节点元素，拷贝出XPath;
+使用bs4时，需要记住findAll方法；
+    如果元素有id最好，是唯一的，可以直接用；
+否则可以遍历list来取出你真正需要的那个元素；
+lxml比bs4要快：因为1.lxml用C语言实现的，
+bs4是用python来实现的；2.lxml使用的是局部加载的方式，
+bs4使用的是全局加载的方式；
+
+
+//*[@id="maincontent"]/div[3]
+//*[@id="maincontent"]/div[3]/p
+
+
+正则表达式：
+		最难的不是匹配到你想要的信息，
+而是怎么把你不需要的干扰信息踢出去；
+使用原则：能把几乎所有合法信息匹配出来，
+一定程度避免把非法信息匹配进来就可以了；
+在爬虫匹配网页信息时，非贪婪模式用的非常多；
+
+学习HTML,JS,CSS,XPath等等，可以参看：
+http://www.w3school.com.cn/
+
+学习正则表达式：
+http://deerchao.net/tutorials/regex/regex.htm
+
+作业：
+	用正则表达式实现下面的效果：
+	把 i=d%0A&from=AUTO&to=AUTO&smartresult=dict
+	转换成下面的形式：
+		i:d%0A
+		from:AUTO
+		to:AUTO
+		smartresult:dict
+
+猫眼url：
+http://maoyan.com/board/4?offset=0
+
+GIL：
+如果有一个线程在单核中运行这么一段代码：
+while True:
+  pass
+CPU占用率？接近100%
+如果有两个进程在双核中运行这么一段代码：
+while True:
+  pass
+CPU占用率？100%

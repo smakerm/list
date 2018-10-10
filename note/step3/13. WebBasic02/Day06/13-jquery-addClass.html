@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			$("#btn").click(function(){
+				$("#d1").addClass("c1").addClass("c2").html("测试的文本内容");
+			});
+		}
+	</script>
+  <div id="d1">
+		一个普通的div元素
+	</div>
+	<button id="btn">测试</button>
+ </body>
+</html>

@@ -1,0 +1,289 @@
+1、String 对象
+	1、分割字符串
+		函数：split(seperator)
+		作用：将字符串，通过 seperator 拆分成一个数组
+		ex:
+			var msg="张三丰|男|65|19000102";
+			var arr = msg.split("|");
+			console.log(arr);
+		练习：
+			var str = "1001|5&1382|6&1351|4";
+
+			商品ID ：1001
+			购买数量：5
+			商品ID：1382
+			购买数量：6
+			商品ID：1351
+			购买数量：4
+	2、模式匹配
+		1、作用
+			配合着正则表达式来完成字符串的查找和替换...
+		2、正则表达式
+			语法：/正则格式/修饰符
+				ex:/\d{6}/gim
+
+				修饰符：
+					i : 忽略大小写匹配(Ignorcase)
+					g : 全局匹配(Global)
+					m : 允许多行匹配(Multiple)
+		3、函数
+			1、replace(substr/regexp,replacement)
+				作用：使用replacement替换substr/regexp的内容
+			2、match(substr/regexp)
+				作用：返回满足substr 或 regexp 格式的子字符串，将这些字符串们放在数组中进行返回
+			3、search(substr/regexp)
+				作用：返回满足substr 或 regexp 格式的子字符串第一次出现的下标。如未找到，则返回-1 
+				注意：search函数不支持全局匹配，将自动忽略g
+
+			练习：
+				Microsoft is a big company ,microsoft's color is red and has MICROSOFT logo like microsoft
+				1、将所有的microsoft(大小写)替换成"微软"
+				2、输出共替换了多少处
+2、其他内置对象
+	1、JS的对象分类
+		1、内置对象 - ES 提供
+			String，Array，... ...
+		2、外部对象
+			1、window (BOM)
+			2、document (DOM)
+		3、自定义对象
+			function
+	2、RegExp 对象
+		RegExp : Regular Expression - 正则表达式
+		1、创建 RegExp 对象
+			1、var regExp = /匹配模式/修饰符;
+				var reg1 = /microsoft/g;
+				var reg2 = /\d{2,6}/g;
+			2、var regExp=new RegExp("匹配模式","修饰符");
+		2、RegExp对象的方法
+			1、regExp.test(string)
+				string : 要验证的字符串
+				如果string符合regExp格式的话，则返回true，否则返回 false 
+	3、Math 对象
+		1、作用
+			执行与数学相关的运算和数据
+		2、属性
+			Math.PI
+			Math.E
+		3、函数
+			1、三角函数
+				Math.sin(x)
+				Math.cos(x)
+				Math.tan(x)
+			2、计算函数
+				Math.sqrt(x) : 开方
+				Math.log(x) : 对数
+				Math.pow(x,y) : 求 x 的 y 次方
+			3、数值比较函数
+				Math.abs(x) : 绝对值
+				Math.max(a,b,c,d,e,f,g):获取最大值
+				Math.min(a,b,c,d,e,f,g):获取最小值
+				Math.random() : 返回0-1之间的随机小数
+				Math.round(x) : 将 x 四舍五入到整数
+	4、Date 对象
+		1、创建Date对象
+			1、获取当前系统日期时间
+				var now = new Date();
+			2、初始化自定的日期时间对象
+				var date = new Date("2018/01/01");
+		2、函数
+			1、读取或设置当前时间的毫秒数
+				1、getTime()
+					返回自1970-1-1 00：00：00 以来到 date 之间所经过的毫秒数
+				2、setTime(毫秒数)
+			2、读取时间分量函数
+				1、getFullYear()
+					获取日期时间对象的年份
+				2、getYear()
+					获取子1900年以来到当前日期时间对象所经过的年数
+				3、getMonth()
+					返回 0-11 的数字来表示 1-12月
+						0 : 1月
+						1 : 2月
+						...
+						11 : 12月
+				4、getDate()
+					返回当前日期时间对象所对应的日
+				5、getDay()
+					返回当前日期时间对象所对应的星期?
+					返回 0-6 来表示星期日 - 星期六
+					0 : 日
+					1 : 一
+					... ...
+					6 : 六
+				6、获取时间
+					getHours() : 获取 小时
+					getMinutes() : 获取分钟
+					getSeconds() : 获取秒
+					getMilliseconds() : 获取毫秒
+				7、转换为字符串
+					1、toString()
+					2、toLocaleString()
+					3、toLocaleTimeString()
+					4、toLocaleDateString()
+				练习：
+					1、获取当前系统的日期时间
+					2、按照以下格式进行输出
+						xxxx年xx月xx日 xx时xx分xx秒 星期?
+3、外部对象
+	1、BOM 和 DOM
+		BOM：Browser Object Model - 浏览器对象模型
+		DOM：Document Object Model - 文档对象模型
+	2、BOM
+		1、作用
+			表示整个浏览器窗口
+			BOM提供了一个核心对象 - window
+		2、window 对象的使用
+			1、属性 和 方法
+				window对象会包含若干属性 和 方法
+					属性：
+						document,location,history,...
+					方法：
+						alert() , prompt()
+				调用window对象的属性和方法时，可以省略window不写
+			2、window 中的对话框
+				1、警告框
+					window.alert() / alert()
+				2、输入框
+					window.prompt() / prompt()
+				3、确认框
+					window.confirm() / confirm()
+					按 "确定" 按钮的话，则返回true
+					其余的操作均返回 false
+			3、window 中的定时器
+				1、定时器分类
+					1、周期性定时器
+						每间隔一定的时间后，就执行一遍指定程序，反复执行
+					2、一次性定时器
+						在指定的时间间隔之后，只执行一次操作
+				2、周期性定时器
+					1、声明定时器
+						var ret = setInterval(fun,time);
+						fun:要周期性执行的操作,可以是匿名函数
+						time:时间间隔周期，以毫秒为单位
+						ret:返回已创建好的定时器对象
+					2、清除定时器
+						clearInterval(timer)
+						timer:创建好的，要停止的定时器对象
+				3、一次性定时器
+					1、声明一次性定时器
+						var ret = setTimeout(fun,time);
+						fun:指定时间间隔后要执行的操作
+						time:时间间隔
+						ret:返回已启动的定时器对象
+					2、清除定时器
+						clearTimeout(timer);
+		3、window 的属性(了解)
+			1、screen
+				作用：获取客户端显示器的相关信息
+				属性：
+					1、width / height
+					2、availWidth / availHeight
+			2、history
+				1、作用：包含当前窗口所访问过的url地址们
+				2、属性 和 方法
+					1、属性
+						length：访问过的url的数量
+					2、方法
+						1、back() --后退
+						2、forward() --前进
+						3、go(num)
+							去往历史记录中的第num个页面
+							go(1) -- forward()
+							go(-1) -- back()
+			3、location
+				1、作用
+					表示浏览器地址栏上的信息
+				2、属性 和 方法
+					1、href
+						表示当前窗口中正在浏览的网页的地址
+						如果为href设置值的话，则相当于是浏览器的跳转功能
+					2、reload()
+						重新加载当前网页，等同于刷新
+			4、navigator
+				1、作用
+					包含浏览器的相关信息
+				2、属性
+					1、userAgent
+						显示浏览器相关信息
+	3、DOM - document对象(重点)
+		1、document的概述
+			document对象，是DOM中的顶级对象。封装了和HTML相关的属性，方法和事件。
+
+			网页在加在HTML的时候，会在内存中生成一颗节点树(DOM树)，DOM树的根就是document。网页上的每个元素其实都是DOM树上的一个节点。
+
+			DOM中所提供的操作：
+				1、查找节点的信息
+				2、读取节点的信息
+				3、修改节点的信息
+				4、删除节点的信息
+				5、创建节点的信息
+		2、查找节点
+			1、通过元素的id查找节点
+				var elem = document.getElementById("元素ID");
+					元素ID：要获取的元素的ID
+					elem:所得到的元素的对象 - DOM对象/元素
+						如果没找到匹配的元素，则返回null
+				
+				DOM对象的常用属性：
+					1、innerHTML
+						获取 或 设置当前DOM对象的HTML文本值
+					2、innerText
+						获取 或 设置当前DOM对象的文本值
+					3、value
+						获取 或 设置表单控件对象的值
+				练习：
+					1、网页中创建一个文本框一个按钮
+					2、网页中再创建一个div
+					3、点击按钮的时候，将文本框中的数据取出来，构建成<h1></h1>,再显示到div中
+		3、读取节点的信息
+			1、节点的类型
+				1、元素节点
+					表示页面上的一个元素
+				2、属性节点
+					表示页面上元素的一个属性
+				3、文本节点
+					表示页面上元素中的一个文本内容
+				4、注释节点
+					表示网页上的一个注释
+				5、文档节点
+					表示html文档
+
+				属性：nodeType
+				值：
+					返回1 ：元素节点
+					返回2 ：属性节点
+					返回3 ：文本节点
+					返回8 ：注释节点
+					返回9 ：文档节点
+			2、节点的名称
+				属性：nodeName
+					元素节点 和 属性节点：元素名 或 属性名
+					文本节点：#text
+					文档节点：#document
+					注释节点：#comment
+		4、获取 或 设置元素节点的属性
+			1、getAttribute(attrName)
+				作用：获取某元素指定的属性值
+				attrName:要获取的属性的名称
+				返回值：attrName属性名对应的值
+				注意：获取的属性值，必须要在标记中编写出来，否则值为null
+			2、setAttribute(attrName,attrValue)
+				作用：修改指定属性的值
+				attrName:要修改的属性名
+				attrValue:要设定的值
+			3、removeAttribute(attrName)
+				作用：将attrName属性从元素中删除数去
+			练习：
+				1、网页中创建一个a标记，内容为 百度 ，链接地址为 http://www.baidu.com
+				2、网页中创建一个按钮，文本为 修改
+				3、点击按钮时
+					将超链接的文本修改为：腾讯
+					将超链接的地址修改为：http://www.qq.com
+
+
+
+
+CRUD
+
+

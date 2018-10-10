@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <!-- <script>
+  		for(var i=1;i<=9;i++){
+  			var msg = "";
+  			for(var j=1;j<=i;j++){
+  				msg += j+"*"+i+"="+j*i+"\t";
+  			}
+  			console.log(msg);
+  		}
+  	</script> -->
+	<script>
+		for(var line=1;line<=5;line++){
+			var msg = "";
+			//内层循环1：循环追加空格
+			for(var space=1;space <= 5-line ; space++){
+				msg += " ";
+			}
+			//内层循环2：循环追加**
+			for(var star=1;star <= 2*line-1;star++){
+				msg += "*";
+			}
+			console.log(msg);
+		}
+
+
+	</script>
+ </body>
+</html>

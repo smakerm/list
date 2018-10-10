@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#tbl{
+			width:600px;
+			border:1px solid #000;
+			border-collapse:collapse;
+		}
+		#tbl td{
+			border:1px solid #000;
+		}
+	</style>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		$(function(){
+			//1、为#btnAdd绑定click事件
+			$("#btnAdd").click(function(){
+				//1、获取三个文本框的值
+				var gname = $("#gname").val();
+				var gprice = $("#gprice").val();
+				var gcount = $("#gcount").val();
+				//2、构建四个td，分别存放三个值和一个按钮
+				var $tdName=$("<td>"+gname+"</td>");
+				var $tdPrice=$("<td>"+gprice+"</td>")
+				var $tdCount=$("<td>"+gcount+"</td>");
+				var $tdOper = $("<td></td>");
+				//2.2 创建删除按钮，并指定行为
+				var $btnDel = $("<button>删除</button>");
+				$btnDel.click(function(event){
+					//通过 $btnDel 找到 tr，然后再删除
+					$(event.target).parent().parent().remove();
+				});
+				//2.3 将$btnDel增加到$tdOper中
+				$tdOper.append($btnDel);
+				//3、构建一个tr，存放四个td
+				var $tr = $("<tr></tr>");
+				$tr.append($tdName);
+				$tr.append($tdPrice);
+				$tr.append($tdCount);
+				$tr.append($tdOper);
+				//4、将tr放进tbody中
+				$("#tContent").append($tr);
+			});
+		});
+	</script>
+ </head>
+ <body>
+  <p>
+		<input type="text" id="gname">
+		<input type="text" id="gprice">
+		<input type="text" id="gcount">
+		<button id="btnAdd">增加</button>
+	</p>
+	<table id="tbl">
+		<thead>
+			<tr>
+				<td>商品名称</td>
+				<td>商品价格</td>
+				<td>购买数量</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody id="tContent"></tbody>
+	</table>
+ </body>
+</html>

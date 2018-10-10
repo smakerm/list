@@ -1,0 +1,162 @@
+1、模板
+	1、继承
+		1、
+			{%block 名称%}
+			{%endblock%}
+
+		2、
+			{%extends '父模板名称'%}
+2、模型-Models
+	1、模型
+		根据数据库中的表和字段来构建编程语言中的类和属性
+	2、创建 和 使用模型
+		1、ORM
+			Object Relational Mapping
+			对象关系映射
+		2、数据库的配置
+			1、settings.py
+				DATABASES = {
+					'default':{
+						'ENGINE':'django.db.backend.mysql',
+						'NAME':'数据库名',
+						'USER':'root',
+						'PASSWORD':'123456',
+						'HOST':'localhost',
+						'PORT':'3306',
+					}
+				}
+		3、Models的编写
+			每个类必须继承自models.Model
+			class Entry(models.Model):
+				field1 = models.FieldType(**FiledOptions)
+
+				name=models.CharFiled(max_length=30,null=True)
+		4、将models同步到数据库
+			1、./manage.py makemigrations
+				将models类生成为中间的日志文件
+			2、./manage.py migrate
+				将日志文件映射到数据库
+3、数据的导入和导出
+	1、版本切换
+		./manage.py migration 应用名 版本号
+	2、数据库的导入和导出
+		... ...
+	3、通过数据库自动导出Models
+		./manage.py inspectdb > xxx.py
+================================================
+1、模型的数据库操作方法(CRUD)
+	1、通过视图向DB中增加数据
+		1、Entry.objects.create(属性=值,属性=值)
+		2、创建一个实体对象，并通过 save() 方法完成增加
+			obj = Entry(属性=值,属性=值)
+			obj.save()
+		3、通过字典创建实体对象，再调用 save()
+			dic = {
+				'name':'xx',
+				'age':33,
+				'email':''
+			}
+			obj = Author(**dic)
+			obj.save()
+	2、查询操作(重难点)
+		所有的查询都要在Entry.objects的基础上完成
+		1、基本查询操作
+			语法：all()
+			用法：Entry.objects.all()
+			返回：QuerySet
+		2、查询接口
+			1、all()
+				Entry.objects.all()
+				相当于：select * from ...
+			2、all().values('列名')
+				Entry.objects.all().values('name')
+				相当于：select name from ...
+				作用：查询所有记录的某一列的值
+			3、all().values('列1','列2')
+				Entry.objects.all().values('name','age')
+				相当于：select name,age from ...
+			4、get()
+				只查找一条记录时使用
+				也只能返回一条记录
+				如果查询返回多条记录的话，则报错
+				Entry.objects.get(id=4)
+				相当于：select * from ... where id=4
+			5、exclude()
+				作用：对给定条件取反
+				Entry.objects.exclude(id=3)
+				select * from .... where not id=3
+
+				Entry.objects.exclude(id=3,age=35)
+				select * from .... where not (id=3 and age=35)
+			6、order_by()
+				Entry.objects.order_by('列名1','-列名2')
+				指定按照字段们进行排序，如果是多个字段，中间,隔开。默认是按照升序排序，需要降序的话，只需要在列名前加‘-’即可
+			7、filter()
+				根据自定义条件查询结果集，可以是一个，也可以是多个，多个的话，条件用 , 隔开。
+				如果是多个条件的话，其内部是使用 AND 来进行条件连接的
+				1、使用Entry的属性来作为filter()的条件
+					ex：
+						1、Author.objects.filter(id=1)
+							select * from author where id=1
+						2、Author.objects.filter(name='王宝强')
+						3、Author.objects.filter(id=1,name='王宝强')
+							select * from auther where id=1 and name='王宝强'
+				2、使用 Filed Lookups (查询谓词)
+					1、__exact
+						作用：等值判断
+						Author.objects.filter(id__exact=1)
+						SQL:
+							select * from auther where id=1
+					2、子查询
+						inner=Author.objects.filter(name__exact='贾乃亮').values('age')
+						authors=Author.objects.filter(age__gt=inner)
+	3、修改操作
+		1、修改单个对象
+			1、通过get()得到要修改的实体对象
+			2、通过实体对象修改属性值
+			3、再通过实体对象的save()函数，实现保存
+
+			auth=Author.objects.get(id=1)
+			auth.name='宝强.王'
+			auth.age=45
+			auth.save()
+		2、批量修改(修改查询结果集的值)
+			调用 update() 函数即可
+			Author.objects.all().update(属性=值,...)
+	4、删除操作
+		1、删除单个对象
+			obj=Author.objects.get(id=1)
+			obj.delete()
+		2、批量删除
+			Author.objects.filter(age__lt=50).delete()
+	5、F()操作 和 Q()操作
+		1、F()操作
+			update author set age=age+10
+			Author.objects.all().update(age=age+10)
+
+			作用：用于在执行中获取某列的值
+			语法：F('列名')
+
+			from django.db.models import F
+			Author.objects.all().update(age=F('age')+10)
+
+		2、Q()操作
+			AND:Author.objects.filter(id=1,age=35)
+
+			from django.db.models import Q
+			Author.objects.filter(
+				Q(id__exact=1)|Q(age=35),name='王'
+			)
+
+			select * from author where id=1 or age=35 and name='王'
+	6、原生的数据库操作方法
+		1、查询
+			函数:raw()
+			语法:Entry.objects.raw(sql)
+		2、增删改
+			def sql(request):
+				with connection.cursor() as cursor:
+					sql='delete from index_author;'
+					cursor.execute(sql)
+					return render(... ...)
+

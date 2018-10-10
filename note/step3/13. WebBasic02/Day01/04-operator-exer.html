@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var year = Number(prompt("请输入一个年份:"));
+		var isRun=((year%4==0) && (year%100!=0)) || year%400==0;
+		/*console.log(year+"年是闰年吗?"+isRun);*/
+		isRun ? console.log("是闰年") : console.log("不是闰年");
+	</script>
+ </body>
+</html>

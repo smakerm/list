@@ -1,0 +1,125 @@
+关于反爬：
+    对方网站：
+   1.可能会根据你IP的访问频次及流量，限制你的IP访问；
+   2.大量重复简单的网站浏览行为，会被网站识别（如果是内置浏览器的话不存在这个问题，但是带来的问题是效率低下）；
+   3.有些网站会通过一些普通用户不可能触及但是爬虫程序却可能处理的标签等来识别爬虫；
+
+反反爬的策略：
+    1.User-Agent池；
+    2.代理服务器池； 更好的做法是
+随机的将1，2组合；
+    3.处理Cookie使用CookieJar；
+    4.HTTP协议的细节：处理JS，可以使用一些库让其跑一遍JS的代码，V8引擎；https://baike.baidu.com/item/V8/6178125
+    5.使用分布式策略来抓取；可以尽量把机器遍布在各地，如果有条件的话能把服务器布在校园网效果相对好些；Scrapy-Redis;
+    6.可以使用机器学习的方法来帮助爬虫去改善抓取策略；
+    7.验证码：图像处理，神经网络等等，打码平台；
+    8.尽可能的符合Robots协议；
+
+Scrapy:
+   安装：conda install scrapy
+Usage:
+  scrapy <command> [options] [args]
+
+Available commands:
+  bench         Run quick benchmark test
+  fetch         Fetch a URL using the Scrapy downloader
+  genspider     Generate new spider using pre-defined templates
+  runspider     Run a self-contained spider (without creating a project)
+  settings      Get settings values
+  shell         Interactive scraping console
+  startproject  Create new project
+  version       Print Scrapy version
+  view          Open URL in browser, as seen by Scrapy
+
+  [ more ]      More commands available when run from project directory
+
+Use "scrapy <command> -h" to see more info about a command
+
+   使用：
+    1.创建工程；
+(base) C:\Users\Administrator\Desktop\爬虫\day08\myScrapySpider>scrapy startproj
+ect scrapyTest
+New Scrapy project 'scrapyTest', using template directory 'C:\\ProgramData\\Anac
+onda3\\lib\\site-packages\\scrapy\\templates\\project', created in:
+    C:\Users\Administrator\Desktop\爬虫\day08\myScrapySpider\scrapyTest
+
+You can start your first spider with:
+    cd scrapyTest
+    scrapy genspider example example.com
+
+(base) C:\Users\Administrator\Desktop\爬虫\day08\myScrapySpider\scrapyTest\scrap
+yTest\spiders>scrapy genspider tencent hr.tencent.com
+Created spider 'tencent' using template 'basic' in module:
+  scrapyTest.spiders.tencent
+
+我们需要修改的地方，有四处：
+   1.settings.py:
+	    a)注释掉robots协议；
+			b)修改headers内容；
+      c)打开item pipelines开关；
+	 2.items.py:
+	    把需要抓取的数据映射：
+			 name = scrapy.Field()
+	 3.pipelines.py:
+      重写process_item这个方法，
+可以写到本地文件系统中，也可以写数据库；
+	 4.tecent.py的爬虫文件:
+	    完善parse获取到真正的数据；
+			完善start_urls；
+运行scrapy 的爬虫程序：
+(base) C:\Users\Administrator\Desktop\爬虫\day08\myScrapySpider\scrapyTest\scrap
+yTest\spiders>scrapy crawl tencent
+
+Scrapy中有两种Spider类：
+   1.scrapy.Spider；
+   2.CrawlSpider类在Spider的基础上做了一些升级，指定一些规则，这些规则可以很方便的把网页中的link(URL)提取出来;
+使用以下：
+(base) C:\Users\Administrator\Desktop\爬虫\day08\myScrapySpider\scrapyTest2\sc
+pyTest2\spiders>scrapy genspider -t crawl tencent hr.tencent.com
+Created spider 'tencent' using template 'crawl' in module:
+  scrapyTest2.spiders.tecent
+equest to 'hr.tencent.com': <GET https://hr.tencent.com/position.php?keywords=py
+thon&lid=2156&tid=0&start=10#a>
+
+读Scrapy源码：
+C:\ProgramData\Anaconda3\Lib\site-packages\scrapy
+
+class Request:
+    可以修改编码，UA，Cookie等等；
+class Response:获取响应的类；
+Proxy池，UA池：可以在middlewares.py的中间件中来扩充其功能；也可以将这些信息写入settings.py
+中，以便之后来取；
+
+
+如果爬虫程序中间出错了，下一次爬取的起点在哪？
+从原理上来说：需要将已经爬取过的网页做记录，
+以保证之前爬过的不会再爬；实践中可以使用Redis
+数据库缓存；
+   Scrapy-Redis 用来做简单的分布式爬虫 
+
+
+作业）完善myScrapySpider工程，将数据抓取完整；
+
+自然数N->无穷大，
+1)1+1/2+1/4+1/8+...+1/2^N = ? 2
+2)1+1/2+1/3+1/4+...+1/N = ?  无穷大
+   发散级数，近似等于 欧拉常数+ln(N)
+
+数据分析：
+    1）描述性的分析；
+    2）预测性的分析；
+
+def DFS(tree):
+   if tree.node != None:
+    print(tree.node)
+   if tree.left != None:
+    DFS(tree.left)
+   if tree.right != None:
+    DFS(tree.right)
+
+
+Bloom Filter: 多次hash，时间换空间；
+
+re：finall [\s\S]*?
+BS4：findall
+xpath从浏览器中找；

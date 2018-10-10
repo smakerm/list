@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testArray(){
+			//1、使用 [] 创建数组
+			var names1 = ["张三丰","张无忌","张翠山","金毛狮王"];
+			//2、使用 new 创建数组
+			var names2 = new Array("金花婆婆","赵敏","周芷若","殷素素");
+			console.log("******打印数组******");
+			console.log("names1"+names1);
+			console.log("names2"+names2);
+			console.log("******获取元素******");
+			console.log("names1中的第2个元素:"+names1[1]);
+			console.log("names2中的第3个元素:"+names2[2]);
+			console.log("names1中的第9个元素:"+names1[8]);
+			console.log("******为元素赋值****");
+			//将 names1 中的第一个元素设置为 漩涡鸣人
+			names1[0] = "漩涡鸣人";
+			console.log("names1修改后:"+names1);
+			//为 names1 中的第五个元素赋值为 佐助
+			names1[4] = "佐助";
+			console.log("names1增加后:"+names1);
+			//为 names1 中的第十个元素赋值为 雏田
+			names1[9] = "雏田";
+			console.log(names1);
+			console.log(names1[6]);
+		}
+	</script>
+	<button onclick="testArray()">创建数组</button>
+ </body>
+</html>

@@ -1,0 +1,140 @@
+复习：
+udp 通信 recvfrom   sendto
+fork 多进程并发
+threading 多线程并发
+socketserver 系统模块
+
+套接字的属性 setsockopt   getsockopt
+******************************************************
+
+ftp文件服务器
+
+1、获取文件列表 
+2、能够下载文件
+3、能够上传文件
+
+步骤 ： 设计（使用什么技术，实现什么功能，达到什么目的）
+				计划实施
+				文档确认 （需求分析，概要设计，详细设计，使用说明）
+				编写
+				测试 
+
+
+tcp连接 
+并发 ---》 多进程 fork
+
+实现步骤 ： 1. 创建网络连接
+						1+ 功能架构的设计和客户端退出处理
+						2. 实现list file
+								@ 客户端请求
+								@ 服务器端确认请求
+								@ 遍历文件夹下文件 然后 把文件名发给客户端
+								@ 客户端接收并打印
+补充 ： os.listdir(path) : 获取指定目录下所有文件列表
+        os.path.isfile(filename):判断一个文件是否为普通文件
+
+						3. 实现get  file 
+							 @ 客户端请求
+							 @ 服务器端确认请求 
+							 @ 客户端 以 w 打开文件 服务器端 r 打开
+							 @ 服务器read --- send  客户端recv---write
+							
+						4. 实现put file 
+							@ 客户端请求
+							@ 服务器端确认请求
+							@ 客户端 以 r 打开文件 服务器端 w 打开
+							@ 服务器recv --- write  客户端read---send
+
+
+io 服务器模型
+
+io  input  output 
+
+io的分类 ： 
+阻塞IO （效率低）
+
+非阻塞IO （效率相对较高）
+在遇到原本阻塞的条件时不再阻塞，去执行其他内容，但是往往需要不断轮询阻塞事件是否可以执行
+
+IO多路复用 
+
+同时监控多个IO事件，当IO哪个事件就绪就执行哪个IO事件。形成一种并发的效果
+
+import select
+
+win ---- 》 select
+
+linux/unix ---》 select   poll  epoll
+
+rlist, wlist, xlist=select(rlist, wlist, xlist, [timeout]) 
+
+功能 ： 通过select 方法监控IO事件
+参数 ： rlist ：列表  存放要监控的IO事件 我们将要处理的IO事件
+
+				wlist : 列表  存放要监控的IO事件 你要主动处理的IO事件
+
+				xlist : 列表  存放要监控的IO事件 你希望发生异常通知你																	 处理的IO事件
+返回值：当select 监控的IO事件中有一个或者多个可以处理的时候结         束阻塞，进行返回
+				r ： 列表  参数rlist中如果有可以处理的IO放在这个列表
+				w ： 列表  参数wlist中如果有可以处理的IO放在这个列表
+				x ： 列表  参数xlist中如果有可以处理的IO放在这个列表
+
+多路复用特点 ： 
+
+1. 可以同时监听多种IO 事件
+2. 当任意IO 事件发生时会处理
+3. 在处理每个事件时不能死循环（长期占有服务器）
+4. IO多路复用，是基于IO的处理 不是多进程或者多线程
+
+poll多路复用 
+
+1.  创建poll对象  
+
+p = select.poll()       
+
+2. 加入你关注的IO 事件  
+
+p.register(s)                    相当于select三个参数
+
+3. 监控哪个IO事件发生
+
+events = p.poll()                相当于select函数功能
+返回值 ： [(1,event),(2,event),(3,event)....]
+每一个就绪的IO 事件都会在返回值中给出一个对应的元组
+元组中 第一个元素为 就绪的IO 的 fileno
+       第二个元素为 具体的就是事件 （read write or error）
+*往往需要写一个字典 让 io对象和 fileno 对应起来
+
+4. 将IO事件移除监控范围
+p.unregister(s)                  相当于 rlist.remove()
+
+poll 和 epoll中的事件分类
+
+POLLIN   POLLOUT  POLLERR   POLLUP   POLLPRI   POLLVAL
+rlist    wlist    xlist    断开连接  紧急处理  无效数据
+
+event & POLLIN   得到 True 即表示是当前事件类型 
+
+
+
+写一个聊天室
+
+类似qq聊天室 
+
+当一个用户进入聊天室，发消息，聊天室内所有用户都能收到消息
+
+每当有用户进入或者退出群聊时，其他成员能够收到 进入和退出的信息
+
+消息收发时，不让自己收到， 并且有一定格式 
+ 张三发送了个hello   > hello   
+ 其他成员显示为 张三 say ： hello
+（进入聊天室就要确定下自己的姓名）
+
+管理员喊话 ： 服务器发送消息 所有成员都能收到
+
+
+
+
+
+
+

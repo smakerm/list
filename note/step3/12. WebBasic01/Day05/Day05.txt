@@ -1,0 +1,315 @@
+1、尺寸 和 边框
+	1、单位
+	2、尺寸
+		1、尺寸属性
+			width，height
+
+			允许设置尺寸的属性：
+				1、所有的块级
+				2、所有的行内块元素(表单控件)
+				3、table
+				4、除img以外的所有的行内元素
+			溢出处理：
+				属性：overflow
+				取值：
+					1、visible
+					2、hidden
+					3、scroll
+					4、auto
+	3、边框属性
+			1、边框实现
+				1、边框的简写	
+					border:width style color;
+				2、单边框实现
+					border-方向:width style color;
+				3、单属性实现
+					border-属性:值;
+				4、单边单属性实现
+					border-方向-属性:值;
+			2、轮廓
+				outline:none;
+			3、边框倒角
+				border-radius:半径值;
+				border-radius:50%;
+			4、边框阴影
+				box-shadow:h-shadow v-shadow blur spread color;
+2、框模型
+	1、框模型
+		当框模型的属性介入到元素后，元素的占地尺寸会发生改变
+
+		占地宽度= 左右外边距+左右边框+左右内边距+width
+		
+	2、外边距
+		1、什么是外边距
+			围绕在元素边框/边缘之外的空白距离就是外边距
+		2、属性(4+1)
+			margin-top/right/bottom/left:值;
+			margin:value;
+
+			取值：
+				1、px
+				2、%
+				3、负数 ：移动元素
+				4、auto
+					1、只能作用在左右外边距
+					2、只有设置在已设定尺寸的块级元素上时
+			简洁写法：
+				margin:value; 上下左右
+				margin:v1 v2; 上下  左右
+				margin:v1 v2 v3;上  左右  下
+				margin:v1 v2 v3 v4;上 右 下 左
+
+=================================================
+1、框模型
+	1、外边距(略)
+	2、内边距
+		1、什么是内边距
+			内容与元素边缘之间的距离
+			注意：内边距会扩大元素边框内所占的区域的
+		2、语法
+			padding:四个方向的内边距
+			padding-top / right / bottom / left : 值;
+
+			取值：
+				1、以 px 为单位的数值
+				2、以 % 为单位的数值
+			
+			padding的简洁写法：
+				padding:value ; 四个方向内边距
+				padding:v1 v2 ; 上下  左右
+				padding:v1 v2 v3;上  左右  下
+				padding:v1 v2 v3 v4;上 右 下 左
+			
+			页面中具备默认内边距的元素：
+				1、ol,ul，左内边距为40px
+				2、文本框，密码框，按钮，上下内边距
+	3、box-sizing 属性
+		作用：重新指定框模型的计算方式
+		属性：box-sizing
+		取值：
+			1、content-box
+				元素的width属性只表示内容区域的宽度
+				元素的height属性只表示内容区域的高度
+			2、border-box
+				元素的width属性包含内容区域宽度，左右内边距和左右边框的值
+				元素的height属性包含内容区域高度，上下内边距和上下边框的值
+2、背景属性
+	1、背景颜色
+		属性：background-color
+		取值：合法的颜色值
+		注意：背景颜色是从border位置处就开始绘制的
+	2、背景图像
+		属性：background-image
+		取值：url(图片路径)
+	3、背景图片平铺
+		属性：background-repeat
+		取值：
+			1、repeat
+				默认值，横向纵向都平铺
+			2、no-repeat
+				不平铺
+			3、repeat-x
+				只在横向平铺
+			4、repeat-y
+				只在纵向平铺
+	4、背景图片尺寸
+		属性：background-size
+		取值：width height
+			1、以px为单位
+			2、以%为单位
+	5、背景图片位置
+		1、作用
+			改变背景图在元素中的位置
+		2、属性
+			background-position
+			取值：
+				1、x y
+					以px为单位的数值，用空格隔开
+					x：背景图像的水平偏移位置
+						取值为正，图片右偏移
+						取值为负，图片左偏移
+					y：背景图像的垂直偏移位置
+						取值为正，图片下偏移
+						取值为负，图片上偏移
+				2、x% y%
+					0% 0% : 在左上角
+					100% 100% : 在右下角
+					50% 50% : 正中间
+				3、关键字
+					x : left 上午 11:47:31/ center / right
+					y : top / center / bottom
+	6、背景属性
+		属性：background
+		取值：color url() repeat position;
+
+		ex:
+			background:red;
+			background:url(a.jpg) no-repeat -35px center
+3、文本格式化属性
+	1、字体属性
+		1、指定字体
+			属性：font-family
+			取值：使用 , 隔开的字体值的列表
+			ex:
+				1、font-family:"微软雅黑";
+				2、font-family:"microsoft yahei";
+				3、font-family:"黑体";
+				4、font-family:"simhei";
+				5、font-family:"宋体";
+				6、font-family:"simsun";
+				7、font-family:"微软雅黑",Arial,Helvetica;
+		2、指定字体大小
+			属性：font-size
+			取值：
+				以 px 或 pt 为单位的数值
+		3、字体加粗
+			属性：font-weight
+			取值：
+				1、normal ：正常体，无加粗效果
+				2、bold ：加粗
+				3、value
+					取值为无单位的数字
+					400 - normal
+					900 - bold
+		4、字体样式 - 斜体
+			属性：font-style
+			取值：
+				1、normal ：正常，无斜体效果
+				2、italic ：斜体
+		5、小型大写字母
+			作用：将文本中的所有小写字母都变为大写字母，但是大小跟小写字母一样
+			属性：font-variant
+			取值：
+				1、normal
+				2、small-caps
+		6、字体属性
+			属性：font
+			取值：style variant weight size family;
+			注意：
+				使用简写属性时，必须要设置 family 的值，否则无效
+			练习：
+				创建任意文本
+				1、字体大小更改为 18pt
+				2、加粗所有文本
+				3、斜体显示所有文本
+				4、所有小写字符都变成小型大写字符
+				5、字体设置为 微软雅黑
+	2、文本属性
+		1、文本颜色
+			属性：color
+			取值：合法颜色值
+		2、文本的排列方式
+			控制内容的水平对齐方式
+			属性：text-align
+			取值：left / center / right / justify
+				justify:两端对齐
+		3、文字修饰
+			属性：text-decoration
+			作用：指定某元素中文字的线条修饰效果
+			取值：
+				1、none
+					无任何线条修饰
+				2、underline
+					下划线
+				3、overline
+					上划线
+				4、line-through
+					删除线
+		4、行高
+			作用：指定一行文本数据所占的高度是多少
+			特点：如果行高的高度高于文本的高度的话，那么文本将在行高范围内垂直居中显示
+			属性：line-height
+			取值：
+				1、以 px 为单位的数值
+				2、无单位的数字，表示为当前字体大小的倍数
+		5、首行文本缩进
+			属性：text-indent
+			取值：以 px 为单位的数字，表示缩进距离
+		6、文本阴影
+			属性：text-shadow
+			取值：h-shadow v-shadow blur color
+4、表格属性
+	1、表格常用属性
+		1、尺寸属性 - width，height
+		2、边框属性 - border
+		3、文本格式化属性
+			font-*
+			text-*
+		4、背景属性
+		5、框模型属性
+			margin 不能应用在td上
+		6、vertical-align
+			取值：top / middle / bottom
+	2、表格特有属性
+		1、边框合并
+			属性：border-collapse
+			取值：
+				1、separate
+					默认值，分离边框模式
+				2、collapse
+					边框合并模式
+		2、边框边距
+			作用：设置单元格四周的距离
+			属性：border-spacing
+			取值：
+				1、指定一个值
+					水平和垂直的间距是相等的
+				2、指定两个值
+					第一个值：水平间距
+					第二个值：垂直间距
+					两个值中间用空格隔开
+			注意：只有在分离边框模式下才有效
+5、过渡效果
+	1、什么是过渡
+		使得CSS属性值在一段时间内变化成另外一个属性值
+	2、过渡的语法
+		1、指定过渡属性
+			作用：指定哪个属性值在变化的时候使用过渡的效果
+			属性：transition-property(必须的)
+			取值：
+				1、属性名称
+				2、all
+					但凡能使用过渡效果的属性的值在变化时一律都使用过渡效果体现
+				允许使用过渡效果的属性：
+					1、与颜色相关的属性都可以使用过渡
+					2、取值为数字的属性都可以使用过渡
+		2、指定过渡时长(必须的)
+			属性：transition-duration
+			取值：以 s 或 ms 为单位的数字
+				1s = 1000ms
+				300ms = 0.3s = .3s
+		3、指定过渡的速度时间曲线函数(指定变化速率)
+			属性：transition-timing-function
+			取值：
+				1、ease
+					默认值，慢速开始，快速变快，慢速结束
+				2、linear
+					匀速
+				3、ease-in
+					慢速开始，加速结束
+				4、ease-out
+					快速开始，减速结束
+				5、ease-in-out
+					慢速开始和结束，中间先加速后减速
+		4、指定过渡延迟
+			属性：transition-delay
+			取值：以 s 或 ms 为单位的数值
+		5、过渡属性
+			属性：transition
+			取值：property duration timing-function delay;
+		
+		作业：
+			创建一个 div 200*200
+			鼠标悬停时：
+				1、背景颜色变为紫色
+				2、由正方形变为长方形
+				3、向右偏移500px
+			鼠标移出时，使用过渡效果显示回来
+
+
+
+
+
+
+
+

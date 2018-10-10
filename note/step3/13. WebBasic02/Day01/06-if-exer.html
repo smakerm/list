@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var year = Number(prompt("Year:"));
+		var month = Number(prompt("Month:"));
+		var day = Number(prompt("Day:"));
+		var totalDays = 0;
+		var isRun=year%4==0&&year%100!=0||year%400==0;
+		if(month == 1){
+			totalDays = day;
+		}else if(month == 2){
+			totalDays = 31 + day;
+		}else if(month == 3){
+			totalDays = 31 + 28 + day;
+		}else if(month == 4){
+			totalDays = 31 + 28 + 31 + day;
+		}else if(month == 5){
+			totalDays = 31 + 28 + 31 + 30 + day;
+		}
+
+		if(month >= 3 && isRun){
+			totalDays += 1;
+		}
+
+		console.log("是第"+totalDays+"天");
+	</script>
+ </body>
+</html>

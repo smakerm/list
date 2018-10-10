@@ -1,0 +1,260 @@
+...
+四、岭回归
+线性回归的主要问题是对异常值过于敏感。在真实世界的数据收集过程中，经常会遇到错误的度量结果，而线性回归使用普通的最小二乘法，其目标是使每个样本的误差平方最小。这时，由于异常值误差的绝对值通常较大，会引起回归模型质量的下降。为了避免这个问题，可以引入包含正则化系数(α)的岭回归模型，通过阈值和权重来有选择地削弱异常样本对回归效果的影响。
+代码：ridge.py
+五、多项式回归
+x： [x1, x2, x3] -> y
+y = k1x1 + k2x2 + k3x3 + b
+y = k1x1^1 + k2x2^2 + k3x3^3 + b
+六、决策树回归和自适应增强决策树回归
+1.决策树模型和自适应增强决策树模型的比较
+代码：housing.py
+2.特征的相对重要性
+在一个特定的回归模型中，影响最终输出的诸特性所做出的贡献并不相同，评估其贡献大小有助于排除影响较小的因素，简化后续数据的处理过程。
+代码：imp.py
+3.数据的时间周期对特性重要性的影响
+代码：bike.py
+七、简单分类器
+分类规则已知，直接通过代码对数据做分类。
+代码：simple.py
+八、逻辑回归分类器
+代码：logistic.py
+九、朴素贝叶斯分类器
+代码：nb.py
+十、划分训练集和测试集
+代码：train_test.py
+十一、用交叉验证检验模型的准确性
+代码：cv.py
+十二、混淆矩阵
+      0      1      2
+0  45     4       3
+1  11    56      2
+2   5      6     49
+代码：cm.py
+十三、性能报告
+代码：report.py
+十四、汽车质量评估
+价格(buying)：昂贵(vhigh)、贵(high)、便宜(med)、廉价(low)
+门数：2、3、4、5
+人数：2、4
+...
+代码：car.py
+十五、验证曲线
+代码：vc.py
+十六、学习曲线
+代码：lc.py
+十七、完整分类学习过程
+数据收集->训练测试划分->模型训练->交叉验证->模型测试
+                                                                                       |
+                                                  模型应用<-评估精度<-+
+十八、SVM(支持向量机)线性分类器
+代码：svm_linear.py
+一个类的数据被另一个类包围，这种形式的数据属于线性不可分的状态，这种样本不适合用线性分类器。
+十九、SVM多项式非线性分类器
+代码：svm_poly.py
+二十、SVM径向基函数(RBF)非线性分类器
+代码：svm_rbf.py
+二十一、解决类型数量不平衡问题
+某一个类型的数据量可能比其他类型多很多，这种条件下训练的分类器就会存在较大的偏差，边界线不能反映出数据的真是特性，因此需要考虑修正样本的比例，或者想办法调和。
+二十二、置信度
+代码：svm_conf.py
+二十三、最优超参数
+代码：svm_hyper.py
+二十四、事件预测
+代码：event.py
+二十五：估算交通流量
+代码：traffic.py
+二十六、k-means聚类
+针对数据样本间距离的分类方法。
+代码：kmeans.py
+二十七、利用聚类实现矢量量化
+代码：vector.py
+二十八、均值漂移聚类
+利用不同的概率密度匹配数据样本的分布模式，自动计算出类的个数。
+代码：mean_shift.py
+二十九、凝聚层次聚类
+代码：hier_agglo.py
+对比有无连接性
+代码：spiral.py
+三十、评价聚类算法的效果，择优而用
+度量聚类效果的重要指标：轮廓系数。轮廓系数用于表示集群是不是被划分得合理，每个集群是否足够密集。
+代码：perf.py
+三十一、用DBSCAN算法自动估算最优的集群数量
+Density Based Spatial Clustering of Applications with Noise，带噪声的基于密度的聚类方法
+核心样本：类属确定
+边缘样本：类属不明确
+带外样本：不属于任何集群
+代码：dbscan.py
+三十二、股票价格分类
+代码：stock.py
+三十三、客户购买习惯的划分
+代码：sales.py
+三十四、语音识别
+1.读取和绘制时间域音频数据
+波形文件：.wav，时间-强度
+代码：signal.py
+2.基于傅立叶变换的频率域音频数据
+代码：freq.py
+y=Asin(ωx+φ)
+A:振幅，能量
+ω:角频率
+2π/ω:时间频率
+φ:相位
+3.基于傅立叶变换的频率域滤波
+代码：make.py
+x           2**15
+----- = -----
+sigs      sigs.max
+1.23456
+123456
+4.音频合成
+代码：syn.py
+5.音频特征值——MFCC，Mel Frequency Cepstrum Coefficient，梅尔频率倒谱系数
+时间域 -FFT-> 频率域 -> MFCC
+apple.wav
+MFCCs -> 'apple'
+代码：feature.py
+6.语音识别
+代码：speech.py
+三十五、推荐引擎
+1.函数组合
+1)map
+代码：map.py
+2)reduce
+functools模块提供
+代码：reduce.py
+3)函数级联：用一个函数的返回值做为另一个函数的参数。
+代码：cascade.py
+def train_model(degree, x, y):
+    model = si.make_pipeline(sp.PolynomialFeatures(
+        degree), sl.LinearRegression())
+    model.fit(x, y)
+    return model
+2.通过管线连接特性选择器和随机森林分类器
+	pipeline.py
+	BRE - Busyness Romment Engine
+3.寻找最近邻
+代码：fnn.py
+4.基于knn算法的分类
+代码：knn.py
+5.基于knn算法的回归
+代码：knn2.py
+6.计算欧氏距离分数，简称欧氏分数(0-1)
+欧氏距离用户表达样本间的相似程度，分值越大的多个样本，相似度越高。
+X = [x1, x2, ..., xn]
+Y = [y1, y2, ..., yn]
+                                      1
+_______________________________________________
+        __________________________________________
+1+ V (x1-y1)^2+(x2-y2)^2+...+(xn-yn)^2
+代码：euclid.py
+7.计算皮尔逊距离分数，简称皮氏分数(-1-1)
+学霸       80 - 100
+学渣       50 - 70
+代码：pearson.py
+8.寻找相似用户
+根据相似度矩阵中的相似度分数，针对每一个行做降序排列。
+代码：similar.py
+9.电影推荐
+根据和特定用户相似的每个用户对该用户未评价过的电影的评分做关于皮氏分数的加权平均，按照从大到小排序。
+代码：reco.py
+三十六、图像识别
+1.OpenCV-Python基本操作
+代码：basic.py
+2.边缘检测
+代码：edge.py
+3.均衡化
+代码：equalize.py
+4.棱角检测
+代码：corner.py
+5.Star特征检测器
+代码：star.py
+6.SIFT特征检测器
+代码：sift.py
+7.图像特征值
+代码：feature.py
+8.图像识别
+代码：object.py
+三十七、人脸识别
+1.视频捕捉
+代码：capture.py
+2.面部定位
+代码：haar.py
+3.主成分分析(Principal Components Analysis, PCA)
+PCA识别数据中的重要部分，并将其按照重要程度排序。当需要处理很大维度的特征值时，利用PCA降维，可以在不损失数据重要特征的同时，降低其处理复杂度。
+代码：pca.py
+4.核主成分分析
+代码：kpca.py
+5.独立成分分析
+代码：ica.py
+6.人脸识别
+代码：face.py
+三十八、自然语言
+nltk，Natural Language Toolkit
+http://www.nltk.org/install.html
+http://www.nltk.org/data.html
+1.分词
+鱼香肉丝    里面     多放点儿    辣椒。
+对称加密需要DES处理引擎。
+天儿冷了多穿点儿。
+this is a man.
+代码：tk.py
+2.词干提取
+play -> plays/playing/player
+Porter: 宽松，简单，快，不保证词干的语法正确
+Lancaster: 严格，复杂，慢，保证词干的语法正确
+Snowball: 在精度和效率上位于以上两种提取器之间，常用
+代码：stem.py
+3.词形还原
+名字：复数->单数
+动词：分词->原型
+代码：lemma.py
+4.词块划分
+代码：split.py
+5.词袋(BOW, Bag Of Words)模型
+用词频矩阵做为每个样本的特征。
+Are you curious about tokenization?
+Let's see how it works!
+We need to analyze a couple of sentences with punctuations to see it in action.
+are you curiou about tokenize let see how it work ...
+1    1      1          1         1              0   0     0      0  0 ...
+0    0      0          0         0              1   1     1      1  1 ...
+...
+6.文本分类
+tf-idf, Term Frequency - Inverse Document Frequency
+词频——逆文档频率，其本质就是基于词袋模型的文本特征值
+代码：tfidf.py
+7.性别识别
+代码：gender.py
+8.情感分析
+代码：sentiment.py
+9.主题建模
+代码：topic.py
+三十九、神经网络
+1.神经元(感知器)
+神经元负责执行所有的计算，它将多个不同的输入用不同的权重系数组合起来，加上相应的偏差，得到一个或多个输出。
+代码：neuron.py
+2.单层神经网络
+代码：monolayer.py
+3.深度神经网络
+代码：deep.py
+4.学习向量量化神经网络
+LVQ, Learning Vector Quantization
+分类
+代码：lvq.py
+5.递归神经网络
+针对时间序列样本具有较好的学习效果。
+代码：recurrent.py
+6.基于深度神经网络的OCR(光学字符识别)
+代码：ocrdb.py
+四十、数据可视化
+1.三维散点图
+代码：scatter3d.py
+2.饼图
+代码：pie.py
+3.动画气泡
+代码：bubble.py
+
+
+
+

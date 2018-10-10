@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			$("#btnTest").click(function(){
+				//匹配li们当中，属于其父元素中的第一个子元素们
+				$("li:first-child").css("background","yellow");
+				
+				//匹配所有li中的第一个元素
+				$("li:first").css("font-size","32px");
+			});
+		}
+	</script>
+ </head>
+ <body>
+	<button id="btnTest">测试</button>
+  <ul>
+		<li>马蓉</li>
+		<li>白百合</li>
+		<li>李小璐</li>
+	</ul>
+	<ul>
+		<li>王宝强</li>
+		<li>陈羽凡</li>
+		<li>贾乃亮</li>
+	</ul>
+ </body>
+</html>

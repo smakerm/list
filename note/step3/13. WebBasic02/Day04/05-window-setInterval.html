@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var timer ; //全局的定时器对象
+		function testInterval(){
+			timer = setInterval(function(){
+				var now = new Date();
+				console.log(now.toLocaleString());
+			},1000);
+		}
+
+		function stopInterval(){
+			clearInterval(timer);
+		}
+	</script>
+	<button onclick="testInterval()">开始</button>
+	<button onclick="stopInterval()">停止</button>
+ </body>
+</html>

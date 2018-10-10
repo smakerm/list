@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#uname{
+			color:gray;
+			font-style:italic;/*斜体字*/
+		}
+		#uname:active{
+			font-style:normal;/*正常体（非斜体）*/
+		}
+		#uname:focus{
+			color:green;
+		}
+
+
+
+		/*100*/
+		#s1{color:red;}
+		/*1+1=2*/
+		p span{color:green;}
+		/*10+1=11*/
+		.pp span{color:orange;}
+		/*100+10+1=111*/
+		#main .pp span{color:pink;}
+		/*100+1=101*/
+		#main span{color:blue;background-color:yellow;}
+		/*100+1+1=102*/
+		#main p span{color:yellow;}
+		/*100+1+10+1=112*/
+		#main p.pp span{color:black;}
+
+
+
+		
+		a.anchor{color:red;}
+		a:hover{color:green;}
+		
+	</style>
+ </head>
+ <body>
+	<a href="#" class="anchor">这是一个测试的超链接</a>
+
+	<div id="main">
+		<p class="pp">
+			<span id="s1">这是div中的p中的span</span>
+		</p>
+	</div>
+
+  用户名称：<input type="text" id="uname" value="请输入您的名称">
+ </body>
+</html>

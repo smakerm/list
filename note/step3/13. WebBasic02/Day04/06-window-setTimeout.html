@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var timer = null ; //全局定时器变量
+		function closeWindow(){
+			if(confirm("确认关闭网页吗?")){
+				timer = setTimeout(function(){
+					window.close();
+				},5000);
+			}
+		}
+
+		function cancelClose(){
+			if(timer != null){
+				clearTimeout(timer);
+				alert("取消成功!");
+			}
+		}
+	</script>
+	<button onclick="closeWindow()">关闭网页</button>
+	<button onclick="cancelClose()">取消关闭</button>
+ </body>
+</html>

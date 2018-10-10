@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			/*$("#title~p").css("background-color","yellow");
+
+			$("#title~p:first").css("font-size","32px");
+			$("#title~p:not(:first)").css("color","red");*/
+
+			/*使用:odd,:even 完成隔行变色效果*/
+			$("#title~p:odd").css("background","red");
+			$("#title~p:even").css("background","yellow");
+		}
+	</script>
+ </head>
+ <body>
+	<p>此情此景，我想吟诗一首... ...</p>
+  <div id="title">静夜思</div>
+	<p>窗前明月光</p>
+	<p>疑是地上霜</p>
+	<p>举头望明月</p>
+	<p>低头思故乡</p>
+ </body>
+</html>

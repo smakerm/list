@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>关联数组</title>
+ </head>
+ <body>
+  <script>
+		function testArray(){
+			var names = [];
+			names[0] = "西游记";
+			names[1] = "水浒传";
+			names["xyj"] = "古代神话小说";
+			names["shz"] = "古代武侠小说";
+
+			console.log(names[0]);
+			console.log(names["xyj"]);
+
+			console.log("数组的长度:"+names.length);
+
+			for(var i = 0; i < names.length ; i ++){
+				console.log(i+":"+names[i]);
+			}
+
+			for(var i in names){
+				console.log(i+":"+names[i]);
+			}
+		}
+	</script>
+	<button onclick="testArray()">测试关联数组</button>
+ </body>
+</html>

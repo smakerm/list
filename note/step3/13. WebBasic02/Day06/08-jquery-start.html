@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="container">
+		<p id="pp">这是container中的pp</p>
+	</div>
+	<button onclick="getPPParent()">获取pp的父元素</button>
+	<button onclick="j2d()">jQuery -> DOM</button>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		function getPPParent(){
+			var pp = document.getElementById("pp");
+			//使用DOM元素调用jQuery的方法
+			//var parent = pp.parent();
+			//console.log(parent);
+
+			//将 pp 转换为 jQuery对象
+			var $pp = $(pp);
+			//var $parent = $pp.parent();
+			//console.log($parent);
+			
+			//试图使用jQuery对象访问DOM属性
+			var parent = $pp.parentNode;
+			console.log(parent);
+		}
+
+		function j2d(){
+			//1、使用jQuery选择器获取 id 为 pp 的元素
+			var $pp = $("#pp");
+			//试图通过 jQuery对象访问DOM属性
+			//console.log($pp.parentNode);
+
+			//2、将$pp转换为DOM元素
+			var pp = $pp[0];
+			console.log(pp.parentNode);
+		}
+	</script>
+ </body>
+</html>

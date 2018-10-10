@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		//页面加载后执行
+		$(function(){
+			$("#btn").bind("click",function(event){
+				alert("动态绑定的事件");
+				console.log(event);
+			});
+		});
+	</script>
+ </head>
+ <body>
+  <button id="btn">绑定事件</button>
+ </body>
+</html>

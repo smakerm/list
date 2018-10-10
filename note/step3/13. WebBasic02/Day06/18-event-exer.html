@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		var province = ["黑龙江","吉林","辽宁"];
+		var cities = [
+			["哈尔滨","齐齐哈尔","牡丹江"],
+			["长春","吉林","四平"],
+			["沈阳","大连","铁岭"]
+		];
+
+		$(function(){
+			//1、构建 <option>请选择</option>，并增加到selProvince中
+			var $opSel = $("<option>请选择</option>");
+			$opSel.attr("value","-1");
+			$("#selProvince").append($opSel);
+			//2、循环遍历 province 数组，取出每一个元素构建成option并增加到selProvince中
+			for(var i=0;i<province.length;i++){
+				var $op = $("<option></option>");
+				$op.html(province[i]);
+				$op.attr("value",i);
+				$("#selProvince").append($op);
+			}
+
+			//3、为selProvince绑定change事件
+			$("#selProvince").change(function(event){
+				console.log($(event.target));
+				//判断是否存在 #selCity 元素
+				if($("#selCity").length > 0){
+					$("#selCity").remove();
+				}
+
+				//如果选项不是 请选择(-1) 的话
+				if(this.value != -1){
+					//1、创建一个 <select></select>，并设置id
+					var $sel = $("<select></select>");
+					$sel.attr("id","selCity");
+					//2、将$sel加载到网页上
+					//$("body").append($sel);
+					$(this).after($sel);
+					//3、从 cities 数组中获取对应的数据并构建  option 添加到 $sel 上
+					//console.log(cities[this.value]);
+					for(var i=0;i<cities[this.value].length;i++){
+						var $opC=$("<option></option>");
+						$opC.attr("value",i);
+						$opC.html(cities[this.value][i]);
+						$sel.append($opC);
+					}
+				}
+
+			});
+		});
+	</script>
+ </head>
+ <body>
+  <select id="selProvince"></select>
+ </body>
+</html>

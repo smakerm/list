@@ -1,0 +1,135 @@
+Redis
+特性：
+    １支持持久化，可以将数据写入磁盘，供重启后使用
+    ２支持多种数据类型储存
+    ３支持数据备份优势
+优势：
+    １性能：读写能力强
+    ２丰富的存储类型
+    ３原子性：单独操作是原子性的，支持事务
+
+
+安装
+安装redis服务
+    sudo apt-get install redis-server
+启动redis
+    redis-server
+命令行操作
+    redis-cli
+
+常用命令
+存数据
+    SET key value
+取数据
+    GET key
+删除数据
+    DEL key (返回：０失败，１成功)
+检查数据是否存在
+    EXISTS key (返回：０不存在，１存在)
+设置数据的过期时间
+    EXPIRE key 过期时间（返回：１成功设定过期时间）
+返回当前数据剩余时间
+    TTL key　（返回：返回剩余时间，-1无过期时间，-2已过期）
+以毫秒设定数据的过期时间
+    PEXPIRE key 毫秒过期时间　（返回：１成功设定毫秒过期时间）
+以毫秒返回当前数据剩余时间
+    PTTL　key (返回：返回毫秒数剩余时间，-1无过期时间，-2已过期)
+从数据库中随机返回一个key值
+    RANDOMKEY
+重新命名 key
+    RENAME key newkey
+仅当newkey 不存在时，将key 命名为newkey
+    RENAMENX key newkey
+获取全部key值
+    keys *
+获取key值所存数据的类型
+    TYPE key
+
+
+hash
+哈希方式存储，用于存储对象
+    HMSET key field value
+    demo: HMSET R name "xiaoming" age 20 
+获取数据
+    HGET key field
+    demo: HGET R name
+获取字段和值
+    HGETALL key
+查询当前key中是否存在该字段
+    HEXISTS key field（返回：０不存在，１存在）
+删除当前key中指定的字段
+    HDEL key field (返回：０删除失败，１删除成功)
+查询当前key中全部字段名
+    HKEYS key
+查询当前key中全部值
+    HVALS key
+获取当前key值中数据数量
+    HLEN key
+修改当前已存在,如果不存在则添加
+    HSET key field value
+当key不存在时进行添加
+    HSETNX key field value
+
+
+事务
+一次执行多个命令，将命令放入队列缓存，当被执行的时候用命令逐条执行，彼此命令之间会不干扰，一条命令执行失败，其他命令继续执行。当事务执行过程中，其他客户端提交命令请求将不会插入到当前事务中。
+
+事务执行阶段：
+    开始事务
+    命令放入队列缓存
+    执行事务
+
+开始事务
+    MULTI
+执行命令放入队列
+    多个命令（返回：QUEUED）
+执行事务
+    EXEC
+
+
+
+
+Django Redis（demo:redisdjango）
+
+安装：
+    sudo pip3 install django-redis
+
+使用redis
+配置settings
+添加
+    CACHES = {
+    'default':{
+        'BACKEND':'django_redis.cache.RedisCache',
+        'LOCATION':'127.0.0.1:6379',
+        'OPTIONS':{
+            "CLIENT_CLASS":"django_redis.client.DefaultClient",
+            },
+        },
+    }
+
+
+
+
+django框架使用redis做缓存队列
+views.py:
+    引入：from django.core.cache import cache
+    定义方法
+    将数据加入队列：cache.set(key,value,time)
+    根据key获取数据：cache.get(key)
+
+django框架函数方法使用缓存
+    在所需缓存的函数方法前添加：@cache_page(time)
+
+django框架全站缓存
+    配置settings
+    在MIDDLEWARE中添加 
+    'django.middleware.cache.UpdateCacheMiddleware'（放第一个）
+    'django.middleware.cache.FetchFromCacheMiddleware'（放最后一个）
+    
+redis 使用场景：
+    １秒杀
+    ２火车票查询
+    ３新闻网站新闻页面缓存
+
+
+

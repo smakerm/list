@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  用户名：<input id="uname">
+	<script src="common.js"></script>
+	<script>
+		window.onload = function(){
+			$("uname").onkeypress = function(event){
+				/*if(event.which >= 48 && event.which <= 57){
+					return true;
+				}
+				return false;*/
+			}
+
+			$("uname").onkeydown = function(event){
+				console.log(event.which);
+			}
+		}
+	</script>
+ </body>
+</html>

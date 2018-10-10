@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function Person(name,age,gender){
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+
+			this.show = function(){
+				console.log("Hello my name is "+this.name+"i'm" + this.age + "years old");
+			}
+		}
+
+		var liLei = new Person("李雷",25,"男");
+		liLei.show();//访问liLei的方法
+		console.log(liLei.gender);//访问liLei的属性
+
+		var hanMei = new Person("韩梅梅",26,"女");
+		hanMei.show();
+		console.log(hanMei.gender);
+	</script>
+ </body>
+</html>

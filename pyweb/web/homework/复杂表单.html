@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复杂表单</title>
+</head>
+<body>
+    <h2>修改个人信息</h2>
+    <form action="" method="post">
+        <table border="1" cellspacing="0" width="600">
+            <tr>
+                <td>姓名:</td>
+                <td><input type="text" value="mary"></td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>
+                    <input type="radio" name="gender" value="f" checked>女士
+                    <input type="radio" name="gender" value="m">男士
+                </td>
+            </tr>
+            <tr>
+                <td>学历:</td>
+                <td>
+                    <select name="xuel" id="0">
+                        <option value="1">其他</option>
+                        <option value="2">专科</option>
+                        <option value="3">本科</option>
+                        <option value="4">硕士及以上</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>个人描述:</td>
+                <td>
+                    <textarea name="dec" id="1" cols="60" rows="3"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="t" value="0">不要公开我的信息
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="保存">
+                    <input type="reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

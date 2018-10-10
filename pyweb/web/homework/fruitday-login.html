@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员登陆</title>
+
+    <style>
+        #container{
+            width: 990px;
+            margin: 0 auto;
+        }
+        h2,span,a,p{
+            color: #b9b9b9;
+        }
+        h2{
+            font-weight: normal;
+            border-bottom: 1px solid #adadad;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .register,.submit{
+            float: right;
+            color: #64A131;
+            font-size: 18px;
+            border: 1px solid #64A131;
+            width: 145px;
+            height: 40px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration-line: none;
+            line-height: 40px;
+            box-sizing: border-box;
+        }
+        .submit{
+            float: left;
+            background-color: #64A131;
+            color: #FFF;
+            border: none;
+            outline: none;
+
+        }
+        #container-left{
+            position: relative;
+            float: left;
+        }
+        #container-left a{
+            width: 130px;
+            position: absolute;
+            top: 333px;
+            left: 185px;
+            box-sizing: border-box;
+        }
+
+        #login{
+            float: right;
+            margin-top: 75px;
+            width:400px;
+            box-sizing: border-box;
+        }
+
+        #login .input-cell{
+
+            box-sizing: border-box;
+            width: 300px;
+            height: 40px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+
+        #login .input-cell:focus{
+            border-color: #64A131;
+            box-shadow: 0 0 3px #64A131;
+        }
+
+
+
+        .form-line{
+            width: 400px;
+            height: 40px;
+            margin-top: 20px;
+        }
+        .form-line p{
+            float: left;
+            width: 60px;
+            height: 40px;
+            margin: 0;
+            line-height: 40px;
+            text-align: right;
+        }
+        .form-line div{
+            width:300px;
+            float: right;
+        }
+
+        .isSaved{
+            float:left;
+            width:20px;
+            height:20px;
+            vertical-align: middle;
+        }
+        #login a{
+            float: right;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>会员登录</h2>
+
+        <div id="container-left">
+            <img src="Images/huiyuan.jpg">
+            <a href="#" class="register">会员注册&gt;</a>
+        </div>
+
+        <div id="login">
+            <form action="login" method="post">
+                <div class="form-line">
+                    <p>手机号</p>
+                    <div>
+                        <input type="text" class="input-cell">
+                    </div>
+                </div>
+
+                <div class="form-line">
+
+                    <p>密码</p>
+                    <div>
+                        <input type="password" class="input-cell">
+                    </div>
+                </div>
+
+
+                <div class="form-line">
+
+                    <p></p>
+                    <div>
+                        <input type="checkbox" class="isSaved" id="isSaved" name="isSaved">
+                        <lable for="isSaves">记住密码</lable>
+                        <a href="#">快捷登陆</a>
+                        <a href="#">忘记密码</a>
+                    </div>
+
+                </div>
+
+
+                <div class="button form-line">
+                    <p></p>
+                    <div>
+                        <input type="submit" class="submit" value="登陆">
+                        <a href="#" class="register">注册会员</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

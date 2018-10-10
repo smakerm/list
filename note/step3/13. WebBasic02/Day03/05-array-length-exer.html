@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function saveName(){
+			var names = [];
+			while(true){
+				var input = prompt("输入姓名:");
+				if(input == "exit"){
+					break;
+				}
+				names[names.length] = input;
+			}
+			console.log(names);
+		}
+
+		function findMax(){
+			var nums = [875,63,-129,3,7893,67,125];
+			var max = nums[0];
+			for(var i=1;i<nums.length;i++){
+				if(nums[i] > max){
+					max = nums[i];
+				}
+			}
+			console.log("该数组中的最大值为:"+max);
+		}
+	</script>
+
+	<button onclick="saveName()">录入数据</button>
+	<button onclick="findMax()">获取最大值</button>
+ </body>
+</html>

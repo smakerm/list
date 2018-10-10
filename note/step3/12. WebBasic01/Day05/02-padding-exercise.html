@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		.form-control{
+			width:300px;
+			height:40px;
+			/*尺寸属性中会包含内边距和边框的值*/
+			box-sizing:border-box;
+			/*边框*/
+			border:1px solid #ccc;
+			/*取消轮廓*/
+			outline:none;
+			/*上下内边距为0，左右内边距为10px*/
+			padding:0 10px;
+		}
+		.form-control:focus{
+			border-color:#64A131;
+			box-shadow:0px 0px 2px #64A131;
+		}
+
+		#isSaved{
+			width:20px;
+			height:20px;
+		}
+
+		#btnLogin{
+			width:145px;
+			height:40px;
+			color:#fff;
+			font-size:18px;
+			/*边框倒角，背景颜色，取消边框，取消轮廓*/
+			border-radius:5px;
+			background-color:#64a131;
+			border:none;
+			outline:none;
+		}
+	</style>
+ </head>
+ <body>
+  <form action="login" method="post">
+		<table>
+			<tr>
+				<td>手机号</td>
+				<td>
+					<input type="text" name="uphone" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td>
+					<input type="password" name="upwd" class="form-control" placeholder="请输入6-20位的字符">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="checkbox" name="isSaved" checked id="isSaved">记住密码
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#">忘记密码</a>
+					<a href="#">快捷登录</a>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" value="登录" id="btnLogin">
+					<a href="#">注册会员</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+ </body>
+</html>

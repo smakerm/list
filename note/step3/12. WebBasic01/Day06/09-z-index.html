@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#d1,#d2,#d3{
+			width:100px;
+			height:200px;
+			position:absolute;
+		}
+		#d1{background:red;top:0px;left:0px;}
+		#d2{background:green;top:20px;left:20px;}
+		#d3{background:blue;top:40px;left:40px;}
+
+		#d1:hover,#d2:hover,#d3:hover{
+			z-index:100;
+		}
+	</style>
+ </head>
+ <body>
+  <div id="d1"></div>
+	<div id="d2"></div>
+	<div id="d3"></div>
+ </body>
+</html>

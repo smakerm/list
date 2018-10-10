@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script>
+		function getDiv(){
+			//1、获取 id 为 container 的元素
+			var div=document.getElementById("container");
+			//2、读取 div 的 innerHTML 属性值
+			//console.log(div.innerHTML);
+			//3、设置 div 的 innerHTML 属性值
+			//div.innerHTML = "<h6>修改的数据</h6>";
+
+			//4、读取 div 的 innerText 属性值
+			console.log(div.innerText);
+			//5、设置 div 的 innerText 属性值
+			div.innerText = "<h6>修改的数据</h6>";
+
+
+
+
+
+
+
+
+			//console.dir(div);
+			//获取属性
+			//console.log(div.clientHeight);
+			//绑定事件
+			/*div.onclick = function(){
+				window.alert("点击了DIV");
+			}*/
+		}
+
+		function getUname(){
+			//1、获取 id为 uname 的元素
+			var uname=document.getElementById("uname");
+			//2、再获取该元素的value属性值
+			console.log(uname.value);
+		}
+	</script>
+ </head>
+ <body>
+  <div id="container">
+		<h1>这是测试的DIV</h1>
+		<button onclick="getDiv()">获取div</button>	
+	</div>
+	<div>
+		用户名：<input type="text" id="uname">
+		<button onclick="getUname()">获取文本框的值</button>
+	</div>
+	
+ </body>
+</html>

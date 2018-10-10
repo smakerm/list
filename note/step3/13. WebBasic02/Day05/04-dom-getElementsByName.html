@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="container">
+		<p>请打分：</p>
+		<input type="radio" name="score" value="1">1分
+		<input type="radio" name="score" value="2">2分
+		<input type="radio" name="score" value="3">3分
+		<input type="radio" name="score" value="4">4分
+		<input type="radio" name="score" value="5">5分
+	</div>
+	<button onclick="btnValidate()">验证</button>
+	<script src="common.js"></script>
+	<script>
+		function btnValidate(){
+			var sArray = document.getElementsByName("score");
+			var pass = false;
+			for(var i = 0 ; i < sArray.length ; i++){
+				if(sArray[i].checked){
+					pass = true;
+					break;
+				}
+			}
+			if(pass){
+				alert("通过");
+			}else{
+				alert("请选择1项!");
+			}
+		}
+	</script>
+ </body>
+</html>

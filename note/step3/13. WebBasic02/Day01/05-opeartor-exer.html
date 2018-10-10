@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var height = Number(prompt("请输入身高:"));
+		var weight = Number(prompt("请输入体重:"));
+		var bmi = weight / (height * height);
+		bmi > 25 ? console.log("您偏胖!") : 
+			bmi < 20 ? console.log("您偏瘦!") : console.log("恭喜您，正好!");
+	</script>
+ </body>
+</html>

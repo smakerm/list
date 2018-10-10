@@ -1,0 +1,317 @@
+1、WEB 与 服务器
+2、框架
+=================================================
+1、设计模式 与 框架模式
+	1、设计模式
+		设计模式，是一套被反复使用，多数人知晓并经过分类的代码设计经验的总结，是为了解决一些通用性问题的
+		目的：重用代码并保证代码的可靠性
+		官方认证的设计模式有23种：单例模式，抽象工厂模式，观察者模式 -- 《大话设计模式》
+	2、框架模式
+		代码的重用，框架模式是解决如何设计程序框架的代码，在框架模式中会包含多种的设计模式
+		如：MVC，MTV，MVVM，ORM，... ...
+		1、MVC
+			M ：Models，模型层
+				在程序中主要处理数据，负责在数据库中对数据进行存取操作(CRUD)
+			V ：Views , 视图层
+				应用程序中处理显示的部分内容(html,jsp)
+			C ：Controllers , 控制器层
+				处理用户交互的部分，通常负责从模型中取出数据，再进行业务的处理，最后将数据给视图，并将视图给客户端
+		2、MTV
+			M ：Models 模型层，功能同上
+			T ：Templates 模板层
+				用于处理用户显示的部分内容，如：html
+			V ：Views 视图层
+				处理用户交互部分，从模型中获取数据，再将数据给模板，再显示给用户
+
+			M  ---  M
+			V  ---  T
+			C  ---  V
+2、Django框架
+	1、什么是Django
+		是一个开源框架，2005年发布，采用Python语言开发的。早期Django是做新闻网站的。提供了非常强大的后台管理系统，采用的是MTV的框架模式
+	2、Django的优缺点
+		1、优点
+			1、开源框架，有完美的文档支持
+			2、解决方案比较完整，内部功能也比较多
+			3、提供完整的路由系统，优雅的URL解析方式
+			4、自助式的后台管理
+		2、缺点
+			目标：高内聚，低耦合
+			耦合度偏高
+	3、Django的安装
+		1、Linux 中的安装
+			1、查看已安装的django
+				1、进入到虚拟环境中
+				2、进入到python的交互模式
+				3、在交互模式中输入
+					1、import django
+					2、django.VERSION
+			2、安装
+				1、在线安装 - 使用 pip
+					1、终端中输入 
+						pip install django
+						(安装django的最高版本)
+
+						pip install django==1.11.8
+
+						虚拟环境中不用 sudo
+				2、离线安装
+					1、下载所需要的django包
+						https://www.djangoproject.com/
+					2、在 Linux 中解压 django
+						tar -xvf Django-1.11.8.tar.gz
+					3、进入到Django文件夹中
+					4、安装
+						python setup.py install
+		2、Windows 中的安装
+			1、在线安装
+				控制台中 
+				pip3 install django==1.11.8
+			2、离线安装
+				1、下载django安装包
+				2、解压django包
+				3、进入到django包中
+					python setup.py install
+	4、使用Django
+		1、创建Django项目
+			直接使用 django-admin 去创建Django项目
+			1、找到项目文件夹(自定义)
+			2、使用 django-admin 指令
+				django-admin startproject 项目名称
+		2、启动Django项目
+			1、进入到项目文件夹中
+			2、通过 manage.py 启动项目
+				1、
+					python manage.py runserver
+					或
+					./manage.py runserver
+					只能在本机访问
+					http://localhost:8000
+					http://127.0.0.1:8000
+				2、
+					./manage.py runserver 0.0.0.0:8000
+					允许在局域网内访问，可以通过IP地址访问
+
+					ex:
+						1、启动服务
+							./manage.py runserver 0.0.0.0:8000
+						2、查看 虚拟机 IP地址
+							ifconfig
+						3、在windows中，打开chrome浏览器，通过IP地址访问django项目
+	5、Django结构介绍
+		1、manage.py 
+			负责执行django中的各项操作的文件
+			命令脚本文件
+			如：
+				1、启动服务
+				2、创建应用
+				3、创建管理员、用户
+				... ...
+		2、主文件夹(名称与项目名称相同)
+			存放项目的最基础的配置文件
+			1、__init__.py
+				项目初始化文件，每当服务器启动的时候，会自动执行
+				如果有自定义的初始化操作，需要放在该文件中
+			2、urls.py
+				项目的基础url(路由)配置文件
+				路由：去哪找执行的程序
+			3、wsgi.py
+				配置应用服务器的文件，暂时不用
+			4、settings.py(重要)
+				项目的主设置文件：应用，模板，数据库，语言，时区，... ...
+				1、BASE_DIR ：项目所在的绝对路径
+				2、DEBUG ：调试模式
+					开发过程中，推荐使用 True
+					上线运行时，必须改为 False
+				3、ALLOWED_HOSTS
+					设置允许访问本地项目的地址列表，如果不设置的话，只有本机(localhost / 127.0.0.1访问)。推荐些 '*' ，表示任何机器都允许访问当前项目
+				4、INSTALLED_APPS
+					指定已安装的应用，如果有自定义应用的话，需要在此注册
+				5、MIDDLEWARE ：注册中间件
+				6、ROOT_URLCONF ：指定项目的基础路由配置文件
+				7、TEMPLATES ：指定模板的信息
+				8、DATABASES ：指定数据库的信息
+				9、LANGUATE_CODE : 指定语言，允许修改为 zh-Hans
+				10、TIME_ZONE :指定时区，建议改为 Asia/Shanghai
+	6、settings的加载流程
+		1、先加载global_settings
+			位于：虚拟环境/lib/python3.5/site-packages/django/conf
+		2、再加载项目中的settings
+			注意：如果 global_settings中的内容与项目settings中的内容冲突的话，优先使用项目的settings中的内容
+	7、初识 django-admin 和 manage.py
+		1、终端中直接输入 django-admin
+			check
+			compilemessages
+			createcachetable
+			dbshell
+			diffsettings
+			dumpdata
+			flush
+			inspectdb
+			loaddata
+			makemessages
+			makemigrations
+			migrate
+			runserver
+			sendtestemail
+			shell
+			showmigrations
+			sqlflush
+			sqlmigrate
+			sqlsequencereset
+			squashmigrations
+			startapp
+			startproject #创建项目
+			test
+			testserver
+		2、进入到项目主文件夹，输入./manage.py
+			[auth]
+					changepassword #修改密码
+					createsuperuser #创建超级用户
+
+			[contenttypes]
+					remove_stale_contenttypes
+
+			[django]
+					check
+					compilemessages
+					createcachetable
+					dbshell #进入到Django数据shell交互模式
+					diffsettings
+					dumpdata
+					flush
+					inspectdb #将数据表直接导出为Models
+					loaddata
+					makemessages
+					makemigrations #创建数据库日志文件，记录Models的改动
+					migrate #将数据库日志文件同步到数据库中
+					sendtestemail
+					shell
+					showmigrations
+					sqlflush
+					sqlmigrate
+					sqlsequencereset
+					squashmigrations
+					startapp #创建应用
+					startproject
+					test
+					testserver
+
+			[sessions]
+					clearsessions
+
+			[staticfiles]
+					collectstatic
+					findstatic
+					runserver #启动服务
+	8、URL的使用
+		1、urls.py
+			默认在主文件夹中，包含所有的地址映射。
+			每当一个请求产生后，都会到urls.py中进行地址的匹配，匹配上后再找到对应的处理程序(View视图)去执行
+		2、测试
+			1、项目主文件夹中，创建 views.py
+				作用：包含所有定义好的视图(处理程序)
+				views.py :
+					from django.http import HttpResponse
+
+					def fun_views(request):
+						return HttpResponse('Hello Django')
+			2、在 urls.py 中追加
+				from .views import *
+				urlpatterns = [
+					url(r'^admin/',admin.site.urls),
+					url(r'^fun/$',fun_views),
+				]
+		3、url 函数
+			url函数的语法
+			url(regex,views,kwargs=None,name=None)
+				1、regex
+					正则表达式，匹配请求的 url
+				2、views
+					URL处理的视图函数，通常都是自定义的
+				3、kwargs
+					字典，用来向views传参的
+				4、name
+					字符串，给url()起一个别名，主要在模板中配合{%url%}一起使用
+		4、url 向 view 传参
+			1、使用正则表达式传参
+				使用正则表达式的子组传参,使用()
+
+				urlpatterns = [
+					#访问路径必须是 fun 
+					url(r'^fun/$',fun_views),
+					#访问路径必须是 fun
+					url(r'^(fun)/$',fun_views),
+
+					url(r'^fun/(\d+)',fun_arg1_views),
+				]
+				注意：
+					1、在 url() 中，一个子组()表示一个参数
+					2、在views.py中，对应的处理函数要根据url()中子组的个数，相应的定义参数，定义的参数要位于 request之后
+				练习：
+					1、访问地址：localhost:8000/18/0223/15
+						如何获取 18 0223 15
+					2、访问地址
+						localhost:8000/zh/0223
+						localhost:8000/jp/0223
+
+						如何获取 zh(jp),0223
+					定义 url() 匹配模式 以及 views 的处理函数
+			2、使用url()第三个参数，字典传参
+				urlpatterns = [
+					url(r'^showname/$',show_views,{'name':'zsf','age':'25'}),
+				]
+
+				views.py
+				def show_views(request,name,age):
+					resp = HttpResponse(name+":"+age)
+					return resp
+				注意：
+					1、视图处理函数中，必须声明参数
+					2、参数的名称 和 位置 必须要与字典中的名称和位置保持一致
+3、Django 中的应用
+	1、什么是应用
+		应用是网站中的一个独立的模块，包含独立的显示信息。
+		在项目主文件夹中一般不处理其他的请求，主要就做初始化设置 以及 地址的分发
+		实际操作中，会将请求，交给不同的应用去处理
+	2、创建应用
+		1、命令
+			./manage.py startapp 应用名称
+			ex:
+				创建一个应用，名称为 index
+		2、在 settings.py中注册应用
+			在 INSTALLED_APPS 中追加应用名称即可
+			INSTALLED_APPS = [
+				'django.contrib.admin',
+				... ...,
+				'index',
+			]
+		3、应用的结构组成
+			1、migrations 目录
+				存放数据库日志文件，是一个django与数据库交互的中间文件
+			2、__init__.py
+				应用的初始化操作文件
+			3、admin.py
+				应用的后台管理配置文件
+			4、apps.py应用的属性设置文件，不需改动
+			5、models.py
+				Models模型文件
+			6、tests.py
+				测试模块，通常不用
+			7、views.py
+				定义视图的py文件
+			练习：
+				创建应用，并进行注册
+					在 day2_exer 中创建应用
+					1、index 
+					2、news - 表示新闻的应用
+					3、sports - 表示体育的应用
+					4、musics - 表示音乐的应用
+
+
+
+
+
+http://localhost:8000/index/login
+http://localhost:8000/news/login
+

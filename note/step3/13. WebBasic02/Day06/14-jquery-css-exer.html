@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			$("#btn").click(function(){
+				//1、获取 uname 的值
+				var uname = $("#uname").val();
+				//2、将uname的值显示在#show中
+				$("#show").html(uname);
+				//3、设置#show的css样式
+				$("#show").css({
+					"font-size":"32px",
+					"color":"red",
+					"background":"yellow",
+					"font-weight":"bold"
+				});
+			});
+		}
+	</script>
+ </head>
+ <body>
+  <p>
+		用户名：
+		<input type="text" id="uname">
+		<button id="btn">显示</button>
+	</p>
+	<div id="show"></div>
+ </body>
+</html>

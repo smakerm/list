@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <!-- <script>
+  		//条件：从1开始到100结束
+  		//操作：打印循环条件的值
+  		var i = 1;
+  		while(i <= 100){
+  			console.log(i);
+  			//更新循环条件
+  			i++;
+  		}
+  	</script> -->
+
+
+		<!-- <script>
+			//条件：从1开始，到100结束
+			//操作：累加 循环条件 的值
+			var i=1,sum=0;
+			while(i <= 100){
+				sum += i;//sum = sum + i;
+				i ++;
+			}
+			console.log("1-100之间的和为:"+sum);
+		</script> -->
+
+
+		<!-- <script>
+			//条件：从1开始到100结束
+			//操作：判断循环条件是否为 3 的倍数
+			var i=1;
+			while(i <= 100){
+				if(i % 3 == 0){
+					console.log(i);
+				}
+				i++;
+			}
+		</script> -->
+
+		<!-- <script>
+			//条件：从 2000 开始 到 2050 结束
+			//操作：判断条件是否满足闰年的要求
+			var i = 2000;
+			while(i <= 2050){
+				if(i%4==0&&i%100!=0||i%400==0){
+					console.log(i);
+				}
+				i++;
+			}
+		</script> -->
+
+		<script>
+			var year = Number(prompt('Year:'));
+			var month = Number(prompt('Month:'));
+			var day = Number(prompt('Day:'));
+			var totalDays = 0;
+			var isRun=year%4==0&&year%100!=0||year%400==0;
+
+			//条件：从1月开始，到month-1月为止
+			//操作：将这些月份的天数进行累加
+			var i = 1;
+			while(i < month){
+				switch(i){
+					case 1:
+					case 3:
+					case 5:
+					case 7:
+					case 8:
+					case 10:
+						totalDays += 31;
+						break;
+					case 4:
+					case 6:
+					case 9:
+					case 11:
+						totalDays += 30;
+						break;
+					case 2:
+						totalDays += 28;
+						if(isRun){
+							totalDays += 1;
+						}
+				}
+				i++;
+			}
+
+			totalDays += day;
+			console.log("共"+totalDays+"天");
+		</script>
+ </body>
+</html>

@@ -1,0 +1,55 @@
+create table sheng(
+id int primary key auto_increment,
+S_ID int,
+S_name varchar(15)
+)default charset=utf8;
+
+insert into sheng values
+(1, 130000, '河北省'),
+(2, 140000, '山西省'),
+(3, 150000, '内蒙古自治区'),
+(4, 160000, '辽宁省'),
+(5, 170000, '黑龙江省');
+
+create table city(
+id int primary key auto_increment,
+C_ID int,
+C_name varchar(15),
+CFather_ID int
+)default charset=utf8;
+
+insert into city values
+(1, 131100, '石家庄市', 130000),
+(2, 131101, '沧州市', 130000),
+(3, 131102, '廊坊市', 130000),
+(4, 131103, '衡水市', 130000),
+(5, 131104, '太原市', 140000),
+(6, 131105, '呼和浩特市', 150000),
+(7, 131106, '包头市', 150000),
+(8, 131107, '沈阳市', 160000),
+(9, 131108, '大连市', 160000),
+(10,131109, '无锡市', 320000),
+(11,131110, '徐州市', 320000),
+(12,131111, '常州市', 320000);
+
+
+create table xian(
+id int primary key auto_increment,
+X_ID int,
+X_name varchar(15),
+XFather_ID int
+)default charset=utf8;
+
+insert into xian values
+(1, 132100, '河东区', 131100),
+(2, 132101, '正定县', 131100),
+(3, 132102, '固安县', 131102),
+(4, 132102, '香河县', 131102),
+(5, 132103, '哈哈', 131112);
+
+
+
+
+
+
+

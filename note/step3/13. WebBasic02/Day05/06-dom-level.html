@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="container">
+		<h3 id="title">悯农</h3>
+		<!-- 以下是正文内容 -->
+		<p>锄禾日当午</p>
+		<p>汗滴禾下土</p>
+		<p>谁知盘中餐</p>
+		<p>粒粒皆辛苦</p>
+	</div>
+	<button onclick="getParent()">获取title的父元素</button>
+	<button onclick="getChildNodes()">获取container子节点</button>
+	<button onclick="getChildren()">获取container的children</button>
+	<button onclick="getNextSibling()">获取title的下一个兄弟</button>
+
+	<script src="common.js"></script>
+	<script>
+		function getNextSibling(){
+			var title = $("title");
+			//var elem = title.nextSibling;
+			var elem = title.nextElementSibling;
+			console.log(elem);
+		}
+
+		function getChildren(){
+			var div = $("container");
+			var arr = div.children;
+			console.log(arr);
+		}
+
+		function getChildNodes(){
+			var div = $("container");
+			var arr = div.childNodes;
+			for(var i=0;i<arr.length;i++){
+				if(arr[i].nodeType == 1){
+					console.log(arr[i]);
+				}
+			}
+		}
+
+		function getParent(){
+			//1、获取 #title
+			var h3 = $("title");
+			//2、再获取 #title 的父元素
+			var div = h3.parentNode;
+			console.log(div);
+		}
+	</script>
+ </body>
+</html>

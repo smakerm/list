@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天天果园</title>
+
+    <style>
+        .upname>input{
+            width: 300px;
+            height: 40px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            outline: none;
+            padding-left: 10px;
+
+        }
+        .upname>input:focus{
+            border: 1px solid #64A131;
+            box-shadow: 0px 0px 2px #64A131;
+        }
+        #submit{
+            width: 145px;
+            height: 40px;
+            background-color: rgb(104, 160, 49);
+            font-size: 18px;
+            color: #fff;
+            font-family: "微软雅黑", "黑体";
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        .char1{
+            color: #b0aeb2;
+        }
+        a{
+            color: #b0aeb2;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="post">
+        <table class="char1" width="400" height="300">
+            <tr>
+                <td>手机号</td>
+                <td colspan="2" class="upname">
+                    <input type="text" maxlength="11" title="手机号">
+                </td>
+            </tr>
+            <tr>
+                <td  align="right">密码</td>
+                <td colspan="2" class="upname">
+                    <input type="password" placeholder="请输入6-20位号码字符">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" title="密码" name="issaved" checked>记住密码
+                </td>
+                <td>
+                    <a href="#">忘记密码?</a>
+                    <a href="#">快捷登陆</a>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="登陆" id="submit">
+                </td>
+                <td>
+                    <a href="#">注册会员</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testDate(){
+			var now = new Date();
+			var date = new Date("2018/01/01");
+			console.log(now.getTime());
+		}
+		
+		/**
+		 * 按照指定的格式格式化时间和日期
+		 * num:传递进来的时间分量(月或日或时或分或秒)
+		 * 返回值:如果是单位数字的话，则拼0再返回
+		 */
+		function df(num){
+			if(num < 10){
+				num = "0"+num;
+			}
+			return num;
+		}
+
+		function showDate(){
+			var now = new Date();
+			var year = now.getFullYear();
+			var month = df(now.getMonth()+1);
+			var date = df(now.getDate());
+			var hour = df(now.getHours());
+			var minute = df(now.getMinutes());
+			var second = df(now.getSeconds());
+			var day = "";
+			switch(now.getDay()){
+				case 1:
+					day = "一";
+					break;
+				case 2:
+					day = "二";
+					break;
+				case 3:
+					day = "三";
+					break;
+				case 4:
+					day = "四";
+					break;
+				case 5:
+					day = "五";
+					break;
+				case 6:
+					day = "六";
+					break;
+				case 0:
+					day = "日";
+					break;
+			}
+			console.log(year+"年"+month+"月"+date+"日 "+hour+"时"+minute+"分"+second+"秒 星期"+day);
+		
+		}
+	</script>
+	<button onclick="testDate()">测试时间</button>
+	<button onclick="showDate()">打印日期</button>
+ </body>
+</html>

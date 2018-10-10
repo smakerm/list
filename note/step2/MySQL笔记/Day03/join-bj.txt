@@ -1,0 +1,62 @@
+1、显示省和市的信息
+
+select sheng.S_name,city.C_name
+from sheng,city
+where
+sheng.S_ID=city.CFather_ID;
+
+2、显示省、市、县的信息
+
+select sheng.S_name,city.C_name,xian.X_name 
+from sheng,city,xian 
+where
+sheng.S_ID=city.CFather_ID and city.C_ID=xian.XFather_ID;
+
+内连接
+1、显示省市信息,没有匹配的不显示
+
+select sheng.S_name,city.C_name 
+from sheng
+inner join city 
+on sheng.S_ID=city.CFather_ID;
+
+2、显示省市县的信息
+
+select sheng.S_name as Sheng,city.C_name as Shi,xian.X_name as Xian
+from sheng inner join city
+on sheng.S_ID=city.CFather_ID 
+inner join xian on city.C_ID=xian.XFather_ID;
+
+外连接-左连接
+1、显示省市的信息,以左表为准
+select sheng.S_name,city.C_name from sheng
+left join city 
+on sheng.S_ID=city.CFather_ID;
+
+外连接-右连接
+select sheng.S_name,city.C_name from sheng
+right join city 
+on sheng.S_ID=city.CFather_ID;
+
+3、显示省市区的信息,要求市全部显示
+
+select sheng.S_name,city.C_name,xian.X_name from sheng
+right join city on sheng.S_ID=city.CFather_ID 
+left join xian on city.C_ID=xian.XFather_ID;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

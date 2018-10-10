@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		window.onload = function(){
+			$("#btn").click(function(){
+				//获取 id为d1元素的html内容
+				var html=$("#d1").html();
+				console.log(html);
+
+				$("#d1").html("<h1>通过jQuery修改的内容</h1>");
+			});
+		}
+	</script>
+ </head>
+ <body>
+  <div id="d1">
+		<p>这是d1中的p元素</p>
+	</div>
+	<button id="btn">测试</button>
+ </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		/*声明类选择器,redColor，内容：文本颜色为红色*/
+		.redColor{
+			color:red;
+		}
+
+		/*声明类选择器，greenColor,内容：文本颜色为绿色*/
+		.greenColor{
+			color:green;
+		}
+		
+		/*元素选择器.类选择器{ ... }*/
+		/*class为redColor的h3元素的背景颜色为黄色*/
+		h3.redColor{
+			background-color:yellow;
+		}
+
+		/*声明类选择器 .under,内容为 ：text-decoration:underline;*/
+		.under{
+			text-decoration:underline;
+		}
+
+		#title{
+			color:orange;
+			font-size:24px;
+			background-color:purple;
+		}
+	</style>
+ </head>
+ <body>
+	<div id="title">唐诗大比拼</div>
+	<h3>唐诗一首</h3>
+  <h1 class="greenColor under">登鹳雀楼</h1>
+	<h2 class="greenColor">王之涣</h2>
+	<h3 class="redColor">白日依山尽</h3>
+	<h4 class="redColor under">黄河如海流</h4>
+	<h5 class="redColor">欲穷千里目</h5>
+	<h6 class="redColor">更上一层楼</h6>
+ </body>
+</html>

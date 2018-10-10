@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		//页面加载后运行
+		$(function(){
+			//为#btnShow绑定click事件
+			$("#btnShow").click(function(){
+				//1、获取 #uname 的值
+				var uname = $("#uname").val();
+				//2、创建一个 h1 标记，并且设置内容为 #uname的值
+				//var $h1=$("<h1>"+uname+"</h1>");
+				var $h1 = $("<h1></h1>");
+				$h1.html(uname);
+				//3、将 h1 添加到页面中
+				$("body").append($h1);
+			});
+		});
+	</script>
+ </head>
+ <body>
+  用户名称：<input type="text" id="uname">
+	<button id="btnShow">显示</button>
+ </body>
+</html>

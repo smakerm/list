@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#d1{
+			background-color:red;
+			width:200px;
+			height:200px;
+			/*过渡编写于此：即管去又管回*/
+
+			/*1、指定过渡属性*/
+			transition-property:all;
+			/*2、指定过渡时长*/
+			transition-duration:2s;
+			/*3、指定过渡速率*/
+			transition-timing-function:linear;
+			/*4、指定过渡延迟*/
+			/* transition-delay:5s; */
+		}
+		#d1:hover{
+			background-color:green;
+			border-radius:50%;
+			/*过渡编写于此：只管去不管回*/
+		}
+	</style>
+ </head>
+ <body>
+  <div id="d1"></div>
+ </body>
+</html>

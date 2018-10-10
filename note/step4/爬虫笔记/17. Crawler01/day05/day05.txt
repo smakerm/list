@@ -1,0 +1,99 @@
+面向对像的23种设计模式：解决变化的问题；
+    单例模式，生产类型
+		MVC(MTV)
+
+def DelDupli4(L):
+    for i in L:
+        while L.count(i) > 1:
+            L.remove(i)
+    return L
+
+C:/Users/Administrator/Desktop/爬虫/第四天/testCopyFiles
+
+电商网站；
+金融股票网站；
+豆瓣，知乎；
+招聘网站；
+视频网站；
+
+使用Selenium+Chrome:
+1)安装selenium：
+	conda install selenium；
+在Python环境中输入
+from selenium import webdriver
+能够正常运行，说明selenium这个自动测试工具安装成功；
+
+2)安装FireFox，Chrome等你需要的浏览器；
+
+3)安装该浏览器对应的驱动程序；
+需要驱动和解释器路径一致；
+C:\ProgramData\Anaconda3
+https://github.com/mozilla/geckodriver/releases/
+
+webdriver.Firefox()
+
+
+Python             <--Bridge-->        Chrome,FireFox
+Selenium
+什么情况下形成了孤儿进程,
+什么情况下形成了僵尸进程?
+由于浏览器有可能在Selenium通知其关闭的情况下关不掉，
+这时你在知道浏览器进程已经没用的情况下，可以定期
+强制结束进程。
+headless浏览器，无界面的浏览器；
+
+selenium中重要的方法和属性：
+     get 通过URL访问某个网站；
+     find_element_by_id，find_elements_by_xpath等方法
+可以用来查找元素；
+		 page_source获取当前网页的html信息；
+		 current_url当前的URL；
+		 delete,add,cookie；
+		 set_page_load_time;
+		 execute_script用来执行一段JS脚本;
+
+用Selenium这套方案效率相对比较低，在生产环境中不太容易被接受，
+不是不得已不要轻易使用；
+如果你想要把数据加载全的话，需要从两个纬度来考虑问题：
+1）空间上：尽可能的让网页的长宽大，可能需要
+考虑下拉的操作；
+execute_script的方式来下拉；
+2）时间上：尽可能的让加载数据的时间足够的长，这样才能保证
+数据加载足够的全；可能需要多次尝试；
+需要设置等待时间；
+
+SSL安全套接层
+HTTPS = HTTP+SSL;
+   加密算法：
+			对称加密   AES,DES等等 加密和解密用同一个密钥；
+			非对称加密 RSA算法     加密和解密用不同的密钥:
+			                             私钥和公钥；
+私钥加密的数据只有公钥能解；
+用公钥加密的数据只有私钥解；
+算质数(素数);   m = p*q
+
+
+作业：使用Selenium+浏览器的方式，操控有道词典进行
+翻译；
+
+http://mm.taobao.com/search_tstar_model.htm?
+	
+
+cookie，session：
+		由于HTTP本身是无状态的，我们希望用户在登录某个网站
+时有状态的信息存在，这样的情况下我们引入了cookie和
+session；可以保证下一次登录时直接找到这个用户的痕迹；
+这样，我们的爬虫就可以抓到这个cookie，从而伪装
+成曾经登录过的状态；
+
+使用cookiejar的过程：
+		首先，我们需要一个能够自己处理
+cookie的一个handler，这里通过CookieJar，
+HTTPCookieProcessor创建出一个handler，
+build_opener使其具备能够处理cookie的能力；
+    然后，我们使用post的方式登录，一旦
+登录成功，这个handler就可以自己接管有用的cookie；
+从而省去了我们自己手动管理cookie的过程。
+
+
+

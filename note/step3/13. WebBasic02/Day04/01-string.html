@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testSplit(){
+			var msg = "张三丰|男|65|19000102";
+			var arr = msg.split("|");
+			console.log(arr);
+		}
+
+		function testSplitExer(){
+			var str = "1001|5&1382|6&1351|4";
+			//1、通过 & 拆分str，得到一个数组，数组中的每个元素就是购买的"商品ID|购买数量"
+			var array = str.split("&");
+			//2、循环遍历 array 中的每个元素，使用 | 再进一步拆分，就可以得到每个商品的ID和购买数量
+			for(var i=0;i<array.length;i++){
+				var gArray = array[i].split("|");
+				console.log("商品ID:"+gArray[0]);
+				console.log("购买数量:"+gArray[1]);
+			}
+		}
+
+		function testReplace(){
+			var str = "你个大山炮，天天除了干山炮的事也不知能干点啥了!真是山炮到家了!";
+
+			//match()
+			var arr = str.match(/山炮/g);
+			console.log("共出现山炮"+arr.length+"次");
+
+			//replace()
+			/*console.log(str);
+			str = str.replace(/山炮/g,"**");
+			console.log(str);*/
+		}
+
+		function testReg(){
+			var msg = "Microsoft is a big company ,microsoft's color is red and has MICROSOFT logo like microsoft";
+			var count = msg.match(/microsoft/gi).length;
+			msg = msg.replace(/microsoft/gi,"微软");
+			console.log(msg);
+			console.log("共替换了"+count+"处");
+		}
+	</script>
+	<button onclick="testReg()">testReg()</button>
+	<button onclick="testReplace()">替换字符串</button>
+	<button onclick="testSplit()">testSplit</button>
+	<button onclick="testSplitExer()">testSplitExer</button>
+ </body>
+</html>

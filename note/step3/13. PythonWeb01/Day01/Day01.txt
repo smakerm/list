@@ -1,0 +1,292 @@
+1、使用jquery
+	<script src="jquery-1.11.3.js"></script>
+2、jQuery对象
+	区分 jQuery 对象 和 DOM对象
+	jQuery对象会具备jQuery所提供的所有的操作方法
+	$obj.html()
+	$obj.innerHTML = "";
+	1、获取jQuery对象 - $() - 工厂函数
+		$(选择器) 会返回一个jQuery对象或数组
+	2、jQuery与DOM之间的相互转换
+		1、DOM -> jQuery
+			var $obj = $(DOM);
+		2、jQuery -> DOM
+			1、var dom = $obj.get(0);
+			2、var dom = $obj[0];
+3、jQuery选择器
+	1、基本选择器
+		$("#ID"),$(".class"),$("div"),$("*"),$("#id,div,p")
+	2、层次选择器
+		$("selector1 selector2") : 后代
+		$("selector1>selector2") : 子代
+		$("selector1+selector2") : 相邻兄弟
+		$("selector1~selector2") : 通用兄弟
+	3、基本过滤选择器
+		1、:first
+		2、:last
+		3、:not(selector)
+		4、:odd
+		5、:even
+		6、:eq(index)
+		7、:gt(index)
+		8、:lt(index)
+	4、子元素过滤选择器
+		1、:first-child : 属于其父元素中的首个子元素
+		2、:last-child 
+		3、:nth-child(n) : 属于其父元素中的第n个子元素
+	5、内容过滤选择器
+		1、:contains(text)
+		2、:empty
+		3、:has(selector)
+		4、:parent
+	6、可见性过滤选择器
+		1、:visible
+		2、:hidden
+	7、状态过滤选择器
+		1、:enabled
+		2、:disabled
+		3、:checked
+		4、:selected
+	8、属性过滤选择器
+		1、[attr]
+		2、[attr=value]
+		3、[attr^=value]
+		4、[attr$=value]
+		5、[attr*=value]
+		6、[attr!=value]
+
+4、jQuery操作DOM
+	1、基本操作
+		1、html()
+		2、text()
+		3、
+			attr(attrName)
+			attr(attrName,attrValue)
+			removeAttr(attrName);
+		4、val()
+	2、样式操作
+		1、attr("class","className")
+		2、addClass("className")
+			返回jQuery对象，可以实现连缀调用
+			$obj.addClass().addClass().html("");
+		3、removeClass("className")
+			 removeClass() : 移除所有的class
+		4、toggleClass("className")
+			 切换Class
+		5、hasClass("className");
+		6、css("属性名","值")
+		7、css(JSON对象)
+			 $obj.css({
+				"color":"red",
+				"background":"orange"
+			 });
+	3、遍历
+		1、children() / children(selector)
+			获取子元素或歹意selector选择器的子元素
+			注意：只考虑直接子元素不考虑后代元素
+		2、next() / next(selector)
+		3、prev() / prev(selector)
+		4、parent()
+	4、创建 和 增加
+		1、创建元素
+			$("创建的标记内容")
+			$("<div></div>")
+			$("<button></button>")
+		2、插入
+			1、内部插入
+				1、$obj.append(new)
+					作为最后一个子元素添加
+				2、$obj.prepend(new)
+			2、外部插入
+				1、$obj.after(new)
+				2、$obj.before(new)
+	5、删除节点
+		1、remove()
+			$obj.remove()
+		2、empty()
+			$obj.empty()
+			清空 $obj
+5、jQuery的事件
+	1、页面加载后执行
+		$( function(){
+			// 页面的初始化操作
+			// DOM树加载完毕时就调用的
+		} );
+
+
+		window.onload = function(){
+			
+		}
+	2、jquery事件绑定
+		1、方式1 - bind()
+			$obj.bind("事件名",事件处理函数);
+			$obj.bind("click",function(){
+				
+			});
+		2、方式2 
+			$obj.事件名称(事件处理函数);
+			$obj.click(function(){
+				
+			});
+6、jQuery的动画
+	1、基本显示/隐藏
+		$obj.show([duration])
+		$obj.hide([duration])
+	2、滑动式显示和隐藏
+		$obj.slideDown([duration])
+		$obj.slideUp([duration])
+	3、淡入淡出式
+		$obj.fadeIn([duration])
+		$obj.fadeOut([duration])
+
+jQuery插件-自学
+
+==============================================
+1、Python工具 - pip
+	1、作用
+		Python的软件包管理器，有一些python包被集成到了pip中。只要被集成到pip中的包，都允许通过pip直接安装
+	2、安装 pip
+		sudo apt install python-pip (python2)
+		sudo apt install python3-pip (python3)
+	3、使用 pip / pip3
+		1、安装/更新/删除 python包
+			1、安装python包
+				sudo pip3 install SomePackage
+				ex:
+					sudo pip3 install pymysql==0.7.11
+			2、下载 python 包
+				sudo pip3 download SomePackage
+			3、删除 python 包
+				sudo pip3 uninstall SomePackage
+			4、更新(升级)python包
+				sudo pip3 upgrade SomePackage
+		2、查看当前环境中所安装的包
+			pip3 list
+		3、搜索
+			pip3 search SomePackage
+		4、展示
+			pip3 show SomePackage
+		5、记录现有环境的python包
+			1、pip3 freeze > requirements.txt
+				将当前python环境中所安装的内容打包成一个列表
+			2、pip3 install -r requirements.txt
+				允许在当前系统下，逐一安装requirements.txt中所列出的内容
+2、Python工具 - VirtualEnv
+	1、什么是VirtualEnv - 虚拟环境
+		VirtualEnv,是Python中的虚拟环境，在做Python应用开发时，如果不想在大的Python环境中安装各种各样的包的话，则可以虚拟出一个Python环境，可以让虚拟环境专门为某一个应用而存在。允许在虚拟环境中安装各种包且不影响大的python环境
+	2、安装 VirtualEnv
+		sudo pip3 install virtualenv
+	3、创建 和 使用 虚拟环境
+		1、准备工作
+			mkdir my_env
+			cd my_env
+		2、创建虚拟环境
+			virtualenv 虚拟环境名称
+			ex:virtualenv default
+
+			创建指定版本的虚拟环境
+			virtualenv -p /usr/bin/python2.7 名称
+			virtualenv -p /usr/bin/python3.5 名称
+		3、启动虚拟环境
+			注意：不能在 bin 目录中启动虚拟环境
+			source bin/activate
+		4、退出虚拟环境
+			deactivate
+		5、删除虚拟环境
+			rm 虚拟环境目录 -rf
+
+		注意：
+			在虚拟环境中使用pip安装和卸载内容时，不要使用 sudo 进行授权
+	4、虚拟环境管理工具 - VirtualenvWrapper
+		1、作用
+			第三方的管理工具，能够快速，高效而且方便的管理虚拟环境
+		2、安装虚拟环境管理工具
+			sudo pip3 install virtualenvwrapper
+		3、配置 virtualenvwrapper
+			在~目录下，有一个终端管理文件 .bashrc (在~目录下，输入 ll)
+			配置 .bashrc ，以便在启动终端时，就自动启动虚拟环境管理工具
+			修改.bashrc : sudo vi .bashrc
+			在 .bashrc 最底部增加以下内容：
+			1、export WORKON_HOME=~/my_env
+				将 ~/my_env 作为虚拟环境的管理目录，所有使用virtualenvwrapper创建的虚拟环境都默认保存于此
+			2、如果系统中包含多个python执行环境的话，则添加以下内容
+				export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+			3、source /usr/local/bin/virtualenvwrapper.sh
+			4、在 ~ 目录下，执行一遍 .bashrc
+				source .bashrc
+		4、使用虚拟环境管理工具
+			1、创建并进入虚拟环境
+				1、mkvirtualenv 虚拟环境名称
+					ex: mkvirtualenv default
+				2、
+					mkvirtualenv --python=/usr/bin/python2.7 虚拟环境名称
+			2、查看当前所维护的所有虚拟环境
+				workon
+			3、切换虚拟环境
+				workon 虚拟环境名称
+			4、退出虚拟环境
+				deactivate
+			5、删除虚拟环境
+				rmvirtualenv 虚拟环境名称
+			
+			练习：
+				1、完善 .bashrc 文件 
+				2、创建一个虚拟环境 - env3.5
+					2.1 、创建 python3.5 虚拟环境
+				3、完成 虚拟环境的操作
+					1、切换到 env2.7
+						workon env2.7
+					2、退出虚拟环境
+						deactivate
+					3、再进入到 env3.5
+						workon env3.5
+
+3、WEB 与 服务器
+	1、WEB ：表示用户可以浏览的网页(HTML,CSS,JS)
+	2、服务器
+		1、硬件 与 软件
+			硬件范畴：一台主机
+			软件范畴：一个能够接受用户请求并给出响应的程序
+		2、作用
+			1、存储WEB上的信息(网页，图片，音视频，css)
+			2、能够处理用户的请求(request)并给出响应(response)
+			3、能够执行服务器端程序：如查询数据库
+		3、WEB与服务器的关系
+			参考图 - WEB与服务器的关系
+			运行在服务器端的程序，可以由不同的语言来编写：
+				Java语言 -> JSP
+				C#语言 -> ASP.NET
+				php语言 -> php
+				Python语言 -> Django
+		4、网站请求的全过程
+			1、用户：输入域名，通过域名解析(DNS)器得到IP地址
+			2、向服务器发送http/https请求
+			3、传输层TCP协议，经过网络传输和路由解析
+			4、WEB服务器接收HTTP请求
+			5、服务器处理请求内容，并进行必要的数据交换
+			6、将响应的内容发回给浏览器(响应)
+			7、浏览器解析HTML
+			8、显示解析好的内容		
+4、框架
+	1、什么是框架
+		框架是一个为了解决某些开放性问题而存在的一种结构。框架提供了最基本的功能，我们只需要在这些基本功能的基础上构建自己的操作就可以了。
+	2、框架的优点
+		1、快速开发 - 基本功能已经提供好了
+		2、可以解决大部分问题
+		3、bug少，稳定性较高
+	3、框架的分类
+		1、前端框架
+			处理前端内容(HTML,CSS,JS)
+		2、后端框架
+			处理服务器程序的
+			Spring - Java
+		3、全栈框架
+			包含WEB整体的解决方案，包含开发框架，运行环境
+			Rails (Ruby)
+			Django(Python)
+	4、Python的WEB框架
+		1、Django ：重量级的Python Web 框架
+		2、Tornado ：异步框架
+		3、Flask ：轻量级框架
+		4、Webpy ：轻量级框架
+		5、Web2py ：全栈框架，webpy的加强版

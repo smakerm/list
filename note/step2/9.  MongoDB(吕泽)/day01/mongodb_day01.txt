@@ -1,0 +1,336 @@
+数据库 MongoDB 
+
+程序  =  数据结构 + 算法
+
+数存储的发展阶段
+
+文件管理阶段  
+优点 ： 数据可以长期保存
+        能存储大量的数据
+				使用比较简单
+
+缺点 ： 数据的一致性差
+        数据冗余度大
+				查找修改不方便
+
+数据库管理阶段 
+
+优点 ： 数据组织结构化
+        冗余度小
+				容易扩充
+				查找效率高
+				方便使用程序自动处理
+缺点 ： 需要使用sql语句等特定的语句处理，相对比较复杂
+
+几个概念：
+
+数据： 能够输入到计算机中被识别处理的信息集合
+
+数据库 ：按照数据组织结构，存储和管理数据的仓库。是在数据库管           理系统管理和控制下存放在一定介质上的数据集合。
+
+数据库管理系统：管理数据库的软件，用于建立使用和维护数据库
+
+数据库系统：由数据库，数据库管理系统，开发工具等共同构成的集合             概念
+
+
+关系型数据库
+
+采用关系模型来组织数据结构的数据库
+
+Oracle  DB2  SQLServer  MySql  SqLite（python标准库支持）
+
+优点 ： 容易理解，类似我们常见的表格模型
+        使用方便，都是通过sql语句进行操作，sql语句是非常成熟的
+				易于维护，完整性好，数据一致性高，降低了冗余
+				技术成熟，可以使用外连接等比较复杂的操作
+
+缺点 ： 不能很好的满足高并发的需求，每次操作需要sql语句需要解         析
+				针对海量数据的瞬间爆发在读写性能上显得不足，关系型数据库内部每一步操作为了保证原子型都会加锁
+				数据一致性较高，在处理某些数据情况时浪费资源 
+				数据库扩展比非关系型数据库要复杂困难
+				
+
+非关系型数据库  NoSQL (Not  only  sql)
+优点 ： 高并发，大数据下读写能力强
+        支持分布式，容易扩展
+				弱化了数据结构，降低了数据的一致性
+
+缺点 ： 没有join等复杂的操作
+				通用性差 （不同的nosql数据库有不同的使用方法）
+				操作灵活即容易混乱
+
+面试要求 ： 能够描述关系型和非关系型数据库特点
+
+Nosql的使用情况：
+
+1.数据模型简单灵活，一致性差
+2.对数据库的并发处理要求高
+3.数据库设计时无法准确估量大小，后期可能需要扩展
+4.给定的数据关系比较容易建立起键值模型
+
+Nosql的分类 
+
+1.键值型数据库
+	Redis   oracle BDB   Tokyo
+
+2.列存储数据库
+	HBase  
+
+3.文档型数据库
+	MongoDB  CouchDB
+
+4 图形数据库
+
+要求 ： 知道Nosql数据库分为几类，Mongodb是文档型数据库
+
+MongoDB 
+1.是一个文档型非关系数据库
+2.由c++编写的数据库 
+3. 支持丰富的查询操作 
+4.支持众多编程语言的接口 （python  ruby  c++ c#  PHP）
+5.使用方便，便于部署
+6.数据格式丰富
+7.支持分布式扩展
+
+用户        朋友圈           评论
+张三        旅游台湾         李四 ，王五
+
+            吃了个大餐     李四   赵六， 小气  
+
+Mongodb安装
+
+自动安装 
+
+sudo  apt-get install mongodb  
+
+默认安装位置 /var/lib/mongodb
+配置文件   /etc/mongodb.conf
+命令集  /usr/bin
+
+手动安装
+
+1.下载对应系统的安装包
+www.mongodb.com   ---》 download  ---》community server
+2. 选择安装目录  （/user/local/  /opt）
+选择一个位置将安装包解压  tar 
+3.进入解压后的文件夹，将bin目录添加到环境变量
+PATH=$PATH:/usr/test/mongodb/bin/
+export PATH
+将这两句添加到linux自动执行脚本
+/etc/rc.local   或者  /etc/bash.bashrc  或其他自启动脚本
+
+4. 重启系统 
+reboot 
+source /etc/bash.bashrc
+
+5.设置数据库的存储位置
+sudo mkdir -p  /data/db 
+mongod  --dbpath  /data/db  
+
+mongodb 端口号  27017  
+
+设置Mongodb的端口号 
+mongod --port  8888  
+
+mongo 
+
+mongo  shell  表示进入到mongodb的交互模式  注意：JavaScript
+
+
+数据类型 ：字符串   整型  布尔型  浮点型   数组类型  时间类型
+文档类型   空值null    字符串（symbol 通常表示特殊字符）  
+时间戳    ObjectID  二进制   代码js   正则表达式
+
+mongodb 存储数据的一些概念
+
+mysql        mongo        含义
+
+database    database      数据库
+
+table       collection    表/集合
+
+column      field         字段/域
+
+row         document      记录/文档
+
+index       index         索引  
+
+------------------——---
+id  |    name  |  age
+-----------------------
+1   |   Lily   |   17
+-----------------------
+2   |   Lucy   |   18
+-----------------------
+{
+	"_id":ObjectId("askjdfhask12314klesaj"),
+	"name":"Lily",
+	"age" :17
+},
+{
+	"_id":ObjectId("askas978fa89sfsdf09aj"),
+	"name":"Lucy",
+	"age" :18
+}
+
+进入mongo shell  ：  mongo
+退出mongo shell  ：  quit()
+
+创建数据库 
+
+use databasename
+
+e.g.  
+创建一个叫stu的数据库
+use stu
+
+* use实际的功能表示你选择使用哪个数据库，如果选择一个不存在的数据库则当向这个数据库插入数据时，数据库会自动创建
+
+查看当前数据库系统中的数据库
+show  dbs
+
+数据库的命名规则：
+1.原则上是满足以下几条的任意UTF-8格式的字符串
+2、不能是‘’字符
+3、不能含有 空格' '   点'.'   ‘/’  '\'   '\0'
+4. 习惯上全部小写
+5、不应超过64字节
+6. 不能使用admin   local   config 这三个名字
+
+admin ： 存储用户权限
+local ： 不会被复制，只能用于本机操作 
+config： 分片处理时存储分片信息
+
+db  ————》一个数据库全局量 代表你当前正在使用的数据库
+
+db 默认表示 test数据库
+
+数据库的备份和恢复
+
+备份   mongodump  -h  dbhost -d dbname  -o  dbdir
+
+e.g.  mongodump -h 127.0.0.1 -d stu -o student
+      将本机stu数据库备份到当前目录下的student文件夹
+
+恢复   mongorestore  -h  <hostname>:<port> -d dbname <path>
+
+e.g.   mongorestore -h 127.0.0.1:27017 -d  test student/stu
+
+
+数据库的检测
+
+mongostat
+
+insert(每秒插入次数) query（每秒查询次数） update（每秒更新次数） delete（每秒删除次数） getmore command（每秒运行命令次数） dirty used flushes（每秒向磁盘写入次数） vsize（使用虚拟内存情况）   res（使用物理内存情况） qrw arw net_in net_out conn                time
+
+mongotop  检测每个数据库的读写时长
+
+ns 数据表   total  read 读时长  write 写时长
+
+
+删除数据库
+db.dropDatabase()
+
+创建集合 
+db.createCollection(collection_name)
+
+查看数据库中的集合
+show tables
+或
+show collections
+
+集合的命名规则 
+1.不能是空字符串
+2.不能含有 ‘\0’
+3. 不能以system.开头，这是系统集合的保留前缀
+4.集合不要和保留字重名不要包含$
+
+创建集合2 
+
+当向一个集合中插入一条文档，如果这个集合不存在，则会自动创建
+db.collection_name.insert()
+
+e.g.    db.class2.insert({name:'Lily',age:17,sex:'w'})
+会自动创建class2这个集合
+
+删除集合 
+db.collection_name.drop()
+
+e.g.   db.stu.drop()
+删除stu这个集合
+
+
+文档  
+在mongodb中数据的组建形式 
+由键值组成，类似python中的字典 
+
+mongodb中数据文档为bson格式 （类似于python字典，使用键值的方                               式保存和展示数据）
+
+文档中 键的命名规则
+
+1.utf-8格式的字符串
+2.不能有\0  不能为空 （习惯上不用. 和 $）
+3.以_开头的很多都是保留的键，所以一般不用_开头
+
+注意： 文档中的键值对是有序的
+       文档中的值指的就是文档支持的数据类型
+			 mongodb中区分大小写
+
+支持数据类型
+
+整型       整数， 32位整型
+布尔       True  False 
+浮点型      存储小数
+Arrays      列表数组
+Timestamp   时间戳
+Date        时间日期
+Object      内部文档
+Null        空值
+Symbol      特殊字符字符串
+Binary data  二进制数据
+code         代码
+regex        正则表达式
+ObjectId     ObjectId字串                          ObjectId("5ab9f98588ce659bcaa3a8ee")
+
+objectid  ： 系统自动为每个文档生成的不重复的主键
+            键名称>  _id
+						值    >  ObjectId("5ab9f98588ce659bcaa3a8ee")
+24位十六进制数  8 文档创建事件   6  机器ID  4进程ID  6 计数器 
+
+
+集合设计原则
+1. 同一类文档存在一个集合中
+2. 集合中尽量存储域和文档格式相近的文档
+3. 集合中可以存在文档数据的差异
+
+
+插入文档 
+db.collection_name.insert()
+e.g.  db.class1.insert({'name':'宝强','age':22,'sex':'m'})
+
+* 插入文档时域名可以不加引号
+db.class1.find() 查看
+
+插入多条文档
+db.collection_name.insert([{},{},{}....])
+
+e.g.
+db.class1.insert([{name:'阿哲',age:24},{name:'阿蓉',age:22,sex:'w'},{name:'阿花',age:18,sex:'w'}])
+
+*_id为系统定义主键值，如果使用系统值则保证不重复，如果自定义值即会覆盖系统值，但是自己也不能让该域重复
+
+save插入数据
+db.collection_name.save()
+
+e.g.  db.class1.save({_id:1,name:'沙师弟',age:1700})
+
+如果不添加_id域的时候 同insert
+如果添加_id域，该域值如果不存在则正常插入，如果存在则修改原数据
+
+save不能够插入多条文档
+
+作业 ： 练习mongodb 中数据库  集合 的创建删除
+        熟练使用 文档的插入语句
+				理论内容能够描述
+
+

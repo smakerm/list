@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#tbl{
+			width:500px;
+			border:1px solid #000;
+			border-collapse:collapse;
+		}
+		#tbl td{
+			border:1px solid #000;
+		}
+	</style>
+ </head>
+ <body>
+  <table id="tbl">
+		<tr>
+			<td>商品名称</td>
+			<td>商品价格</td>
+			<td>购买数量</td>
+			<td>操作</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+		<tr>
+			<td>可乐</td>
+			<td>2.5</td>
+			<td>5</td>
+			<td>
+				<button onclick="btnUpdate(this)">修改</button>
+			</td>
+		</tr>
+	</table>
+	<script src="common.js"></script>
+	<script>
+		/*function btnUpdate(btn){
+			//将 按钮上的文本更改为 确定
+			btn.innerHTML = "确定";
+			//通过 btn 找到 父元素的上一个兄弟元素的值
+			var td=btn.parentNode.previousElementSibling;
+			console.log(td.innerHTML);
+			td.innerHTML = "<input id='num' value='"+td.innerHTML+"'>";
+			//"<input id='num' value='5'>"
+		}*/
+		
+		/**
+		 * btn : 表示的就是点击的按钮(通过this传递进来的)
+		 */
+		function btnUpdate(btn){
+			if(btn.innerHTML == "修改"){
+				//执行修改操作
+				btn.innerHTML = "确定";
+				//找到 btn 的 父元素的上一个兄弟元素
+				var td = btn.parentNode.previousElementSibling;
+				td.innerHTML = "<input value='"+td.innerHTML+"'>";
+			}else{
+				//执行确定操作
+				btn.innerHTML = "修改";
+				//获取btn的父元素的上一个兄弟元素 td 中的文本框中的值
+				var td = btn.parentNode.previousElementSibling;
+				var num = td.children[0].value;
+				td.innerHTML = num;
+				
+			}
+		}
+	</script>
+ </body>
+</html>

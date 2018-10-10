@@ -1,0 +1,55 @@
+股票系统
+知识点：
+    前端：
+        １页面显示分模块化，使用前端标签iframe
+        ２Ｋ线图显示，调用第三方js插件echarts显示k线图
+        ３使用input 隐藏属性hidden传递隐藏数据
+    后端：
+        １user表继承django自带user表，继承方法：
+            models中:User(AbstractUser)
+            settings中添加AUTH_USER_MODEL = 'stockapp.User'
+        ２使用django自带登录login()，登出logout()，用户名密码判断user = authenticate(username=username, password=password)，用户登录激活验证request.user.is_authenticated()
+        ３调用第三方tushare获取实时数据（股票，资讯，电影）
+            官网：http://tushare.org
+            安装：pip install tushare
+            使用方法：import tushare as ts
+            df = ts.realtime_boxoffice()
+            print(df)
+        4判断用户所在templates
+        5交易部分逻辑代码
+
+可扩展
+    １在股票k线图显示时可加入数据分析，预测市场
+    ２完善交易过程，添加挂单模块
+    ３使用tushare获取财经相关资讯
+    ４使用爬虫爬取相关股票名称，股票编码，初始化数据库
+
+项目代码：stock
+注意：使用python2.X版本，使用数据库mysql数据库，依赖包tushare,echarts
+使用运行方法：
+    进入stock项目
+    执行python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py runserver
+    使用django后台添加股票名称，股票编码
+    *****股票编码必须是真实的*****
+    
+
+代码说明：
+views.py 逻辑代码
+urls.py　路由跳转
+models.py　用于数据库ORM
+data.py 调用tushare获取股票实时数据
+forms.py　定义注册登录form表单
+templates　相关页面
+    主要页面：
+    company.html 股票信息详情页
+    hot.html　热点资讯页面
+    index.html　首页
+    k.html　K线图页面
+    left.html　左侧默认显示页面
+    login.html　登录页
+    login_left.html　左侧登录页
+    realHead.html　页头部分股票数据显示页面
+    register.html　注册页面
+    stock_transaction.html　交易页面

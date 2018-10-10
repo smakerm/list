@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testWindow(){
+			//console.log(window);
+			if(confirm("确认关闭网页吗?")){
+				window.close(); //关闭当前网页
+			}else{
+				alert("暂不关闭网页！");
+			}
+		}
+	</script>
+	<button onclick="testWindow()">测试window</button>
+ </body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		window.onload = function(){
+			var uname = $("uname");
+			//为 uname 绑定 focus 事件
+			uname.onfocus = function(){
+				$("uname-show").innerHTML = "用户名6-9位";
+			}
+			//为 uname 绑定 blur 事件
+			uname.onblur = function(){
+				if(this.value.length >= 6 && this.value.length <= 9){
+					$("uname-show").innerHTML = "通过";
+					$("uname-show").style.backgroundColor="green";
+					$("uname-show").style.color="#fff";
+				}else{
+					$("uname-show").innerHTML = "用户名不符合规范";
+					$("uname-show").style.backgroundColor="red";
+					$("uname-show").style.color="#fff";
+				}
+			}
+		}
+	</script>
+ </head>
+ <body>
+  <p>
+		<input id="uname" placeholder="用户名6-9位">
+		<span id="uname-show">*</span>
+	</p>
+ </body>
+</html>

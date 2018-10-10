@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testReg(){
+			var regExp = /^\d{2,6}$/g;
+			var input = prompt("请输入2-6位的数字:");
+			if(regExp.test(input)){
+				alert("格式正确");
+			}else{
+				alert("格式错误");
+			}
+		}
+	</script>
+	<button onclick="testReg()">测试正则表达式</button>
+ </body>
+</html>

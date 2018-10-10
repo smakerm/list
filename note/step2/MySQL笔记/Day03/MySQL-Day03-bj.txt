@@ -1,0 +1,262 @@
+MySQL-Day02回顾
+1、表记录的管理
+	1、删除表记录
+		1、delete from 表名 where 条件;
+			##不加where条件全部删除
+	2、修改表记录
+		1、update 表名 set 字段名=值,... where 条件;
+			##不加where条件全部修改
+2、运算符
+	1、数值比较&字符比较
+		1、数值比较运算符：> >= < <= != =
+		2、字符比较：= !=
+	2、逻辑比较
+		and 、or
+	3、范围内比较(between and、in、not in)
+		字段名 between 值1 and 值2
+		字段名 in(值1,值2,...)
+		字段名 not in(值1,值2,...)
+	4、空、非空(is null、is not null)
+		1、注意
+			1、null ：空值,必须用is 或 is not去匹配
+			2、""   ：空字符串,用 = 或 != 去匹配
+	5、模糊比较(like)
+		1、字段名 like 表达式
+		2、表达式
+			_ : 匹配单个字符
+			% : 匹配0到多个字符
+3、SQL查询
+	1、order by(排序)
+		1、order by 字段名 ASC/DESC;
+	2、limit(永远放在SQL语句的最后)
+		1、limit n -->显示n条记录
+		2、limit m,n -->从 m+1 条记录开始,显示 n 条
+	3、聚合函数
+		avg(字段名)、sum(字段名)、max(字段名)、
+		min(字段名)
+		count(字段名) ## 空值NULL不会被统计
+	4、group by(给查询结果分组)
+		1、注意
+			1、group by之后字段名 必须为select 后的字段名
+			2、如果select后的字段名没有在group by之后,则必须要对该字段进行聚合处理
+	5、having(对查询结果进行进一步筛选)
+		1、注意
+			1、having与group by联合使用,用来过滤由group by返回的结果集
+			2、弥补了where关键字不能与聚合函数联合使用的不足
+			3、where只能操作表中实际存在的字段,having可以操作聚合函数生成的显示列
+	6、distinct(不显示字段的重复值)
+		1、注意
+			1、distinct和from之间所有的字段必须全部相同才可以去重
+			2、distinct不能对任何字段做聚合处理
+	7、查询表记录时做数学运算
+		+ - * / %
+	8、总结
+		3、 select ... 聚合函数 from ...
+		1、 where ...
+		2、 group by ...
+		4、 having ...
+		5、 order by ...
+		6、 limit ...
+	4、约束
+		1、默认约束(default)
+		2、非空约束(not null)
+	5、索引
+		1、BTree
+		2、优点：加快数据的检索速度
+		3、缺点
+			1、索引需要动态维护,降低数据的维护速度
+			2、索引占用物理空间
+		4、索引类型
+			1、普通索引(MUL)
+				1、创建
+					1、创建表时创建: index(字段名),...
+					2、在已有表创建:
+						create index 索引名 on 表名;
+				2、查看
+					1、desc 表名;
+					2、show index from 表名\G;
+				3、删除(只能一个一个删除)
+					drop index 索引名 on 表名;
+			2、唯一所以(UNI,字段值不允许重复,但可为NULL)
+				1、创建
+					1、创建表
+						unique(字段名),...
+					2、在已有表中创建
+						create unique index 索引名 on 表名;
+				2、删除
+					drop index 索引名 on 表名;
+MySQL-Day03笔记
+1、索引
+	1、普通索引(MUL)
+	2、唯一索引(UNI)
+	3、主键索引(PRI)
+		1、使用规则
+			1、一个表中只能有一个主键(primary)字段
+			2、对应字段的值不允许重复,且不能为空
+			3、主键字段的key标志PRI
+			4、把表中能够唯一标识一条记录的字段设置为主键,通常把表中记录编号的字段设置为主键
+		2、创建主键(primary key)
+			1、创建表时创建
+				1、字段名 数据类型 primary key,
+				2、primary key(字段名)
+			2、在已有表中创建
+				alter table 表名 add primary key(字段名);
+		3、删除
+			alter table 表名 drop primary key;
+		4、自增长属性(auto_increment)
+			1、作用：通常和主键字段一起配合使用
+			2、创建
+				1、创建表时创建
+				字段名 数据类型 primary key auto_increment
+				2、在已有表中添加自增长属性(modify)
+					alter table 表名 modify 字段名 数据类型 primary key auto_increment
+		5、删除主键及自增长属性
+			1、alter table 表名 modify 字段名 数据类型;
+			2、alter table 表名 drop primay key;
+	4、外键索引(foreign key)
+		1、定义
+			让当前表的字段值在另一个表的范围内选择
+		2、语法格式
+			foreign key(参考字段名)
+			references 被参考表名(被参考字段名)
+			on delete 级联动作
+			on update 级联动作
+		3、案例
+			表1：缴费信息表(财务)
+				学号  姓名     班级     缴费金额
+					1   唐伯虎  AID1712     28000
+					2   点秋香  AID1712     20000
+			表2：学生信息表(班主任)
+				学号  姓名    缴费金额
+					1   唐伯虎    28000
+		4、删除外键
+			1、语法格式
+				alter table 表名 drop foreign key 外键名;
+			2、注意
+				1、外键名的查看方式
+					show create table 表名;
+		5、在已有表中添加外键
+			1、语法格式
+				alter table 表名 add 
+				foreign key(参考字段名) references
+				被参考表名(被参考字段名)
+				on delete 级联动作
+				on update 级联动作
+			2、注意
+				在已有表中添加外键时,会受到表中原有数据的限制
+		6、级联动作
+			1、cascade ：数据级联更新
+				1、当主表删除记录时,如果从表有相关联记录则级联删除
+				2、当主表更新被参考字段的值时,从表级联更新参考字段的值
+			2、restrict(默认)
+				1、当主表删除记录时,如果从表中有相关联记录则不允许主表删除
+				2、update同 1 
+			3、set null
+				1、当主表删除记录时,从表中相关联记录外键字段值变为null
+				2、update 同 1
+			4、no action
+				同 restrict,都是立即检查外键限制
+		7、使用规则
+			1、两张表被参考字段和参考字段的数据类型要一致
+			2、被参考字段必须是KEY的一种,通常是primary key
+2、数据导入
+	1、作用：将文件系统的内容导入到数据库中
+	2、语法格式
+		load data infile "文件名"
+		into table 表名
+		fields terminated by "分隔符"
+		lines terminated by "分隔符"
+
+		tarena:x:1000:1000:tarena,,,:/home/tarena:/bin/bash
+		用户名:密码:UID:GID:描述:家目录:登录权限
+	3、把/etc/passwd 导入到mysql数据库中
+	4、操作步骤
+		1、在数据库中创建对应的表
+		2、查看数据库的默认搜索路径
+			show variables like "secure_file_priv";
+		3、将系统文件拷贝到数据库的默认搜索路径中
+			sudo cp /etc/passwd /var/lib/mysql-files
+			sudo -i
+			cd /var/lib/mysql-files
+			ls
+			exit
+3、数据导出
+	1、作用
+		将数据库中表的记录保存到系统文件里
+	2、语法格式
+		select ... from 表名
+		into outfile "文件名"
+		fields terminated by "分隔符"
+		lines terminated by "分隔符"
+	3、练习
+		1、把userinfo表中的用户名、密码和uid号三个字段导出到userinfo.txt中
+		2、将库名:mysql库中user表中的User、Host两个字段的值导出到 user2.txt
+	4、注意
+		1、导出的内容由SQL查询语句决定
+		2、执行导出命令时路径必须指定在对应的数据库目录下
+		3、show variables like "secure_file_priv";
+			 show variables like "%secure%";
+4、表的复制
+	1、表的复制
+		1、语法格式
+			create table 表名 select 查询命令;
+		2、练习
+			1、复制userinfo表的前10行,userinfo3 \c
+			2、复制userinfo表的用户名、密码、uid三个字 段的2-10条记录,userinfo4
+	2、只复制表结构
+		1、语法格式
+			create table 表名 select ... where false;
+	3、注意
+		1、复制表的时候不会把原有表的 键 属性复制过来
+5、嵌套查询
+	1、定义
+		把内层的查询结果作为外层查询的条件
+	2、语法格式
+		select查询语句 where 条件(select查询语句);
+	3、练习
+		1、把uid的值小于这个字段的平均值的用户名和uid显示出来
+		2、查找userinfo表中用户名在 mysql库下的user表Host值为localhost并且User值是root 的用户名
+6、多表查询
+	1、两种方式
+		1、select 字段名列表 from 表名列表; #笛卡尔积
+			select * from tt1,tt2;
+		2、select 字段名列表 from 表名列表 where 条件;
+	2、练习
+		1、显示省和市的信息
+		2、显示省、市、县的信息
+7、连接查询
+	1、内连接
+		1、定义
+			从表中删除与其他被连接表中没有匹配到的行
+		2、语法格式
+			select 字段名列表 from 表1 
+			inner join 表2 on 条件;
+		3、练习
+			1、显示省市信息,没有匹配的不显示
+			2、显示省市县的信息	
+	2、外连接
+		1、左连接
+			1、定义
+				以左表为主显示查询结果
+			2、语法
+				slect 字段名列表 from 表1 left join 表2 on 条件;
+			3、练习
+				1、显示省市的信息,以左表为准
+				2、显示省市的信息,以右表为准
+				3、显示省市区的信息,要求市全部显示
+		2、右连接
+
+			
+
+			
+						
+		
+
+
+
+
+
+
+
+
+

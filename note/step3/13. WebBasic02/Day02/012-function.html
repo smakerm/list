@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		//声明函数
+		function printMsg(){
+			alert("Hello World");
+		}
+		
+		/**
+		 * 计算两个数字的和，并打印输出
+		 * num1 : 表示第一个数字
+		 * num2 : 表示第二个数字
+		 */
+		function add(num1,num2){
+			console.log(num1+num2);
+		}
+		//调用函数
+		//printMsg();
+	</script>
+
+	<button onclick="printMsg()">调用函数</button>
+	<button onclick="add(15,18)">调用带参数函数</button>
+ </body>
+</html>

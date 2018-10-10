@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#d1,#d2{
+			width:200px;
+			height:200px;
+			position:absolute;
+			left:400px;
+			top:200px;
+		}
+		#d1{
+			background:#f00;
+			border:1px solid #000;
+		}
+		#d2{
+			background:#999;
+			border:1px solid #000;
+			opacity:0.5;
+
+			/*位移*/
+			/* transform:translate(100px,-50px) */
+
+			/* transform:scaleX(-2); */
+			/* transform:scale(-2); */
+
+			/*更改转换原点*/
+			/* transform-origin:left top; */
+			transform:translate(50px) rotate(45deg);
+		}
+	</style>
+ </head>
+ <body>
+  <div id="d1">参考元素</div>
+	<div id="d2">转换元素</div>
+ </body>
+</html>

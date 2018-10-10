@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>1.正向查询,通过Book查询Publisher</h3>
+    <p>书名:{{book.title}}</p>
+    <p>出版日期:{{book.publication_date}}</p>
+    <p>出版社:{{publisher.name}}</p>
+    <h3>2.反向查询,通过Publisher查询Book们</h3>
+    <p>出版社:{{pub.name}}</p>
+    {%for b in books%}
+        <p>书名:{{b.title}}</p>
+        <p>出版日期:{{b.publication_date}}</p>
+    {%endfor%}
+</body>
+</html>

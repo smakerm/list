@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function homework(){
+			//1、声明一个数组以及若干数据
+			var names = ["漩涡鸣人","佐助","小樱","卡卡西","佐助"];
+			//2、用户录入数据
+			var input = prompt("请输入一个数据:");
+			//3、声明一个变量，用于表示数据是否存在于数组中,默认为 -1
+			var index = -1;
+			//4、循环遍历数组中的每个元素，依次与录入的数据进行比较，如果相等的话，则将元素的下标赋值给 声明好的变量
+			for(var i=0;i<names.length;i++){
+				if(names[i] == input){
+					index=i;
+					break;
+				}
+			}
+			//5、判断变量的值是否为-1
+			if(index == -1){
+				alert("您要查找的数据不存在!");
+			}else{
+				alert(input + "的下标为:" + index);
+			}
+		}
+
+		function findIndex(){
+			//1、声明一个数组以及若干数据
+			var names = ["漩涡鸣人","佐助","小樱","卡卡西","佐助"];
+			//2、用户录入数据
+			var input = prompt("请输入一个数据:");
+			//3、声明一个数组，用于保存找到的数据的所有下标
+			var indexArray = [];
+			//4、循环遍历，用input依次与数组中的元素进行比较，如果相等的话，则将元素的下标保存进indexArray中
+			for(var i = 0; i < names.length; i ++){
+				if(input == names[i]){
+					indexArray.push(i);
+				}
+			}
+			//5、判断 indexArray的长度是否为>0
+			if(indexArray.length > 0){
+				alert("出现的位置为:"+indexArray);
+			}else{
+				alert("您输入的数据不存在!");
+			}
+		}
+	</script>
+	<button onclick="homework()">查找数据</button>
+	<button onclick="findIndex()">查找数据(重复)</button>
+ </body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <h1>修改个人信息</h1>
+	<form action="update" method="post">
+		<table border="1" cellspacing="0">
+			<tr>
+				<td>姓名：</td>
+				<td>
+					<input type="text" name="uname" value="mary">
+				</td>
+			</tr>
+			<tr>
+				<td>性别：</td>
+				<td>
+					<input type="radio" name="gender" value="1">女士
+					<input type="radio" name="gender" value="0" checked>男士
+				</td>
+			</tr>
+			<tr>
+				<td>学历：</td>
+				<td>
+					<select name="edu">
+						<option value="0">其他</option>
+						<option value="1">专科</option>
+						<option value="2">本科</option>
+						<option value="3">硕士及以上</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">个人描述：</td>
+				<td>
+					<textarea name="desc" rows="5" cols="30"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="checkbox" name="isPublic">
+					不要公开我的个人信息
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" value="保存">
+					<input type="reset" value="重填">
+				</td>
+			</tr>
+		</table>
+	</form>
+ </body>
+</html>

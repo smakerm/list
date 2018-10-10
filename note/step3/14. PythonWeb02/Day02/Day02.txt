@@ -1,0 +1,157 @@
+1、后台管理
+	1、创建超级用户
+		./manage.py createsuperuser
+	2、基本管理
+		1、admin.py
+			注册models
+			admin.site.register(Entry)
+		2、修改 models 以便提升显示效果
+			1、 def __str__(self):
+						return self.xxx;
+			2、通过内部类 Meta 实现特殊显示效果
+				class Meta:
+					1、db_table
+					2、ordering
+					3、verbose_name
+					4、verbose_name_plural
+	3、高级管理
+		1、在 admin.py 中创建 高级管理类
+			1、定义 EntryAdmin 
+				继承自 admin.ModelAdmin
+
+				class EntryAdmin(admin.modelAdmin):
+					pass
+			2、允许出现的属性
+				1、list_display
+				2、list_display_links
+				3、list_editable
+				4、search_fields
+				5、list_filter
+				6、date_hierarchy
+					取值必须是 DateField / DateTimeField
+				7、fields
+				8、fieldsets
+					fieldsets=(
+						('组名1',{'fields':('',''),'classes':('collapse',)}),
+					)
+2、Django连接查询
+	1、一对一查询
+		models.OneToOneField(Entry)
+
+		两个实体类：Author , Wife
+			1、通过 Author 找 Wife
+				author = Author.objects.get(id=1)
+				wife = author.wife
+			2、通过 Wife 找 Author
+				wife = Wife.objects.get(id=2)
+				author = wife.author
+	2、一对多/多对一
+		model = models.ForeignKey(Entry)
+
+		两个实体类：Publisher(一) , Book(多)
+		正向查询：
+			book = Book.objects.get(id=1)
+			publisher = book.publisher
+
+		反向查询
+			publisher = Publisher.objects.get(id=4)
+			books = publisher.book_set.all()
+
+==================================================
+1、Django中的连接查询
+	1、多对多查询
+		1、什么是多对多
+			A表中的一条记录可以与B表中的任意多条记录匹配，同时B表中的每一条记录也可以与A表中的任意多条记录相匹配
+		2、语法
+			entry = models.ManyToManyField(Entry)
+		3、查询
+			class Author(models.Model):
+				... ...
+				publish = models.ManyToManyField(Publish)
+			
+			正向查询：在 Author 中查询 Publish
+				author = Author.objects.get(id=3)
+				pub_list=author.publish.all()
+
+				通过关联属性.all()
+			反向查询：在 Publisher 中查询 Author
+				pub = Publisher.objects.get(id=1)
+				auList = pub.author_set.all()
+
+			练习：
+				创建 Author 与 Book 之间的多对多关系
+				1、查询 贾乃亮 出版的 所有的书籍
+				2、查询 红楼梦 的作者们都有谁
+2、自定义查询对象 - objects
+	1、声明类 EntryManager,继承自models.Manager,并添加自定义函数
+		class EntryManager(models.Manager):
+			def  函数名(self,自定以参数):
+				... ...
+				return ...
+	2、使用EntryManager 覆盖 Models中的objects
+		class Entry(models.Model):
+			objects = EntryManager()
+
+	练习：
+		1、为 Author 指定自定义objects 对象
+			包含以下操作：
+			1、年纪小于指定年纪的所有的作者的信息
+		2、为 Book 指定自定义objects对象
+			包含以下操作：
+			1、查询书名中包含指定关键字的书籍的数量
+3、HttpRequest 介绍
+	1、什么是HttpRequest
+		HttpRequest,请求对象，封装了请求过程中的所有信息
+		在Django中，HttpRequest 被化身成了 request封装到视图处理函数中作为参数.该参数，在调用视图处理函数时自动传入
+		print(dir(request))
+	2、HttpRequest 中的主要内容
+		1、request.scheme : 请求协议
+		2、request.body 请求主体
+		3、request.path 请求路径
+		4、request.get_host() 请求的主机地址 / 域名
+		5、request.method 请求方法
+		6、request.GET get的请求数据
+		7、request.POST post的请求数据
+		8、request.COOKIES cookies的数据
+		9、request.META 请求的元数据
+	3、有关HTTP协议
+		1、每个请求一定会有 method
+			get,post,put,delete,... ...
+
+			get:向服务器要数据时使用
+				传递数据到服务器时会直接将请求数据封装到地址之后
+
+				http://www.baidu.com/s?wd=佳能&price=3000
+			
+			post:想传递数据到服务器处理的时候，用post
+				post的请求提交的数据全部封装在 "请求主体" 中
+		2、请求主体
+			只有post 和 put 请求方式才能产生请求主体
+			其他请求方式都没有请求主体
+	4、获取请求提交的数据
+		1、GET请求
+			request.GET['名称']
+		2、POST请求
+			request.POST['名称']
+4、csrf 跨站点攻击
+	目的：为了解决跨站点发送post请求
+	解决方案：
+		1、删除 CsrfViewMiddleWare 中间件
+		2、在视图函数增加@csrf_protect
+		3、
+			在模板中 <form> 底下第一行增加一个标签{%csrf_token%}
+
+			<form method="" action="">
+				{%csrf_token%}
+			</form>
+
+
+
+
+
+
+
+Author.objects.all()
+Author.objects.myself()
+
+['COOKIES', 'FILES', 'GET', 'META', 'POST', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_encoding', '_get_post', '_get_raw_host', '_get_scheme', '_initialize_handlers', '_load_post_and_files', '_mark_post_parse_error', '_messages', '_post_parse_error', '_read_started', '_set_post', '_stream', '_upload_handlers', 'body', 'build_absolute_uri', 'close', 'content_params', 'content_type', 'csrf_processing_done', 'encoding', 'environ', 'get_full_path', 'get_host', 'get_port', 'get_raw_uri', 'get_signed_cookie', 'is_ajax', 'is_secure', 'method', 'parse_file_upload', 'path', 'path_info', 'read', 'readline', 'readlines', 'resolver_match', 'scheme', 'session', 'upload_handlers', 'user', 'xreadlines']

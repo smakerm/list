@@ -1,0 +1,110 @@
+和人工打码平台：
+    data = {
+        'action':'captch',
+        'file':img_data.encode('utf-8'),
+        'apikey':'XXXYYYY'
+    }
+    data=urlencode(data)
+    req = urllib.Request(url, data, method='POST')
+    reponse = urllib.urlopen(req)
+    result = reponse.read()
+
+输入n(正整数), 如果n=4,输出:
+10 11 12 1      
+9  16 13 2      
+8  15 14 3      
+7  6  5  4
+while num < n*n: 
+	while 向下
+	while 向左
+	while 向上
+	while 向右
+        num += 1
+     
+数组，链表；
+Python中的list是数组的实现；
+[0, 0, 0, 0]
+[0, 0, 0, 2]
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+L = [1,2,3,4]
+
+L
+Out[2]: [1, 2, 3, 4]
+
+L2 = [[0 for i in range(4)]for j in range(4)]
+
+L2
+Out[4]: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+L2[0]
+Out[5]: [0, 0, 0, 0]
+
+L2[0][0]
+Out[6]: 0
+
+L2[1][3] = 2
+
+L2
+Out[8]: [[0, 0, 0, 0], [0, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+L2[0][0] = 10
+
+L2
+Out[10]: [[10, 0, 0, 0], [0, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+sudo pip install numpy
+import numpy as np
+
+myArray =  np.zeros((4,4),dtype=np.int16)
+
+myArray
+Out[13]: 
+array([[0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0]], dtype=int16)
+myArray[0][0] = 10
+
+myArray
+Out[15]: 
+array([[10,  0,  0,  0],
+       [ 0,  0,  0,  0],
+       [ 0,  0,  0,  0],
+       [ 0,  0,  0,  0]], dtype=int16)
+
+myArray[1][3] = 2
+
+myArray
+Out[17]: 
+array([[10,  0,  0,  0],
+       [ 0,  0,  0,  2],
+       [ 0,  0,  0,  0],
+       [ 0,  0,  0,  0]], dtype=int16)
+
+
+日志：
+    1）在多进程多线程中调试程序；
+    2）帮助我们在用户的环境中去查找问题；
+注意：
+    日志管理中的日志handler每次不再使用的使用，一定要记得把其remove；否则，下次启动时，系统中可能还出现多条日志；因为系统中之前的之前日志没有被处理干净。
+
+SSL 安全套接层
+非对称加密：公钥，私钥；
+    私钥-可以解密-》公钥加密的数据；
+    公钥-可以解密-》私钥加密的数据；
+HTTPS = HTTP+SSL
+Python 中处理HTTPS证书安全：
+import ssl # 安全套接层
+#自己保证网站证书的安全
+context = ssl._create_unverified_context()
+。。。
+response = urllib.request.urlopen(req,context=context)
+
+作业1）利用所学的爬虫技术，从网络上抓取1000个代理服务器的地址和端口号，尝试哪些代理可用，并记录可用的部分。
+作业2）输入n,比如这里n=4,输出:三角形数
+   1
+  121
+ 12321
+1234321
+回去好好看看downloadHtml这个方法的实现；

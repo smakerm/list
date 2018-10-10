@@ -1,0 +1,152 @@
+1、Django连接查询
+	1、多对多关联查询
+		1、语法
+			entry = models.ManyToManyField(Entry)
+		2、查询
+			class Author(models.Model):
+				book = models.ManyToManyField(Book)
+			正向查询：
+				au = Author.objects.get(id=1)
+				bookList = au.book.all()
+			反向查询：
+				book = Book.objects.get(id=1)
+				auList = book.author_set.all()
+2、Models高级引用
+	1、自定义扩展 objects
+		1、声明类继承自 models.Manager,添加自定义函数
+			class EntryMananger(models.Manager):
+				def 函数(self,自定义参数):
+					... ...
+					return ... ...
+		2、将 EntryManager 与 Entry 结合
+			class Entry(models.Model):
+				objects = EntryManager()
+3、HttpRequest 介绍
+	1、request 中的内容
+		1、request.GET
+			以 get 方式请求提交的数据
+		2、request.POST
+			以 post 方式请求提交的数据
+		3、request.method
+			获取请求方式
+		4、request.COOKIES
+	2、获取 get 请求 或 post 请求中的数据
+		request.GET["name"]
+		request.POST["name"]
+	3、csrf跨站点攻击
+		解决方案：
+			1、删除中间件
+			2、在处理的视图函数上增加@csrf_protect
+			3、在<form>中第一行元素增加
+				{%csrf_token%}
+
+==================================================
+1、使用 forms 模块处理表单
+	1、forms 模块的作用
+		通过forms模块，允许将表单控件与py文件相结合
+	2、使用 forms 模块
+		1、创建 forms.py 文件
+		2、导入 forms 
+			from django import forms
+		3、创建class，一个class对应一个表单
+			该 class 必须继承自 forms.Form
+		4、在class中创建属性
+			一个属性对应一个表单控件
+	3、在模板中，解析 form 对象
+		1、注意
+			1、需要自定义 <form>
+			2、需要自定义 提交按钮
+		2、处理方法
+			1、手动解析
+				{%for filed in form%}
+					<p>{{filed.label}}:{{field}}</p>
+				{%endfor%}
+			2、自动解析
+				{{form.as_p}}
+				{{form.as_ul}} - 需要自定义 ul
+				{{form.as_table}} - 需要自定义 table
+	4、在HTML中提交的表单内容也可以传递给forms.Form
+		views.py
+
+		def remark_views(request):
+			form = RemarkForm(request.POST)
+			if form.is_valid():#必须要经过验证才能继续
+				cd = form.cleaned_data #封装了提交的数据
+				print(cd['uname'])
+		练习：
+			1、在 forms.py 中追加一个 RegisterForm 类
+				增加以下属性，并生成到 register.html 显示成表单控件
+				1、uname ：文本框
+				2、upwd ：文本框 / 密码框
+				3、uemail ：邮件框
+				4、uage ：文本框
+			2、在 regsiter.html 中 添加 <form> 和 提交按钮
+			3、点击提交时，将数据插入到数据库中
+				创建数据库 day8 ，创建Models-Users
+	5、forms 的高级处理
+		将 Models 和 Forms 结合到一起使用
+		通过Models 自动生成表单
+		1、创建 class ，EntryForm ,并继承自 forms.ModelForm
+		2、创建内部类 Meta ，并定义相关信息
+			1、model ：指定关联的Models是谁
+			2、fields
+				1、指定一个列表，声明允许生成表单控件的属性
+				2、取值 "__all__"，表示全部属性都允许被生成表单控件
+			3、labels - 字典
+				{
+					'属性1':'显示文本1',
+					'属性2':'显示文本2',
+				}
+	6、内置小部件(widgets)
+		1、什么是小部件
+			生成到网页上的控件的类型
+		2、常用小部件
+			1、TextInput : type="text"
+			2、NumberInput : type="number"
+			3、EmailInput : type="email"
+			4、URLInput : type="url"
+			5、PasswordInput : type="password"
+			6、HiddenInput : type="hidden"
+			7、CheckboxInput : type="checkbox"
+			8、Textarea : <textarea></textarea>
+			9、Select : <select></select>
+		3、小部件的使用
+			1、继承自 forms.Form
+				subject = forms.CharField(
+					label='标题',
+					widget=forms.TextInput(
+						attrs={
+							'属性名':'属性值',
+							'class':'form-control',
+							'placeholder':'请输入用户名'
+						}
+					)
+				)
+			2、继承自 forms.ModelForm
+				class WidgetForm(forms.ModelForm):
+					class Meta:
+						model = Users
+						fields = '__all__'
+						labels = {
+							'uname':'...'
+						}
+						widgets = {
+							'uname':forms.TextInput(attrs={
+								'class':'form-control',
+								'placeholder':'xxx'
+							})
+						}
+
+
+
+
+
+
+
+
+
+
+
+select * from users where uphone='13912345678' and upass='fdafdsafdsafdsa'
+
+select * from users where uphone='13912345678'

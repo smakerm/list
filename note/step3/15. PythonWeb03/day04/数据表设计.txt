@@ -1,0 +1,408 @@
+数据表
+功能：用户注册，用户登录，博客的浏览，评论的发布浏览
+
+用户表 tb_user
+
+用户ID user_id int autoincrement
+用户名 user_name varchar(64) not null
+密码 user_password varchar(64) not null
+爱好 放弃 
+性别 可选
+年龄 可选
+昵称 可选
+签名 可选
+个性标签 放弃
+头像 user_avatar varchar(128) 
+城市 user_city varchar(32) not null #beijing shanghai shenzhen
+创建时间 user_createdat datetime
+最近修改时间 user_updatedat datetime
+
+primary key 用户ID
+unique 用户名
+
+create table if not exists tb_user(
+ user_id int auto_increment,
+ user_name varchar(64) not null,
+ user_password varchar(64) not null,
+ user_avatar varchar(128),
+ user_city varchar(32) not null,
+ user_createdat datetime default current_timestamp,
+ user_updatedat datetime default current_timestamp on update current_timestamp,
+ primary key(user_id),
+ unique(user_name) 
+) default charset = utf8
+
+
+
+
+博客表tb_blog
+
+博客ID blog_id int autoincrement
+博客标题 blog_title varchar(64) not null
+博客正文 blog_content varchar(1024) not null
+作者(用户)ID blog_user_id int not null
+创建时间 blog_createdat datetime
+最近修改时间 blog_updatedat datetime
+
+
+primary key 博客ID
+foreign key 作者ID reference 用户表中用户ID
+
+create table if not exists tb_blog(
+ blog_id int auto_increment,
+ blog_title varchar(64) not null,
+ blog_content varchar(1024) not null,
+ blog_user_id int not null,
+ blog_createdat datetime default current_timestamp,
+ blog_updatedat datetime default current_timestamp on update current_timestamp,
+ primary key(blog_id),
+ foreign key(blog_user_id) references tb_user(user_id)
+)default charset = utf8
+
+
+博客标签表 tb_tag
+标签ID tag_id int autoincrement
+标签内容 tag_content varchar(64) not null
+
+primary key 标签ID
+unique 标签内容
+
+create table if not exists tb_tag(
+ tag_id int auto_increment,
+ tag_content varchar(64) not null,
+ primary key(tag_id),
+ unique(tag_content)
+)default charset = utf8
+
+
+博客标签关联表 tb_blog_tag
+ID rel_id int autoincrement
+关联表博客ID rel_blog_id int not null
+关联表标签ID rel_tag_id int not null
+
+primary key ID
+foreign key 关联表博客ID reference 博客表的博客ID
+foreign key 关联表标签ID reference 标签表的标签ID
+
+create table if not exists tb_blog_tag(
+ rel_id int auto_increment,
+ rel_blog_id int not null,
+ rel_tag_id int not null,
+ primary key(rel_id),
+ foreign key(rel_blog_id) references tb_blog(blog_id),
+ foreign key(rel_tag_id) references tb_tag(tag_id)
+)default charset = utf8
+
+评论表tb_comment
+评论ID comment_id int autoincrement
+评论内容 comment_content varchar(128) not null
+被评论的博客ID comment_blog_id int not null
+评论人ID comment_user_id int not null
+创建时间 comment_createdat datetime
+最近修改时间 comment_updatedat datetime
+
+primary key 评论ID
+foreign key 被评论的博客ID reference 博客表的博客ID
+foreign key 评论人ID reference 用户表的用户ID
+
+create table if not exists tb_comment(
+ comment_id int auto_increment,
+ comment_blog_id int not null,
+ comment_user_id int not null,
+ comment_content varchar(128) not null,
+ comment_createdat datetime default current_timestamp,
+ comment_updatedat datetime default current_timestamp on update current_timestamp,
+ primary key(comment_id),
+ foreign key(comment_blog_id) references tb_blog(blog_id),
+ foreign key(comment_user_id) references tb_user(user_id)
+)default charset = utf8
+
+1 向用户表中插入数据
+  
+  insert into tb_user(user_name,user_password,user_city) values('abc','123','beijing')
+
+2 从用户表中删除一条数据
+  delete from tb_user where user_id = 4
+
+3 从用户表中更新一条数据
+  update tb_user set user_name = 'abcd' where user_id = 1
+
+4 从用户表中查询所有数据
+  select * from tb_user
+
+5 从用户表中查询用户ID，用户名，用户城市和注册时间 
+  select user_id,user_name,user_city,user_createdat 
+  from tb_user
+
+6 从用户表中查询用户城市为beijing或shanghai的用户
+  
+  select user_name,user_city from tb_user
+  where user_city='beijing' or user_city='shanghai'
+
+  select user_name,user_city from tb_user
+  where user_city in ('beijing','shanghai')
+
+7 从用户表中查询注册时间为2018年1月31日上午九点十分至上午九点十三分之间的用户
+
+  select user_name,user_createdat from tb_user
+  where user_createdat > '2018-01-31 9:10:00' and user_createdat < '2018-01-31 9:13:00'
+
+  
+  select user_name,user_createdat from tb_user
+  where user_createdat  between '2018-01-31 9:10:00' and '2018-01-31 9:13:00'
+
+8 从用户表中查询每个城市的注册用户量
+  select user_city,count(*) usercount from tb_user
+  group by user_city
+
+9 从用户表中查询最晚注册时间
+  select max(user_createdat) late from tb_user
+
+10 从用户表中查询最晚注册时间的用户信息
+  #写法错误！linux下会报错，windows会返回错误的一条查询结果
+  select user_name,max(user_createdat) late from tb_user
+  
+  #正确的查询
+  select user_name,user_createdat 
+  from tb_user
+  where user_createdat = (select max(user_createdat) late from tb_user)
+
+11 从用户表查询每个城市最晚注册用户信息
+   
+   每个城市最晚注册时间:
+   select user_city,max(user_createdat) from tb_user
+   group by user_city
+
+MySQL联合查询
+
+交叉联合查询 cross join
+内连接联合查询 inner join （MySQL简写join）
+外连接联合查询: 左外连接联合查询 left outer join (MySQL简写left join)
+                右外连接联合查询 right outer join (MySQL简写right join)
+
+创建两张数据表用来演示各种联合查询效果
+create table table1(
+
+  customer_id varchar(20) not null,
+  city varchar(20) not null,
+  primary key(customer_id)
+
+) default charset = utf8
+
+create table table2(
+ order_id int not null auto_increment,
+ customer_id varchar(20),
+ primary key(order_id)
+)default charset = utf8
+
+insert into table1(customer_id,city) values
+('tedu','hangzhou'),('jd','shanghai'),('tx','hangzhou'),('baidu','hangzhou')
+
+insert into table2(customer_id) values
+('tedu'),('tedu'),('jd'),('jd'),('jd'),('tx'),(Null)
+
+1 cross join 效果
+select * from table1 cross join table2
+得到一张很大的数据表(28条数据记录 4*7)
+这样的数据表称为两张数据表的笛卡尔积
+
+2 inner join 效果
+select * from table1 inner join table2
+其效果与cross join是一样的
+得到一张很大的数据表(28条数据记录 4*7)
+这样的数据表称为两张数据表的笛卡尔积
+
+3 left outer join效果
+不能直接让两张表进行左外连接
+select * from table1 left join table2
+左外连接是在内连接基础上进行的
+首先让两张表先做“有条件”的内连接。
+条件就是两张表要有共同列，在共同列上做内连接
+然后才能进行左外连接。
+
+select * from table1 join table2 on
+table1.customer_id = table2.customer_id 
+
+select * from table1 left join table2 on
+table1.customer_id = table2.customer_id 
+
+4 right outer join效果
+不能直接让两张表进行右外连接
+select * from table1 right join table2
+右外连接是在内连接基础上进行的
+首先让两张表先做“有条件”的内连接。
+条件就是两张表要有共同列，在共同列上做内连接
+然后才能进行右外连接。
+
+select * from table1 join table2 on
+table1.customer_id = table2.customer_id 
+
+select * from table1 right join table2 on
+table1.customer_id = table2.customer_id 
+
+11 从用户表查询每个城市最晚注册用户信息
+第一种方式：
+通过无条件内连接得到笛卡尔积，然后利用where从27条数据记录中删选出符合条件的数据记录
+select user_name,tb_user.user_city,user_createdat,t.user_city,t.late from
+tb_user join
+(select user_city,max(user_createdat) late from tb_user 
+group by user_city) t
+where tb_user.user_city = t.user_city and tb_user.user_createdat = t.late
+
+第二种方式：
+通过有条件内连接
+select user_name,tb_user.user_city,user_createdat,t.user_city,t.late from
+tb_user join
+(select user_city,max(user_createdat) late from tb_user 
+group by user_city) t
+on tb_user.user_city = t.user_city and tb_user.user_createdat = t.late
+
+完善其他数据表内容，注意事项：
+1. 不是所有的用户都会发表博客
+2. 不是所有的博客都有标签
+3. 不是所有的博客都有评论
+
+可视化数据库工具：
+Navicat
+DataGrid
+SqlYog
+
+12.查询所有博客的作者信息(作者的id，作者的用户名，博客的id，博客的标题)
+
+select user_id,user_name,blog_id,blog_title
+from tb_user join tb_blog
+on user_id = blog_user_id
+
+select user_id,user_name,blog_id,blog_title,blog_user_id
+from tb_user join tb_blog
+where user_id = blog_user_id
+
+13.查询所有写过博客的用户的用户信息（用户ID，用户名）
+select distinct user_id,user_name
+from tb_user join tb_blog
+on user_id = blog_user_id
+
+14.查询所有用户信息以及他们写过的blog的信息
+select user_id,user_name,blog_id,blog_title
+from tb_user left join tb_blog
+on user_id = blog_user_id
+order by user_id
+
+15. 查询所有博客的标签内容
+tb_blog tb_blog_tag tb_tag
+
+step1 查询所有的blogid极其使用的标签id
+select rel_blog_id,rel_tag_id from tb_blog_tag
+
+step2 利用step1查询找到标签ID对应的标签内容
+select tag_content,tag_id,t.rel_blog_id
+from tb_tag join 
+(select rel_blog_id,rel_tag_id from tb_blog_tag) t
+on tb_tag.tag_id = t.rel_tag_id
+
+step3 利用step2查询结果，从tb_blog找到blog的相关信息
+
+select blog_id,blog_title,t2.tag_content
+from tb_blog left join
+(
+select tag_content,tag_id,t.rel_blog_id rbi
+from tb_tag join 
+(select rel_blog_id,rel_tag_id from tb_blog_tag) t
+on tb_tag.tag_id = t.rel_tag_id
+) t2
+on tb_blog.blog_id = t2.rbi
+
+15. 查询所有博客的标签内容以及作者信息
+
+select user_id,user_name,t3.blog_id,t3.blog_title,t3.tc
+from tb_user join
+(
+select blog_id,blog_title,t2.tag_content tc,blog_user_id
+from tb_blog left join
+(
+select tag_content,tag_id,t.rel_blog_id rbi
+from tb_tag join 
+(select rel_blog_id,rel_tag_id from tb_blog_tag) t
+on tb_tag.tag_id = t.rel_tag_id
+) t2
+on tb_blog.blog_id = t2.rbi
+)t3
+
+on tb_user.user_id = t3.blog_user_id
+
+16. 查询所有博客的标签内容以及作者信息和评论条数
+    demo：
+    select t4.user_name , t4.bi,t4.bt,t4.ttc,t5.c
+    
+    from
+	
+    每篇博客获得的评论数量
+    (select comment_blog_id,count(*) c from tb_comment
+    group by comment_blog_id) t5
+
+    join
+    所有博客的标签内容以及作者信息来自第15题
+    (
+	select user_id,user_name,t3.blog_id bi,t3.blog_title bt ,t3.tc ttc
+from tb_user join
+(
+select blog_id,blog_title,t2.tag_content tc,blog_user_id
+from tb_blog left join
+(
+select tag_content,tag_id,t.rel_blog_id rbi
+from tb_tag join 
+(select rel_blog_id,rel_tag_id from tb_blog_tag) t
+on tb_tag.tag_id = t.rel_tag_id
+) t2
+on tb_blog.blog_id = t2.rbi
+)t3
+
+on tb_user.user_id = t3.blog_user_id
+
+     ) t4
+
+连接条件
+on  t5.comment_blog_id = t4.bi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

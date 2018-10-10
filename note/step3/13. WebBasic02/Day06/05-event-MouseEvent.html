@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#d1,#d2{
+			width:300px;
+			height:400px;
+			border:1px solid #000;
+			margin-right:20px;
+			float:left;
+		}
+	</style>
+	<script src="common.js"></script>
+	<script>
+		window.onload = function(){
+			$("d1").onmousemove = function(event){
+				var x = event.offsetX;
+				var y = event.offsetY;
+
+				$("d2").innerHTML = x + ":" + y;
+				$("d2").style.fontSize = "18pt";
+			}
+		}
+	</script>
+ </head>
+ <body>
+  <div id="d1"></div>
+	<div id="d2"></div>
+ </body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="poem1">
+		<h3>静夜思</h3>
+		<p>床前明月光</p>
+		<p>疑是地上霜</p>
+		<p>举头望明月</p>
+		<p>低头思故乡</p>
+	</div>
+	<div id="poem2">
+		<h3>登鹳雀楼</h3>
+		<p>白日依山尽</p>
+		<p>黄河入海流</p>
+		<p>欲穷千里目</p>
+		<p>更上一层楼</p>
+	</div>
+	<button onclick="changeAllP()">修改所有的p</button>
+	<button onclick="changePoem1P()">修改poem1中的p</button>
+	<button>修改poem2中的p</button>
+	<!--
+		文本变红色，背景遍黄色
+	-->
+
+	<script src="common.js"></script>
+	<script>
+		function changeAllP(){
+			//1、获取所有的p元素
+			var pArray = document.getElementsByTagName("p");
+			//2、循环遍历pArray中的每个元素
+			for(var i=0;i<pArray.length;i++){
+				pArray[i].style.fontSize="24px";
+			}
+		}
+
+		function changePoem1P(){
+			//1、获取#poem1元素
+			var poem1 = $("poem1");
+			//2、再获取#poem1中的p元素
+			var pArray=poem1.getElementsByTagName("p");
+			//3、循环遍历所有的p
+			for(var i=0;i<pArray.length;i++){
+				pArray[i].style.color="red";
+			}
+		}
+	</script>
+ </body>
+</html>

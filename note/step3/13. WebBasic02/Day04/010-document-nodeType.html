@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <input type="text" id="uname">
+	<button onclick="showNodeType()">获取uname</button>
+
+	<script>
+		function showNodeType(){
+			var uname = document.getElementById("uname");
+			console.log(uname.nodeType);
+			console.log(uname.nodeName);
+		}
+	</script>
+ </body>
+</html>

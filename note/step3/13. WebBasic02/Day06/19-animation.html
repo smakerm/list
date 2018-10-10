@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#d1{
+			width:400px;
+			height:400px;
+			background:red;
+		}
+	</style>
+	<script src="jquery-1.11.3.js"></script>
+	<script>
+		$(function(){
+			$("#btnShow").click(function(){
+				$("#d1").fadeIn(5000);
+			});
+
+			$("#btnHide").click(function(){
+				$("#d1").fadeOut(5000);
+			});
+		});
+	</script>
+ </head>
+ <body>
+	<button id="btnShow">显示</button>
+	<button id="btnHide">隐藏</button>
+  <div id="d1"></div>
+ </body>
+</html>

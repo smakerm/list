@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		function validateForm(){
+			var uname = $("uname");
+			if(uname.value.length > 0){
+				return true;
+			}
+			return false;
+		}
+	</script>
+ </head>
+ <body>
+  <form action="login" onsubmit="return validateForm()">
+		<p>
+			用户名：<input id="uname">
+		</p>
+		<p>
+			<input type="submit" value="提交">
+		</p>
+	</form>
+ </body>
+</html>

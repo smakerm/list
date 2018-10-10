@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <button id="btn">获取事件源</button>
+	<button onclick="btnClick(event)">使用元素绑定事件</button>
+	<script src="common.js"></script>
+	<script>
+		function btnClick(event){
+			console.log(this); //在普通函数中，表示的是 window 对象
+			console.log(event.target); //event.target 就是事件源
+		}
+
+		window.onload = function(){
+			$("btn").onclick = function(event){
+				console.log(this.innerHTML);
+				console.log(event.target.innerHTML);
+			}
+		}
+	</script>
+ </body>
+</html>

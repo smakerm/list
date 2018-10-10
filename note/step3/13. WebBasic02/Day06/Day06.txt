@@ -1,0 +1,450 @@
+1、事件
+	1、事件行为
+		1、load 事件
+		2、submit 事件
+			功能：表单被提交时要触发的事件
+			注意：通过一个boolean的返回值，通知表单是否被提交
+				返回值：true，可以提交表单
+				返回值：false，不能提交表单
+		3、focus 事件
+			功能：当元素获取焦点时要触发的事件
+		4、blur 事件
+	2、事件对象 (event对象)
+		1、什么是事件对象
+			事件对象中封装了事件中要用到的一些参数和一些操作
+		2、获取事件对象(event对象)
+			1、html元素中绑定事件
+				<ANY onclick="btnClick(event)">
+				<script>
+					function btnClick(event){
+						//event表示事件对象
+					}
+				</script>
+			2、使用JS动态绑定
+				<script>
+					d1.onclick=function(event){
+						
+					}
+				</script>
+		3、事件对象的常用属性
+			1、事件源
+				事件源：表示触发当前事件的元素
+				获取事件源：
+					通过 event.target 获取事件源
+					返回DOM元素
+			2、鼠标事件
+				1、offsetX，offsetY
+					获取鼠标在 元素上 的坐标点
+					以元素的左上角为(0,0)计算的
+				2、clientX，clientY
+					获取鼠标在 网页上 的坐标点
+					以文档的左上角为(0,0)计算的
+				3、screenX，screenY
+					获取鼠标在 显示器上 的坐标点
+					以显示器的左上角为(0,0)计算的
+			3、键盘事件
+				1、event.key
+					得到 按下的 字符
+
+
+				在 keypress 中  和 keydown 中
+				1、在 keypress 中 
+					event.which : 表示按下字符的ASCII码
+				2、在 keydown 中
+					event.which : 表示的 键位码 ，只记录键位，不记录字符(大小写英文字符的键位码是相同的，一些数字和标点的键位码有可能是相同的)
+		4、事件冒泡
+			1、什么是事件冒泡
+				当激发子元素的事件时，把父元素对应的事件也一并给执行了
+
+				场合：
+					1、必须是父子元素或具备层级关系的元素
+					2、为元素们设置了相同的事件
+			2、阻止事件冒泡
+				只让事件在当前元素中执行，不向上冒泡
+				event.stopPropagation();
+2、jQuery
+	1、jQuery的简介
+		是一个轻量级的JS库-是一个被封装好的JS文件。提供了更为简便的页面元素操作方式。
+
+		封装了 DOM，JS ，CSS
+
+		核心理念：Write Less Do More
+		
+		官网：https://jquery.com/
+		jQuery版本：
+			jQuery 3.3.1
+			jQuery 2.x ：不再支持IE6,7,8
+			jQuery 1.11.x
+	2、使用jQuery
+		1、引入jQuery文件
+			<script src="jquery-1.11.3.js"></script>
+			注意：引入的操作必须要放在其他jQuery操作之前
+		2、使用jQuery
+			... ...
+	3、jQuery对象
+		1、什么是jQuery对象
+			jQuery对象是由jQuery对页面元素进行封装后的一种体现
+			jQuery中所提供的所有操作都只针对jQuery对象，其他对象不能用(如:DOM对象)
+		2、工厂函数 - $()
+			想要获取jQuery对象 或 转换为jQuery对象的话，就必须要使用工厂函数
+		3、DOM对象 和 jQuery对象之间的转换
+			DOM对象：以DOM的方式获取出来的节点对象，都是DOM对象,DOM对象只能使用DOM中所提供的方法和属性，是不能访问jQuery提供的属性和方法
+
+			jQuery对象：由jQuery封装而得到的对象。jQuery对象只能访问jQuery提供的属性和方法，是不能访问DOM提供的属性和方法
+
+			1、将DOM对象转换为jQuery对象
+				语法：var $obj=$(DOM对象);
+				注意：在为jQuery对象起名的时候，最好在变量名称前 + $
+
+			2、将jQuery对象转换为DOM对象
+				1、var dom对象 = jQuery对象.get(0);
+				2、var dom对象 = jQuery对象[0];
+
+3、JS中创建对象
+	1、使用Object 直接创建对象
+		var newObj = new Object();
+		//添加属性
+		newObj.property1 = value1;
+		newObj.property2 = value2;
+		... ...
+		//添加方法
+		newObj.method1 = function(){
+			... ...
+		}
+
+		newObj.method2 = function(arg){
+			arg 就是参数
+		}
+	2、使用构造器创建对象
+		function 对象名(参数1,参数2,...){
+			
+			//只能使用this来访问或创建当前对象的成员
+			
+			//使用参数为属性赋值
+			this.属性1 = 参数1;
+			this.属性2 = 参数2;
+			//创建方法
+			this.funName = function(){
+				
+			}
+		}
+
+		使用对象
+		var obj1 = new 对象名(参数1,参数2);
+
+	3、使用JSON创建对象
+		1、什么是JSON
+			JSON：JavaScript Object Notation - JS对象表现形式
+			JSON通常会作为轻量级的数据交换格式
+
+			JSON一般表示只有属性没有方法的对象
+		2、声明JSON对象
+			0、JSON对象使用{}来表示
+			1、使用键值对的方式来声明数据的
+			2、所有的属性，必须用""引起来，如果值是字符串的话，也必须用""引起来
+			3、属性 和 值 之间用 : 隔开
+			4、多对属性之间，使用 , 隔开
+
+4、jQuery选择器
+	1、作用
+		获取页面上的元素们，返回jQuery对象所组成的数组
+		语法：$("选择器");
+	2、选择器的分类
+		1、基础选择器
+			1、ID选择器
+				用法:$("#ID值");
+				说明：返回HTML中指定ID值的元素
+			2、类选择器
+				用法;$(".className");
+				说明：返回HTML中所有class为className的元素
+			3、元素选择器
+				用法:$("元素名称");
+				说明:返回HTML中所有指定标记的元素
+			4、通用选择器
+				用法:$("*");
+				说明:返回HTML中所有的元素
+			5、群组选择器
+				用法:$("selector1,selector2,... ...")
+				说明:返回满足工厂函数内所有选择器的元素
+		2、层级选择器
+			1、$("selector1 selector2")
+					后代选择器
+			2、$("selector1>selector2")
+					子代选择器
+			3、$("selector1+selector2")
+				名称：相邻兄弟选择器
+				作用：匹配紧紧跟在selector1后面且满足selector2选择器的元素
+			4、$("selector1~selector2")
+				名称：通用兄弟选择器
+				作用：匹配selector1后面且满足selector2选	择器的所有元素
+		3、过滤选择器
+			1、基本过滤选择器
+				1、:first
+					只匹配到一组元素中的第一个
+				2、:last
+					只匹配到一组元素中的最后一个
+				3、:not(selector)
+					在一组元素中，将满足selector的元素排除出去
+				4、:odd
+					匹配 偶数行 元素(奇数索引)
+				5、:even
+					匹配 奇数行 元素(偶数索引)
+				6、:eq(index)
+					匹配下标等于 index 的元素
+					$("p:eq(0)").css();
+				7、:gt(index)
+					匹配下标大于 index 的元素
+				8、:lt(index)
+					匹配下标小于 index 的元素
+			2、内容过滤选择器
+				1、:contains("text")
+					匹配包含指定文本的元素
+					$("p:contains('佳能')")
+				2、:empty
+					匹配空元素(不包含任何子元素以及文本)
+				3、:has(selector)
+					匹配含有指定选择器的元素
+				4、:parent
+					匹配本身是父元素的元素
+			3、可见性过滤选择器
+				1、:visible
+					匹配所有的可见元素
+				2、:hidden
+					匹配所有不可见元素
+			4、状态过滤选择器
+				主要用在表单控件上
+				1、:enabled
+					匹配所有的可用元素
+				2、:disabled
+					匹配所有禁用元素
+				3、:checked
+					匹配所有被选中的元素(radio 和 checkbox)
+				4、:selected
+					匹配所有被选中的元素(select)
+			5、子元素过滤选择器
+				1、:first-child
+					匹配属于其父元素中的第一个子元素
+				2、:last-child
+					匹配属于其父元素中的最后一个子元素
+				3、:nth-child(n)
+					匹配属于其父元素中的第n个子元素
+		4、属性选择器
+			使用元素的属性来匹配页面的元素
+			1、[attr]
+				匹配具有attr属性的元素
+				ex:
+					1、匹配页面中所有有id属性的元素
+						$("[id]")
+					2、匹配页面中所有有class属性的元素
+						$("[class]")
+			2、[attr=value]
+				匹配attr属性值为value的元素
+				ex:匹配页面中所有的文本框
+					$(":text");
+					$("input[type='text']")
+			3、[attr!=value]
+			4、[attr^=value]
+				匹配attr属性值是以value字符开始的元素们
+			5、[attr$=value]
+				匹配attr属性值是以value字符结尾的元素们
+			6、[attr*=value]
+				匹配attr属性值中包含value字符的元素们
+
+5、jQuery 操作 DOM
+	1、基本操作
+		1、html()
+			等同于dom中的 innerHTML
+			作用：读取或设置jQuery对象中的HTML内容
+		2、text()
+			等同于dom中的 innerText
+			作用：读取或设置jQuery对象中的普通文本内容
+		3、val()
+			等同于dom中的 value
+			作用：读取或设置jQuery对象的value值(表单)
+		4、属性操作
+			1、attr()
+				作用：读取或设置jquery对象的属性值
+				ex:
+					$("#main").attr("id");
+					$("#main").attr("class","redBack");
+			2、removeAttr(attrName)
+				作用：删除jQuery对象的指定属性
+	2、样式操作
+		1、attr("class","className")
+			为元素动态绑定class属性值
+		2、$obj.addClass("className")
+
+			$obj.addClass("c1").addClass('c2').addClass('c3').html("测试的文本");
+		3、removeClass("className")
+			删除指定的类选择器
+		4、removeClass()
+			删除所有的类选择器
+		5、toggleClass("className")
+			切换样式
+			 元素如果具备className选择器，则删除
+			 元素如果没有className选择器，则添加
+		6、hasClass("className")
+			判断元素是否包含className选择器
+		7、css("属性","值")
+			为元素动态的设置某css属性极其值
+			$obj.css("background-color","red");
+		8、css(JSON对象)
+			$obj.css({
+				"color":"red",
+				"font-size":"32px",
+				"text-decoration":"underline"
+			});
+	3、遍历节点
+		1、children() / children(selector)
+			获取jQuery对象的所有子元素或带有指定选择器的子元素
+			注意：只考虑子元素不考虑后代元素
+		2、next() / next(selector)
+			获取jQuery对象的下一个兄弟元素 / 满足selector的下一个兄弟元素
+		3、prev() / prev(selector)
+			获取jQuery对象的上一个兄弟元素 / 满足selector的上一个兄弟元素
+		4、siblings() / siblings(selector)
+			获取jQuery对象的所有兄弟 / 满足selector的所有兄弟
+		5、find(selector)
+			查找满足selector选择器的后代元素
+		6、parent()
+			查找jQuery对象的父元素
+	4、创建 & 插入节点
+		1、创建对象
+			语法：$("创建内容");
+			ex:
+				1、创建一个div
+					var $div=$("<div></div>");
+				2、创建一个button，文本为 测试按钮
+					var $btn=$("<button>测试按钮</button>");
+		2、插入节点
+			1、内部插入
+				1、$obj.append($new);
+					将$new作为$obj的最后一个子元素插入进来
+				2、$obj.prepend($new);
+					将$new作为$obj的第一个子元素插入进来
+			2、外部插入
+				1、$obj.after($new)
+					将$new作为$obj的下一个兄弟插入进来
+				2、$obj.before($new)
+					将$new作为$obj的上一个兄弟插入进来
+	5、删除节点
+		1、remove()
+			语法：$obj.remove();
+			作用：删除$obj元素
+		2、remove("selector")
+			语法：$obj.remove("selector")
+			作用：按选择器删除元素
+		3、empty()
+			语法：$obj.emptu()
+			作用：清空$obj中所有的内容
+	6、替换 和 复制
+		1、替换
+			1、replaceWith
+				语法:$old.replaceWith($new);
+				使用$new元素替换$old元素
+			2、replaceAll
+				语法：$new.replaceAll($old);
+		2、复制
+			1、clone()
+				$new = $old.clone();
+6、jQuery 事件
+	1、页面加载后执行
+		HTML页面加载流程：
+			1、向服务器发送请求
+			2、接收服务器的响应
+			3、在内存中生成DOM树
+			4、渲染 - 显示内容到网页上
+			5、执行window.onload
+		jQuery 处理的时候
+			1、向服务器发送请求
+			2、接收服务器的响应
+			3、在内存中生成DOM树
+			4、执行 加载后的 操作
+			5、渲染 - 显示内容到网页上
+		如何实现页面加载后执行：
+		1、
+			$(document).ready( function(){
+				//页面的初始化操作
+				//DOM数加载完成后就开始执行
+			} );
+		2、
+			$().ready( function(){
+				//页面的初始化操作
+				//DOM数加载完成后就开始执行
+			} );
+		3、
+			$( function(){
+				//页面的初始化操作
+				//DOM数加载完成后就开始执行
+			} );
+	2、jQuery实现事件的绑定
+		1、方式1
+			$obj.bind("事件名称",function(){
+				//事件的操作
+				//允许使用this来表示当前元素
+			});
+
+			$obj.bind("事件名称",function(event){
+				//事件的操作
+				//允许使用this来表示当前元素
+				//允许传递event对象，作为事件对象
+			});
+		2、方式2
+			$obj.事件名称(function(){
+				//事件的操作
+				//允许使用this来表示当前元素
+			});
+
+			$obj.事件名称(function(event){
+				//事件的操作
+				//允许使用this来表示当前元素
+				//允许传递event来表示事件对象
+			})
+7、jQuery 动画
+	1、基本显示 / 隐藏
+		语法：
+			显示：$obj.show(); / $obj.show(duration);
+			隐藏：$obj.hide(); / $obj.hide(duration);
+	2、滑动式 显示/隐藏
+		语法：
+			显示：$obj.slideDown() / $obj.slideDown(duration);
+			隐藏：$obj.slideUp() / $obj.slideUp(duration);
+	3、淡入淡出式 显示/隐藏
+		语法：
+			显示：$obj.fadeIn() / $obj.fadeIn(duration)
+			隐藏：$obj.fadeOut() / $obj.fadeOut(duration)
+
+
+
+
+JSON ：
+	JavaScript Object Notation
+	JSON是一种轻量级的数据交换格式
+
+	声明JSON格式的对象：
+		1、JSON格式的对象使用 {}
+		2、使用键值对的方式来声明数据
+			键 - 表示该对象的属性
+			值 - 表示该对象的值
+		3、属性的属性(键)，必须用""引起来，值也是字符串的话也需要使用""引起来
+		4、属性 和 值之间使用 : 隔开
+		5、多对属性之间，使用 , 隔开
+
+		var obj = {
+			"name":"sanfeng.zhang",
+			"age":"30",
+			"gender":"男"
+		};
+
+
+
+
+setAttribute(attrName,attrValue)
+getAttribute(attrName)
+removeAttribute(attrName)
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+/*定义所有p元素的样式*/
+p{
+	color:orange;
+	background-color:green;
+	font-size:48px;
+}

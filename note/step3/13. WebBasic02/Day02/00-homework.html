@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		//1、从弹框中录入一个字符
+		var c = prompt("请输入一个字符:");
+		//2、判断是否为数字
+		var isNum = c >= '0' && c <= '9';
+		//3、判断是否为英文
+		//3.1 判断是否为小写英文
+		var isSmall = c >= 'a' && c <= 'z';
+		//3.2 判断是否为大写英文
+		var isCaps = c >= 'A' && c <= 'Z';
+		//3.3 用一个变量保存是否为英文
+		var isENG = isSmall || isCaps;
+		//4、判断是否为汉字
+		var isCHN = c >= '\u4e00' && c <= '\u9fa5';
+		//5、根据判断结果打印输出
+		if(isNum){
+			console.log(c+"是一个数字");
+		}else if(isENG){
+			console.log(c+"是一个英文字符");
+		}else if(isCHN){
+			console.log(c+"是一个汉字");
+		}else{
+			console.log(c+"是其他字符");
+		}
+	</script>	
+ </body>
+</html>

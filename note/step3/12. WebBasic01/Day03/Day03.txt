@@ -1,0 +1,343 @@
+1、列表
+	<ol></ol> -- 有序
+		type ：1，a，A，i，I
+	<ul></ul> -- 无序
+		type ：disc,circle,square,none
+		<li></li> -- 列表项
+2、图片 和 超链接
+	1、url
+		1、绝对路径
+		2、相对路径
+			1、同目录，直接找
+			2、子目录，先进入
+			3、父目录，先返回(../)
+		3、根相对路径
+	2、图片
+		标记：<img>
+		属性：
+			1、src ：图片路径
+			2、width
+			3、height
+	3、超链接
+		标记：<a>内容</a>
+		属性：
+			1、href
+			2、target
+				1、_self : 在自身标签页中打开新网页
+				2、_blank : 在新标签页中打开新网页
+3、表格
+	1、语法
+		表格：<table></table>
+		表行：<tr></tr>
+		单元格：<td></td>
+	2、属性
+		表格：
+			1、width
+			2、height
+			3、align
+			4、border
+			5、cellspacing
+			6、cellpadding
+		表行：
+			1、align
+			2、valign
+			3、bgcolor
+		单元格：
+			1、width
+			2、height
+			3、align
+			4、valign
+			5、bgcolor
+			6、colspan
+				指定单元格跨列
+				从指定单元格位置处开始，横向向右合并几个单元格，被合并掉的要删除
+			7、rowspan
+				指定单元格跨行
+				从指定单元格位置处开始，纵向向下合并几个单元格，被合并掉的要删除
+	3、行分组
+		1、表头行分组
+			<thead></thead>
+		2、表主体行分组
+			<tbody></tbody>
+		3、表尾行分组
+			<tfoot></tfoot>
+4、表单
+	1、form元素
+		1、作用
+			收集用户信息并提交给服务器
+		2、语法
+			标记：<form></form>
+			属性：
+				1、action
+					提交给服务器上处理程序的地址
+				2、method
+					提交方式
+					get , post 
+				3、enctype
+					1、application/x-www-form-urlencoded
+						默认值
+					2、multipart/form-data
+						提交文件
+					3、text/plain
+	2、表单控件
+		1、文本框 与 密码框
+			文本框:<input type="text">
+			密码框:<input type="password">
+			属性：
+				1、name
+					为控件定义名称，如果不声明name属性，则无法提交
+				2、value
+					提交的值
+				3、maxlength
+					限制输入的最大字符数			
+				4、placeholder
+					占位符，
+		2、按钮
+			<input type="submit"> : 提交按钮
+			<input type="reset"> : 重置按钮
+			<input type="button"> : 普通按钮
+
+			<button>按钮上的文字</button>
+				type:submit/reset/button
+===============================================
+1、表单
+	1、表单控件
+		1、单选按钮 和 复选框
+			单选按钮：<input type="radio">
+			复选框：<input type="checkbox">
+			
+			属性：
+				1、name
+					为控件定义名称。除了定义名称之外，name属性也起到了分组的作用。
+					一组的单选按钮和复选框，名称必须一致
+				2、value
+					定义控件的值，当用户选中控件的时候，则将该控件的value提交给服务器
+				3、checked
+					设置预选中，该属性无值
+		2、隐藏域 和 文件选择框
+			1、隐藏域
+				作用：想提交给服务器但不想给用户看的数据要放在隐藏域中
+				语法：
+					<input type="hidden">
+				属性：
+					name ：定义控件的名称
+					value：定义控件的值
+			2、文件选择框
+				<input type="file">
+				属性：
+					name ：定义控件名称
+				注意：
+					1、表单的method必须为post
+					2、表单的enctype必须为multipart/form-data
+		3、多行文本域	
+			标记：<textarea></textarea>
+			属性：
+				1、name ：定义控件名称
+				2、cols ：指定文本域的列数(一行中最多能显示多少个英文字符，中文减半)
+				3、rows ：指定文本的默认行数
+		4、下拉选项框
+			<select name="">
+				<option value="值1">显示内容1</option>
+				<option value="值2">显示内容2</option>
+				<option value="值3">显示内容3</option>
+			</select>
+===============================================
+CSS
+1、CSS介绍	
+	CSS：Cascading Style Sheets - 样式表
+		HTML ：搭建网页结构
+		CSS ：在网页结构基础上进行网页的美化
+2、CSS的使用方式（重点）
+	1、内联方式
+		将CSS内容定义在单独的HTML元素中
+		语法：
+			<ANY style="样式声明">
+			样式声明：
+				1、每个样式声明都是由样式属性名称和样式属性值来组成的
+				2、属性名称和属性值之间使用 : 连接
+					属性名:值
+				3、在一个style中允许出现多个样式声明，多个样式声明之间使用 ; 来分割
+					<ANY style="属性1:值1;属性2:值2;">
+				常用的属性和值：
+					1、文字大小
+						属性：font-size
+						取值：以 px 为单位的数值
+						ex：设置某div的文字大小为 24px
+						<div style="font-size:24px;">xxx</div>
+					2、文本颜色
+						属性：color
+						取值：表示颜色的英文单词
+					3、背景颜色
+						属性：background-color
+						取值：表示颜色的英文单词
+					练习：
+						在 03-css.html基础上，增加以下样式：
+						1、文本颜色为 红色(red)
+						2、背景颜色为 黄色(yellow)
+	2、内部样式表
+		1、作用
+			让定义好的样式适用在多个元素中
+		2、语法
+			<head>
+				<style>
+					样式规则1
+					样式规则2
+					...
+					样式规则n
+				</style>
+			</head>
+
+			样式规则：
+				由选择器 和 样式声明 组成
+				选择器：规范了页面中哪些元素能够使用声明好的样式
+				选择器{
+					样式声明1;
+					样式声明2;
+				}
+				ex:
+				div{
+					font-size:24px;
+				}
+				p{
+					color:blue;
+				}
+				练习：
+					在 03-css.html 基础上
+					使用内部样式表，设置页面中所有的div元素，文字大小为24px，文本颜色为红色，背景颜色为 黄色
+	3、外部样式表
+		1、作用
+			让声明好的样式能够适用在多个网页中
+
+			将样式规则声明在独立的css文件中(xxx.css)
+			在使用的网页上对xxx.css文件进行引用
+			<head>
+				<link rel="stylesheet" href="css文件路径">
+			</head>
+3、CSS样式表的特征
+	1、继承性
+		大部分的css属性是可以由父元素继承给子元素的
+	2、层叠性
+		允许为一个元素定义多种使用方式(内联，内部样式表，外部样式表)。如果定义的属性不冲突的话，那么所有的属性都可以应用到元素上
+	3、优先级
+		如果样式属性声明冲突的华，则按照不同的优先级来应用样式
+
+		浏览器缺省设置     ：    低
+		内部或外部样式表   ：    中
+			就近原则 ：后定义者优先
+		内联方式           ：     高
+	调错：
+		1、Unknown property name 
+			样式属性名称写错了
+		2、Invalid property value
+			样式属性值写错了
+4、CSS选择器(重难点)
+	1、选择器的作用
+		规范了页面中哪些元素能够使用声明好的样式
+		目的：为了匹配页面中的元素
+	2、选择器详解
+		1、元素选择器
+			特点：由元素名称作为选择器，目的是为了匹配页面中指定元素名称的所有标记
+			语法：
+				元素名{
+					... ...
+				}
+			ex:
+				div{ ... } /*匹配页面中所有的div*/
+				span{ ... } /*匹配页面中所有的span元素*/
+				h1{ ... }/*匹配页面中所有的h1元素*/
+		2、类选择器
+			特点：允许被页面上任意一个元素所引用
+			语法：
+				.类名{ ... }
+				ex:
+					1、.redColor{color:red;}
+					2、.top{font-size:24px;}
+				类名：
+					字母，数字，下划线(_),- 组成
+					数字不能开头
+
+				引用类选择器：
+					<ANY class="类名">
+				ex:
+					1、<div class="redColor"></div>
+
+			特殊用法：
+				1、分类选择器的定义方式
+					1、特点
+						允许将元素选择器和类选择器结合到一起使用，目的是为了实现对某种元素不同样式的细分控制
+					2、语法
+							元素选择器.类选择器{
+								... ...
+							}
+
+						ex:
+							div.redBack{ color:red; }
+							匹配：class为redBack的div元素
+				2、多类选择器的引用方式
+					让一个元素引用多个类选择器，多个类选择器名称间用 空格 隔开
+					<ANY class="sel1 sel2 sel3">
+		3、id选择器
+			1、id
+				在HTML中，每个元素都可以声明一个 id 属性，取值在网页中必须是独一无二的，不能重复的。
+			2、id选择器的作用
+				为了匹配页面中指定id值的元素
+			3、id选择器的语法
+				#ID值{ ... }
+				ex:
+					1、#main{  ...  }
+						匹配页面中id为main的元素
+		4、群组选择器
+			1、作用
+				定义多个选择器们共有的样式
+				声明方式是一个以 , 隔开的选择器列表
+			2、语法
+				选择器1,选择器2,选择器3,...{
+					... ...
+				}
+				ex:
+					#main,span,.redColor,div.top{
+						color:red;
+					}
+					等价于：
+					#main{color:red}
+					span{color:red}
+					.redColor{color:red}
+					div.top{color:red}
+		5、后代选择器
+			1、作用
+				依托于元素的后代关系来匹配某元素的后代元素(不限制层级)
+			2、语法
+				选择器1 选择器2{}
+				ex:
+				1、div span{
+						匹配所有的div中的所有的span
+				   }
+				2、#top .important{
+					  匹配id为top中所有class为important的元素
+				   }
+		6、子代选择器
+			1、作用
+				依托于元素的子代关系来匹配元素(只有一层层级)
+			2、语法
+				选择器1>选择器2{ ... }
+				ex:
+					#main>.important{
+						匹配id为main元素中直接子级class为important的元素
+					}
+		7、伪类选择器
+			1、作用
+				为了匹配元素不同状态的选择器
+			2、语法
+				:伪类状态{}
+				通常会配合其他选择器一起使用
+				选择器:伪类状态{}
+				1、链接伪类
+					1、:link
+						匹配超链接未被访问时的状态
+					2、:visited
+						匹配超链接被访问过后的状态
+				2、动态伪类
+					1、:hover
+						匹配当鼠标悬停在元素上时的状态
+					2、:active
+						匹配当元素被激活时的状态

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/remark/" method="post">
+        {%csrf_token%}
+        {%for field in form%}
+            <p>{{field.label}}:{{field}}</p>
+        {%endfor%}
+        <p><input type="submit" value="提交"></p>
+    </form>
+
+   <!-- <h3>form.as_table</h3>
+    <form action="/remark/" method="post">
+        {{form.as_table}}
+    </form>
+    <h3>手动解析</h3> -->
+</body>
+</html>

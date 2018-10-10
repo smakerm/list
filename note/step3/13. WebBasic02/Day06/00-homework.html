@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		#tbl{
+			width:500px;
+			border:1px solid #000;
+			border-collapse:collapse;
+		}
+
+		#tbl td{
+			border:1px solid #000;
+		}
+	</style>
+ </head>
+ <body>
+  <p>
+		<input id="gname" placeholder="商品名称">
+		<input id="gprice" placeholder="商品价格">	
+		<input id="gcount" placeholder="购买数量">
+		<button onclick="btnAdd()">增加</button>
+	</p>
+	<table id="tbl">
+		<thead>
+			<tr>
+				<td>商品名称</td>
+				<td>商品价格</td>
+				<td>购买数量</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody id="tbody"></tbody>
+	</table>
+
+	<script src="common.js"></script>
+	<script>
+		function btnAdd(){
+			//1、获取三个文本框的值
+			var gname = $("gname").value;
+			var gprice = $("gprice").value;
+			var gcount = $("gcount").value;
+			//2、创建四个td，分别将文本框的值赋进去，最后一个td中装2个按钮
+			var tdName = document.createElement("td");
+			tdName.innerHTML = gname;
+			var tdPrice = document.createElement("td");
+			tdPrice.innerHTML = gprice;
+			var tdCount = document.createElement("td");
+			tdCount.innerHTML = gcount;
+			var tdOper = document.createElement("td");
+			//创建删除按钮
+			var btnDelete = document.createElement("button");
+			btnDelete.innerHTML = "删除";
+			//为删除按钮绑定 click 事件
+			btnDelete.onclick = function(){
+				if(confirm("确定删除该行数据吗?")){
+					//找 tbody
+					var tbody = $("tbody");
+					//找 当前删除按钮所在的行
+					var tr = this.parentNode.parentNode;
+					//由 tbody 删除 行
+					tbody.removeChild(tr);
+				}
+			}
+			//创建修改按钮
+			var btnUpdate = document.createElement("button");
+			btnUpdate.innerHTML = "修改";
+			//为修改按钮绑定事件
+			btnUpdate.onclick = function(){
+				if(this.innerHTML == "修改"){
+					this.innerHTML = "确定";
+					//1、查找 修改按钮所在行的 商品数量的td及其值
+					var td = this.parentNode.previousElementSibling;
+					var value = td.innerHTML;
+					//2、创建 - 按钮 ，文本框，+按钮
+					var btnReduce = document.createElement("button");
+					btnReduce.innerHTML = "-";
+					//为 btnReduce绑定click事件
+					btnReduce.onclick = function(){
+						var tNum = this.nextElementSibling;
+						var v = Number(tNum.value);
+						if(v <= 1){
+							v = 1;
+						}else{
+							v--;
+						}
+						tNum.value = v;
+					}
+
+					var txtNum = document.createElement("input");
+					txtNum.setAttribute("value",value);
+
+					var btnAdd = document.createElement("button");
+					btnAdd.innerHTML = "+";
+					//为 btnAdd 绑定 click 事件
+					btnAdd.onclick = function(){
+						var tNum = this.previousElementSibling;
+						var v = Number(tNum.value);
+						tNum.value = ++v;
+					}
+
+					td.innerHTML = "";
+					td.appendChild(btnReduce);
+					td.appendChild(txtNum);
+					td.appendChild(btnAdd);
+				}else{
+					//执行确定的操作
+					this.innerHTML = "修改";
+					//找到 当前按钮的 父元素 的 上一个兄弟元素中的 input 元素
+					var tNum = this.parentNode.previousElementSibling.getElementsByTagName("input")[0].value;
+
+					this.parentNode.previousElementSibling.innerHTML = tNum;
+					
+				}
+			}
+			tdOper.appendChild(btnDelete);
+			tdOper.appendChild(btnUpdate);
+			//3、创建一个tr，将四个td保存进去
+			var tr = document.createElement("tr");
+			tr.appendChild(tdName);
+			tr.appendChild(tdPrice);
+			tr.appendChild(tdCount);
+			tr.appendChild(tdOper);
+			//4、将tr保存进 tbody 中
+			$("tbody").appendChild(tr);
+		}
+	</script>
+ </body>
+</html>

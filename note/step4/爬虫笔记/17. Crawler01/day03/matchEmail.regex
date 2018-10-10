@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ProjectOptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RegexName>matchEmail</RegexName>
+  <RegexDescription />
+  <RegexText>^\w*@\w*\.[^@]*$</RegexText>
+  <ReplaceText />
+  <SourceText>quickzhao3223@hotmail.com
+394996257@qq.com
+394996257@qq.c@om
+</SourceText>
+  <Command>Find</Command>
+  <RegexOptions>Multiline</RegexOptions>
+  <Detail>Groups</Detail>
+  <MaxMatches>1000</MaxMatches>
+  <Sort>Position</Sort>
+  <WordWrap>true</WordWrap>
+  <Format>Auto</Format>
+  <IncludeEmptyGroups>true</IncludeEmptyGroups>
+  <Language>VisualBasic</Language>
+  <VerbatimStrings>false</VerbatimStrings>
+  <InstanceMethods>true</InstanceMethods>
+  <AssumeImports>true</AssumeImports>
+  <GenerateLoop>true</GenerateLoop>
+  <IncludeComment>true</IncludeComment>
+  <CopyCodeOnExit>true</CopyCodeOnExit>
+</ProjectOptions>

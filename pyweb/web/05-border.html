@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>border</title>
+    <style>
+        #d1{
+            width: 300px;
+            height: 40px;
+            border:1px solid #ddd;
+            border-top: 1px solid #000;
+            border-left: 2px dotted #f00;
+        }
+
+        #search{
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+        }
+
+        {#箭头#}
+        #d2{
+            width: 0px;
+            height: 0px;
+            border: 10px solid transparent;
+            border-top-color: #DDDDDD;
+        }
+
+        {#圆角#}
+        #d3{
+            width: 100px;
+            height: 200px;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+
+        {#画圆#}
+        #d4{
+            width: 200px;
+            height: 200px;
+            border: 2px solid #000;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="d1"></div>
+    <br><br>
+    <div id="d2"></div>
+    <input type="text" id="search">
+    <br><br><br>
+    <div id="d3"></div>
+    <br>
+    <div id="d4"></div>
+</body>
+</html>

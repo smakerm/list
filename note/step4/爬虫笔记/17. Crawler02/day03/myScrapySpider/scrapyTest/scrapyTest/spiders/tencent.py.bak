@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+import scrapy
+
+
+class TencentSpider(scrapy.Spider):
+    name = 'tencent'
+    allowed_domains = ['hr.tencent.com']
+	# 这里来确定哪些urls会把抓取
+    start_urls = ['https://hr.tencent.com/position.php?keywords=python&lid=2156&tid=0&start=0#a']
+
+    def parse(self, response):
+        """
+		接受到框架返回的抓取结果
+		提取真正要抓取的信息
+		"""
+		for e
+
+

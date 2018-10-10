@@ -1,0 +1,3 @@
+/etc/pam.d/passwd
+/etc/cron.daily/passwd
+/etc/passwd

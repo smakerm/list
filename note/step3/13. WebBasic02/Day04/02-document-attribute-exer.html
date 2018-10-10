@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <a id="anchor" href="http://www.baidu.com">百度</a>
+	<button onclick="change()">修改</button>
+	<script>
+		function change(){
+			var a = document.getElementById("anchor");
+			a.setAttribute("href","http://www.qq.com");
+			a.innerHTML="腾讯";
+		}
+	</script>
+ </body>
+</html>

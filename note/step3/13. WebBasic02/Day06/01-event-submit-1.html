@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		window.onload = function(){
+			$("formLogin").onsubmit = function(){
+				if($("uname").value.length > 0){
+					return true;
+				}
+				return false;
+			}
+		}
+	</script>
+ </head>
+ <body>
+  <form action="login" id="formLogin">
+		<p>
+			用户名：<input id="uname">
+		</p>
+		<p>
+			<input type="submit">
+		</p>
+	</form>
+ </body>
+</html>

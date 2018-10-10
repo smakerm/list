@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <input type="text" id="uname">
+	<button onclick="btnValidate()">验证</button>
+	<div id="uname-show"></div>
+	<script src="common.js"></script>
+	<script>
+		function btnValidate(){
+			//1、获取uname的value的长度
+			var len = $("uname").value.length;
+			//2、验证长度是否在6-18位之间
+			if(len>=6 && len <= 18){
+				$("uname-show").innerHTML = "通过";
+				$("uname-show").style.color="green";
+			}else{
+				$("uname-show").innerHTML = "用户名必须在6-18位之间";
+				$("uname-show").style.color='red';
+			}
+		}
+	</script>
+ </body>
+</html>

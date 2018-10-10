@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testToString(){
+			var names = ["李白","杜甫","李清照","白居易"];
+			console.log(names);
+			console.log(names.toString());
+			console.log(names.join('and'));
+		}
+
+		function testConcat(){
+			var name1 = ["潘金莲","李师师","鄢颇系"];
+			var name2 = ["刘姥姥","林黛玉","王熙凤"];
+			var name3 = ["大乔","小乔","貂蝉"];
+			var newArr=name1.concat(name2,name3);
+			console.log(newArr);
+		}
+
+		function decode2Bin(){
+			var num = Number(prompt("请输入一个数字:"));
+			var arr = [];
+			//循环获取 num 与 2的余数，并保存进arr，再将num/2变为整数后再赋值给 num
+			while(num > 0){
+				//1、获取 num 与 2 的余数
+				var yu = num % 2;
+				//2、将yu保存进 arr 数组中
+				arr[arr.length] = yu;
+				//3、将 num / 2 取整，再赋值给 num
+				num=parseInt(num / 2);
+			}
+			//将 arr 进行反转
+			arr.reverse();
+			console.log(arr.join(""));
+		}
+
+
+		/**
+		 * 声明一个 升序的排序函数
+		 */
+		function sortAsc(a,b){
+			return a-b;
+		}
+
+		function testSort(){
+			var nums = [38,6,121,76,65,23,1128];
+			console.log("排序前:"+nums);
+			//nums.sort(sortAsc); //升序排序
+
+			//使用匿名函数完成降序排序
+			nums.sort( function(a,b){
+				return b-a;
+			} );
+			console.log("排序后:"+nums);
+		}
+
+		function testStack(){
+			var names = ["张无忌","张翠山"];
+			console.log("原始数组:"+names);
+			//1、向names数组中追加新元素 张三丰
+			var len = names.push("张三丰");
+			console.log("新数组:"+names);
+			console.log("长度:"+len);
+			//2、向数组头部增加一个新匀速 赵敏
+			len = names.unshift("赵敏");
+			console.log("新数组:"+names);
+			console.log("长度:"+len);
+			//3、删除names头部和尾部的元素
+			var delFirst = names.shift();
+			var delLast = names.pop();
+			console.log("数组:"+names);
+			console.log("删除:"+delFirst);
+			console.log("删除:"+delLast);
+		}
+	</script>
+	<button onclick="testToString()">测试toString()</button>
+	<button onclick="testConcat()">测试concat</button>
+	<button onclick="decode2Bin()">十进制转二进制</button>
+	<button onclick="testSort()">测试排序</button>
+	<button onclick="testStack()">测试栈式操作</button>
+ </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <!-- <script>
+  		var num = Number(prompt("请输入一个数字："));
+  		for(var i=2;i<num;i++){
+  			if(num % i == 0){
+  				console.log("不是素数!");
+  				break;
+  			}
+  		}
+  		if(num == i){
+  			console.log("是素数!");
+  		}
+  	</script> -->
+
+		<!-- <script>
+			var num = Number(prompt("请输入一个数字："));
+			var isSu = true;
+		  		for(var i=2;i<num/2;i++){
+		  			if(num % i == 0){
+		  				isSu = false;
+		  				break;
+		  			}
+		  		}
+			if(isSu){
+				console.log(num+"是素数");
+			}else{
+				console.log(num+"不是素数");
+			}
+		</script> -->
+
+		<script>
+			var line = Number(prompt("请输入要打印的行数:"));
+			var msg = "";
+			for(var i=1;i<=line;i++){
+				msg += i+"*"+line+"="+i*line+"\t";
+			}
+			console.log(msg);
+		</script>
+ </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function testScreen(){
+			var w = screen.width;
+			var h = screen.height;
+			alert("宽度:"+w+",高度:"+h);
+			var aw = screen.availWidth;
+			var ah = screen.availHeight;
+			alert("可用宽度:"+aw+",可用高度:"+ah);
+		}
+
+		function testLocation(){
+			alert("5秒钟之后，跳转到百度");
+			setTimeout(function(){
+				location.href="http://www.baidu.com";
+			},5000);
+		}
+			
+	</script>
+	<button onclick="testScreen()">测试Screen</button>
+	<button onclick="testLocation()">测试Location</button>
+ </body>
+</html>

@@ -1,0 +1,182 @@
+什么是七层模型
+tcp 和udp区别
+三次握手和四次挥手
+**************************************************
+
+tcp 数据传输
+
+* recv会不断得取出缓冲区中内容，如果一次没有拿完，那么下次会继续收取没拿完的消息
+
+tcp 粘包
+指的是发送方发送若干次数据的时候，因为是数据流的传输方式，导致数据粘连在一起，接收方一次将多次发送的数据一起接收，产生接受数据的粘连
+
+粘包是tcp传输特有的现象，因为tcp传输没有消息边界。如果是发送连续的内容比如文件等则粘包没有影响。如果是每次发送为单独需要处理内容则需要处理粘包
+
+如何处理粘包
+1.将消息格式化
+2.发送消息的同时发送一个消息长度标识
+3.让消息的发送延迟，使接收端每次都能够有时间接受一个消息
+
+
+UDP 数据表套接字服务器
+
+面向无连接的不可靠的传输服务
+
+1. 创建数据报套接字
+2. 绑定本地IP和端口
+3. 收发消息
+
+recvfrom(BUFFERSIZE)
+功能 ： 在udp中接受消息
+参数 ： buffersize 表示一次最多可以接收多少字节的消息
+返回值 ： data ：接收到的消息
+          addr ：表示从哪个客户端接收到的消息
+
+sendto(data,addr)
+功能：向一个网络终端发送消息
+参数： data 要发送的消息（bytes）
+       addr 发送对象的地址
+
+
+4. 关闭套接字
+
+import  sys  
+sys.argv : 将命令行内容收集为一个列表，每一个元素是命令行中的一项 
+* 命令行传入的内容均为str格式
+* 命令行内容以空格作为分割， 引号可以合成一个整体
+
+udp 客户端
+
+1.创建数据报套接字
+2.消息收发
+3.关闭套接字
+
+* recvfrom每次之能接受一个数据包，如果数据包的大小超过recvfrom的设置大小则会出现数据丢失
+
+总结 tcp和udp的区别
+1. tcp是有连接的，udp是无连接的
+2. tcp有三次握手四次挥手的过程，udp没有
+3. tcp是以数据流传输数据，会有粘包，udp是数据报的形式没有占粘包
+4. tcp的连接需要消耗一定的资源，相比之下udp资源消耗少
+5. tcp保证数据的可靠性，udp不保证
+6. tcp需要listen  accept  connect ，udp不需要这些操作
+
+
+socket模块
+
+套接字属性
+getpeername()
+功能： 用作服务器连接套接字，查看连接的客户端地址
+getsockname()
+功能： 获取套接字对应的绑定的地址和端口
+
+s.type 套接字类型
+
+fileno() 
+功能 ： 获取套接字的文件描述符号码
+文件描述符 ： 系统会给进程中的每一个IO操作对象非配一个>=0的正整数作为标号，我们称之为该IO操作的文件描述符。一个进程中所有IO的文件描述符不会重复
+
+ setsockopt(level，optname，value)
+ 功能 ： 设置套接字选项  可以增加或改变套接字的功能
+ 参数 ： level  要定义的选项类型
+					e.g.  SOL_SOCKET    IPPROTO_IP   IPPROTO_TCP
+				 
+				 optname  每种类型都有具体的选项 根据具体需求选择选项          进行设置
+					e.g.   SOL_SOCKET ----> SO_REUSERADDR
+
+				 value   将选择的现象设置为什么值
+
+
+getsockopt(level，optname)
+功能：获取相应选项的值
+参数 ： level  要获取的选项类型
+								 
+				optname  每种类型都有具体的选项 根据具体需求选择要获        取的选项
+返回值：获取到的值
+
+
+socket服务器模型
+
+硬件服务器 ： 计算机主机  IBM  HP  
+
+集成   分布式
+
+
+软件服务器 ： 网络服务器，提供后端逻辑服务和请求处理的程序集合及架构 
+例如  web服务器等
+
+服务器架构   c/s    b/s   服务器的组织形式
+
+服务器追求 ： 更快速， 更安全，并发量更大
+
+
+循环服务器模型
+
+循环处理客户端的请求，处理完一个继续处理下一个
+
+缺点 ： 不能同时处理多个请求，不允许某个客户端长期占用服务器资源
+
+因为udp不需要进行连接，所以循环服务器模型更加适合udp通信
+
+
+并发服务器模型
+
+每有一个客户端就创建一个 进程/线程处理客户端的具体请求事情，而主进程/主线程 继续接收其他客户端的连接
+
+fork 
+1、创建套接字  绑定  监听
+2. 接收客户端连接请求  创建新的进程
+3. 主进程继续接收下一个客户端连接请求，子进程处理客户端事件
+4、有客户端断开则关闭响应的子进程
+
+threading
+1、创建套接字  绑定  监听
+2. 接收客户端连接请求  创建新的线程
+3. 主线程继续接收下一个客户端连接请求，分支线程处理客户端事件
+
+
+socketserver 模块   （python2  SocketServer）
+
+'DatagramRequestHandler',
+'ForkingMixIn',
+'ForkingTCPServer',
+'ForkingUDPServer',
+'StreamRequestHandler',
+'TCPServer',
+'ThreadingMixIn',
+'ThreadingTCPServer',
+'ThreadingUDPServer',
+'UDPServer',
+
+三部分 
+
+ 多进程/多线程     TCP/UDP      streamhandler/datagramhandler
+
+ ForkingMixIn      TCPServer     StreamRequestHandler
+
+ ThreadingMixIn    UDPServer     DatagramRequestHandler
+
+
+'ThreadingTCPServer' =  ThreadingMixIn  +  TCPServer
+'ThreadingUDPServer',= ThreadingMixIn  +   UDPServer
+'ForkingTCPServer',  = ForkingMixIn   +  TCPServer
+'ForkingUDPServer', = ForkingMixIn   +  UDPServer 
+
+步骤
+#创建服务器类
+#创建处理类
+#使用创建的服务器类来生产服务器
+
+作业 ： 
+ftp文件服务程序
+
+服务端    客户端 
+
+功能 ： 展示服务端指定目录下的文件
+        可以从服务器下载文件
+				可以上传本地文件到服务器目录
+
+提示 ： 客户端可以用print打印一个简单界面
+        注意粘包的问题 文件传输最好用tcp
+
+

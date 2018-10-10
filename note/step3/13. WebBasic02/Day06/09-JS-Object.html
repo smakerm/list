@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		var person = new Object();
+		//属性
+		person.name = "张无忌";
+		person.age = 28;
+		person.gender = "男";
+		//方法
+		person.show = function(){
+			//通过 this 表示当前的对象本身
+			console.log("Hell,my name is "+this.name);
+		}
+
+		person.show();
+	</script>
+ </body>
+</html>

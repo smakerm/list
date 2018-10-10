@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		/**
+		 * 生成 n 位的验证码
+		 * n : 表示要成的位数
+		 * 返回值：按要求生成的验证码
+		 */
+		function generalCode(n){
+			var code = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','A','B','C','D','E'];
+			var str = "";
+			for(var i=0;i<n;i++){
+				//随机生成 0-(code.length-1) 的验证码
+				var r = parseInt(Math.random() * code.length);
+				str += code[r];
+			}
+			return str;
+		}	
+		
+		function testValidateCode(){
+			var str = generalCode(6);
+			var input = prompt("请输入以下验证码:"+str);
+			if(input.toUpperCase() == str.toUpperCase()){
+				alert("验证通过");
+			}else{
+				alert("验证失败");
+			}
+		}
+		
+		/**
+		 * 使用 indexOf 和 lastIndexOf 验证邮箱格式
+		 */
+		function validateEmail(){
+			var email = prompt("请输入电子邮箱:");
+			var atIndex = email.indexOf("@");
+			var dotIndex = email.indexOf(".");
+			var lastDotIndex = email.lastIndexOf(".");
+			if(atIndex >= 0 && dotIndex >= 0 && lastDotIndex > atIndex){
+				alert("格式正确");
+			}else{
+				alert("格式错误");
+			}
+		}
+
+		function testSubstring(){
+			var email = "sanfeng.zhang@sina.com";
+			var uname = email.substring(0,email.indexOf("@"));
+			console.log("用户名为:"+uname);
+			var server = email.substring(email.indexOf("@")+1,email.lastIndexOf("."));
+
+			console.log("服务商名称："+server);
+		}
+	</script>
+	<button onclick="testValidateCode()">验证码</button>
+	<button onclick="validateEmail()">验证邮件</button>
+	<button onclick="testSubstring()">截取子字符串</button>
+ </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="container">
+		<p class="title">静夜思</p>
+		<p class="ct">床前明月光</p>
+		<p class="ct">疑是地上霜</p>
+		<p class="ct">举头望明月</p>
+		<p class="ct">低头思故乡</p>
+	</div>
+	<button onclick="changeTitle()">修改 title </button>
+	<button onclick="changeCt()">修改 ct </button>
+	<script src="common.js"></script>
+	<script>
+		function changeTitle(){
+			var container = $("container");
+			var tArray = container.getElementsByClassName("title");
+			tArray[0].style.color="red";
+			tArray[0].style.fontSize="32px";
+			tArray[0].style.fontWeight="bold";
+		}
+		/*修改所有.ct，加粗，下划线，红色字*/
+		function changeCt(){
+			var container = $("container");
+			var pArray = container.getElementsByClassName("ct");
+			for(var i=0;i<pArray.length;i++){
+				var ct = pArray[i];
+				ct.style.fontWeight="bold";
+				ct.style.textDecoration="underline";
+				ct.style.color="red";
+			}
+		}
+	</script>
+ </body>
+</html>

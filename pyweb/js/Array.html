@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array</title>
+</head>
+<body>
+    <script>
+        function saveName(){
+            var nums = [];
+            while(true){
+                var num = window.prompt('请输入数据:');
+                if("exit" == num){
+                    break;
+                }
+                nums[nums.length] = num;
+                console.log(nums.length);
+            }
+
+            console.log(nums);
+        }
+
+        function findMax(){
+            var nums = [8542,84,6851,-518,15];
+            maxNum = nums[0];
+            for (i in nums){
+                if(i > maxNum){
+                    maxNum = i;
+                }
+            }
+            console.log(maxNum);
+        }
+        function testConcat(){
+            var name1 = ['a','b','c','d'];
+            var name2 = ['1','2','3'];
+
+        }
+
+    </script>
+
+    <button onclick="saveName()">录入数据</button>
+    <button onclick="findMax()">找最大</button>
+</body>
+</html>

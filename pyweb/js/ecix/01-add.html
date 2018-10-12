@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .counter{
+            margin-top:10px;
+        }
+
+        .counter button{
+            width: 30px;
+            height: 30px;
+            border: 1px solid #7bbc44;
+            background: #7bbc44;
+            outline: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: yellow;
+            border-radius: 5px;
+            vertical-align: bottom;
+        }
+
+        .counter #num{
+            width:50px;
+            height: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            margin:0 5px 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="counter">
+        <button onclick="sub()">-</button>
+        <input type="text" id="num" value="1" onkeyup="value=value.replace(/[^0-9]/g,'')" onpaste="value=value.replace(/[^0-9]/g,'')" oncontextmenu = "value=value.replace(/[^0-9]/g,'')">
+        <button onclick="add()">+</button>
+    </div>
+
+
+    <script>
+        function add(){
+            var num = document.getElementById("num");
+            num.value++;
+        }
+        function sub(){
+            var num = document.getElementById("num");
+            if(num.value > 0){
+                num.value--;
+            }
+        }
+    </script>
+</body>
+</html>

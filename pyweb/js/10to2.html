@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10to2</title>
+</head>
+<body>
+    <script>
+        function ten2bin(){
+            var num = window.prompt();
+            var arr = [];
+            while (num > 0){
+                var yu = num % 2;
+                arr[arr.length] = yu;
+                num = parseInt(num / 2);
+            }
+            arr.reverse();
+            console.log(arr.join(''));
+        }
+    </script>
+
+    <button onclick="ten2bin()">click</button>
+</body>
+</html>

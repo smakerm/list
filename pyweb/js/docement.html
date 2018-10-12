@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>docement</title>
+</head>
+<body>
+    <script>
+        function getDiv(){
+            var div = document.getElementById("container");
+
+            div.innerHTML = "<p> 这是P标签 </p>";
+        }
+
+        function getUname(){
+            var uname = document.getElementById('uname');
+            console.log(uname.value);
+        }
+
+    </script>
+
+
+    <div id="container">这是测试的div块</div>
+
+    <button onclick="getDiv()">点击测试</button>
+
+    <div>
+        用户名：<input type="text" id="uname">
+        <button onclick="getUname()">获取文本的值</button>
+    </div>
+
+</body>
+</html>

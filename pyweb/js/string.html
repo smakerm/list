@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function testValidateCode(){
+            var code = ['0','1','2','3','4',
+                        'a','b','c','d','e',
+                        'A','B','C','D','E'];
+            var str = '';
+            for(var i = 0;i < 4;i++){
+                var r = parseInt(Math.random() * code.length);
+                str += code[r];
+            }
+
+            input = prompt("请输入以下验证码:" + str);
+            if(input.toUpperCase() == str.toUpperCase()){
+                console.log("验证码输入正确");
+            }
+            else{
+                console.log("验证码输入错误");
+            }
+        }
+
+
+    </script>
+
+    <button onclick="testValidateCode()">验证码</button>
+</body>
+</html>

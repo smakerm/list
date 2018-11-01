@@ -1,0 +1,16 @@
+{% extends base.html %}
+
+{% block title %} blog {% end %}
+{% block head %}
+   <script src="{{static_url('js/jquery-3.2.1.js')}}"></script>
+
+    <script>
+        $(function () {
+            alert('hello');
+        });
+    </script>
+{% end %}
+
+{% block body %}
+    {% module myblogmodule() %}
+{% end %}

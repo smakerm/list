@@ -1,3 +1,2 @@
-pulseaudio --start --log-target=syslog 
-
+pulseaudio --start --log-target=syslog
 

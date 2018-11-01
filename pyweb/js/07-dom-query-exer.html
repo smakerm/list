@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        table{
+            width: 600px;
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+        td{
+            border:1px solid;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <input type="text" id="sName">
+        <input type="text" id="sPrice">
+        <input type="text" id="sNum">
+        <button onclick="btnAdds()">增加</button>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <td>商品名称</td>
+                <td>商品单价</td>
+                <td>商品数量</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+
+    <script src="../common.js"></script>
+    <script>
+        function btnAdds(){
+            var sName = $("sName").value;
+            var sPrice = $("sPrice").value;
+            var sNum = $("sNum").value;
+
+            var tbody = $("tbody");
+            var tr = document.createElement("tr");
+
+
+            var td1 = document.createElement("td");
+            td1.innerHTML = sName;
+            var td2 = document.createElement("td");
+            td2.innerHTML = sPrice;
+            var td3 = document.createElement("td");
+            td3.innerHTML = sNum;
+
+            tbody.appendChild(tr);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+
+        }
+    </script>
+</body>
+</html>

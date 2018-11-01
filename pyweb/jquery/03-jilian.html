@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+        $(function(){
+            var province = ["黑龙江","吉林","辽宁"];
+            var cities = [
+                ["哈尔滨","齐齐哈尔","牡丹江"],
+                ["长春","吉林","四平"],
+                ["沈阳","大连","铁岭"]
+            ];
+
+            var $opSel = $("<option>请选择</option>");
+            $opSel.attr("value","-1");
+            $("#selProvince").append($opSel);
+
+            for(var i = 0;i<province.length;i++){
+                var $op = $("<option></option>");
+                $op.html(province[i]);
+                $op.attr("value",i);
+                console.log($op);
+                $("#selProvince").append($op);
+            }
+
+            $("#selProvince").change(function(){
+                if($("#selCity").length > 0){
+                    $("#selCity").remove();
+                }
+
+                if(this.value != -1){
+                    var $sel = $("<select></select>");
+                    $sel.attr("id","selCity");
+                    $("body").append($sel);
+
+                    for(var j=0;j<cities[this.value].length;j++){
+                        var $opC = $("<option></option>");
+                        $opC.attr("value",j);
+                        $opC.html(cities[this.value][j]);
+                        $sel.append($opC)
+
+                    }
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <select name="" id="selProvince"></select>
+</body>
+</html>

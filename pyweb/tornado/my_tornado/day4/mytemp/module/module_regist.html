@@ -1,0 +1,45 @@
+<form action="/regist" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>注册</legend>
+            <table>
+                <tr>
+                    <td>用户名:</td>
+                    <td>
+                        <input type="text" name="name" id="input_username">
+                    </td>
+                    <td>
+                        <span id="span_result"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        {{result}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>头像:</td>
+                    <td><input type="file" name="avatar"></td>
+                </tr>
+                <tr>
+                    <td>城市:</td>
+                    <td>
+                        <select name="city" id="">
+                            <option value="beijing">北京</option>
+                            <option value="shanghai">上海</option>
+                            <option value="guangzhou">广州</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="注册"></td>
+                    <td><input type="button" value="登录页面" onclick="javascript:location.href='/';"></td>
+                </tr>
+            </table>
+            <p>
+            </p>
+        </fieldset>
+    </form>

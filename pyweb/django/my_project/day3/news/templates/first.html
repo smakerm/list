@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>
+        <a href="{%url 'my'%}">去往Second页面</a>
+    </h3>
+    <h3>
+        <a href="{%url 'show' 35%}">去往show.html</a>
+    </h3>
+    <h3>
+        <a href="{% url 'result' 1 2%}">去往result.html</a>
+    </h3>
+    <p>
+        <img src="/static/images/1.png" alt="">
+    </p>
+    <p>
+        <img src="{%static 'images/huiyuan.jpg' %}">
+    </p>
+</body>
+</html>

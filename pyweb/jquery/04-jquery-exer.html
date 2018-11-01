@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-1.11.3.js"></script>
+
+    <script>
+        $(function(){
+           $("#btnAdd").click(function(){
+               var gname = $("#gname").val();
+               var gprice = $("#gprice").val();
+               var gcount = $("#gcount").val();
+               var $tr = $("<tr></tr>");
+
+               console.log(gname);
+
+               var $tdName = $("<td>" + gname + "</td>");
+               var $tdPrice = $("<td>" + gprice + "</td>");
+               var $tdCount = $("<td>" + gcount + "</td>");
+               var $tdOper = $("<td></td>");
+
+               var $btnDel = $("<button>删除</button>");
+
+               $btnDel.click(function(event){
+                   $(event.target).parent().parent().remove();
+               });
+
+               $tdOper.append($btnDel);
+               $tr.append($tdName);
+               $tr.append($tdPrice);
+               $tr.append($tdCount);
+               $tr.append($tdOper);
+
+
+               $("#tbody").append($tr);
+
+
+
+           })
+        });
+    </script>
+
+    <style>
+        #tbl{
+            width: 600px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+        #tbl td{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <input type="text" id="gname">
+        <input type="text" id="gprice">
+        <input type="text" id="gcount">
+        <button id="btnAdd">增加</button>
+    </p>
+
+    <table id="tbl">
+        <thead>
+            <tr>
+                <td>商品名称</td>
+                <td>商品价格</td>
+                <td>购买数量</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="btnCreate()">创建</button>
+    <button onclick="btnDelete()">删除</button>
+
+    <script src="../common.js"></script>
+
+    <script>
+        function btnCreate(){
+            var div = document.createElement("div");
+            div.innerHTML = "这是动态创建的div";
+            div.setAttribute("id","div1");
+            div.style.color = "red";
+            document.body.appendChild(div)
+        }
+
+        function btnDelete(){
+            var d1 = document.getElementById("div1");
+            document.body.removeChild(d1);
+        }
+    </script>
+</body>
+</html>

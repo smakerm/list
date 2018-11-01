@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document</title>
+
+    <script src="jquery-1.11.3.js"></script>
+
+    <script>
+        window.onload = function(){
+
+            $("#btnShow").click(
+                function(){
+                    var uname = $("#uname").val();
+                    console.log(uname);
+                    var $show = $("#show-div");
+                    $show.html(uname);
+                    $show.css({
+                        "font-size" : "32px",
+                        "font-weight" : "bold",
+                        "color" : "red",
+                        "background-color":"yellow"
+                    });
+                })
+        }
+    </script>
+</head>
+<body>
+    <p>用户名
+        <input type="text" id="uname">
+        <button id="btnShow">显示</button>
+    </p>
+    <div id="show-div"></div>
+</body>
+</html>

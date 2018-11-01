@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all_authors</title>
+</head>
+<body>
+    {% for au in author %}
+        <p>姓名:{{au.name}}</p>
+        <p>年龄:{{au.age}}</p>
+        <p>邮箱:{{au.email}}</p>
+        <p>头像: <img src="/{{au.picture}}" alt=""></p>
+    {% endfor %}
+</body>
+</html>

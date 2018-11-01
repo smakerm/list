@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../common.js"></script>
+</head>
+<body>
+    <button onclick="btnClick(event)">元素绑定事件</button>
+
+    <button id="btn">JS动态绑定对象</button>
+    <script>
+        function btnClick(event){
+            console.log(event);
+        }
+
+        window.onload = function(){
+            $("btn").onclick = function(event){
+                console.log(event.offsetX + ":" + event.offsetY);
+            };
+        }
+    </script>
+</body>
+</html>

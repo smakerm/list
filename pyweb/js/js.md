@@ -55,6 +55,30 @@ clearTimeout(timer)|清楚定时器|
 
 查找节点
 document.getElementById('id');|通过ID查找|elem对象
+document/elme.getElementsByTagName('标签名')|通过标签查询|由指定标签元素返回的列表
+document.getElementsByName(name)|通过name查找|由指定name返回的列表
+document/elme.getElementsByClassName(classname)||
+
+elem.parentNode|
+elem.children|
+elem.nextSibling|
+elem.nextElementSibling|
+elem.previousSibling|
+elem.previousElementSibling|
+
+创建节点
+document.createElement("元素名");|elem
+增加节点
+document.body.appendChild(elem)
+parentNode.appendChild(elem)
+parentNode.insertBefore(newElem,oldElem)
+
+
+删除节点
+删除节点只能由父元素来发起
+document.body.removeChild(elem)
+parentNode.removeChild(elem)
+
 
 #### DOM对象属性
 innerHTML   |   获取 或 设置当前DOM对象的HTML文本值
@@ -68,11 +92,28 @@ setAttribute(attrName,attrValue)|设置某元素指定的属性|
 removeAttribute(attrName)|移除某元素的属性|
 
 
+#### DOM元素的样式
+    1. 使用setAttribute()设置class属性的值
+        elem.setAttribute("class","类选择器");
+    2. 使用元素的className 属性修改class值
+        elem.className='类选择器';
+    3. 自定义元素样式
+        elem.style.css属性=值;
+        注意:
+            如果css属性中包含 - 的话,连字符(-)要取消,并且 - 后面的第一个字符要变大写
 
 
 
+#### 时间对象的常用属性
+事件源 | event.target
+offsetX, offsetY | 获取鼠标在元素上的坐标点
+clientX, clientY | 获取鼠标在网页上的坐标点
+screenX, screenY | 获取鼠标在屏幕上的坐标点
 
-
+event.key | 得到按下的字符
+event.keypress| event.which  获取ASCII码
+event.keydown | event.which  获取键位码
+event.stopPropagation() | 阻止事件冒泡
 
 
 

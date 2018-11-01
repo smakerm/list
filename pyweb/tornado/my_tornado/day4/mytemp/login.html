@@ -1,0 +1,52 @@
+{% extends base.html %}
+{% block title %}login{% end %}
+
+{% block head %}
+   <script src="{{static_url('js/jquery-3.2.1.js')}}"></script>
+
+    <script>
+        $(function () {
+            var input_username = $('#user_name');
+            var useravatar = $('#user_avatar');
+
+            input_username.blur(function () {
+                var username = input_username.val();
+                if(username==""){
+                    return;
+                }
+                $.ajax(
+                    {
+                        url:'/get_avatar',
+                        data:{'username':username},
+                        type:'post',
+                        dataType:'json',
+                        async:'true',
+                        success:function (data,status,xhr) {
+                            if(data.avatar_name){
+                                var avatar_path = "static/images/" + data.avatar_name;
+                            }
+                            else{
+                                var avatar_path = "static/images/default_avatar.png";
+                            }
+                            useravatar.attr('src',avatar_path);
+
+                            console.log('获取服务器请求成功');
+                            console.log(data);
+                            console.log(status);
+                        },
+                        error:function (xhr,status,error) {
+                            console.log('获取服务器请求失败');
+                            console.log(error);
+                            console.log(status);
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+{% end %}
+
+
+{% block body %}
+    {% module mymodule() %}
+{% end %}
